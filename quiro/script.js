@@ -206,23 +206,72 @@
   }), { rootMargin: '-45% 0px -50% 0px' });
   $$('main section[id]').forEach(s => secObs.observe(s));
 
-  /* ---------- Depoimentos ---------- */
-  const qs = $$('#slider blockquote'), dots = $('#dots');
+  /* ---------- Depoimentos (toque, arraste e teclado) ---------- */
+  const slider = $('#slider'), qs = $$('#slider blockquote'), dots = $('#dots');
   let cur = 0, timer;
   qs.forEach((_, i) => {
     const b = document.createElement('button');
     b.type = 'button';
     b.setAttribute('aria-label', 'Depoimento ' + (i + 1));
-    b.addEventListener('click', () => { show(i); restart(); });
+    b.addEventListener('click', () => { show(i, i > cur ? 1 : -1); restart(); });
     dots.appendChild(b);
   });
-  function show(i) {
+  function show(i, dir = 1) {
+    i = (i + qs.length) % qs.length;
+    const prev = qs[cur], next = qs[i];
+    if (prev !== next) {
+      prev.classList.remove('on');
+      prev.style.transform = `translateX(${-dir * 60}px)`;
+      prev.style.opacity = '';
+      next.style.transition = 'none';
+      next.style.transform = `translateX(${dir * 60}px)`;
+      next.offsetWidth;
+      next.style.transition = '';
+      next.style.transform = '';
+    }
+    next.classList.add('on');
     cur = i;
-    qs.forEach((q, k) => { q.classList.toggle('on', k === i); q.setAttribute('aria-hidden', k !== i); });
+    qs.forEach((q, k) => q.setAttribute('aria-hidden', k !== i));
     $$('button', dots).forEach((b, k) => b.classList.toggle('on', k === i));
   }
-  const restart = () => { clearInterval(timer); if (!reduce) timer = setInterval(() => show((cur + 1) % qs.length), 6500); };
+  const restart = () => { clearInterval(timer); if (!reduce) timer = setInterval(() => show(cur + 1, 1), 6500); };
   show(0); restart();
+
+  let startX = 0, startY = 0, dx = 0, drag = false, horiz = null;
+  slider.addEventListener('pointerdown', e => {
+    if (e.button || e.target.closest('button')) return;
+    drag = true; horiz = null; dx = 0;
+    startX = e.clientX; startY = e.clientY;
+    clearInterval(timer);
+  });
+  addEventListener('pointermove', e => {
+    if (!drag) return;
+    const mx = e.clientX - startX, my = e.clientY - startY;
+    if (horiz === null && Math.abs(mx) + Math.abs(my) > 8) horiz = Math.abs(mx) > Math.abs(my);
+    if (!horiz) return;
+    dx = mx;
+    const q = qs[cur];
+    q.style.transition = 'none';
+    q.style.transform = `translateX(${dx}px)`;
+    q.style.opacity = String(Math.max(0.2, 1 - Math.abs(dx) / 420));
+    slider.classList.add('dragging');
+  });
+  const endDrag = () => {
+    if (!drag) return;
+    drag = false;
+    slider.classList.remove('dragging');
+    const q = qs[cur];
+    q.style.transition = '';
+    if (horiz && Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
+    else { q.style.transform = ''; q.style.opacity = ''; }
+    restart();
+  };
+  addEventListener('pointerup', endDrag);
+  addEventListener('pointercancel', endDrag);
+  slider.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') { show(cur + 1, 1); restart(); }
+    if (e.key === 'ArrowLeft') { show(cur - 1, -1); restart(); }
+  });
 
   /* ---------- Formulário → WhatsApp ---------- */
   const WHATSAPP = '5511999999999'; // troque pelo número real (DDI + DDD + número)
