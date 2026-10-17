@@ -48,7 +48,6 @@
     return { items, place };
   }
 
-  const scrollSpine = buildSpine($('#spineScroll'));
   const alignSpine = buildSpine($('#alignSpine'), { top: 18, span: 548, cord: false, curve: () => 0 });
 
   /* ---------- Rolagem suave (Lenis, quando disponível) ---------- */
@@ -93,26 +92,6 @@
     phases.forEach((li, i) => li.classList.toggle('on', i === idx));
   }
   setAlign(0);
-
-  /* ---------- Regiões da coluna ---------- */
-  const tag = $('#regionTag');
-  const names = { cervical: 'Região cervical · C1–C7', toracica: 'Região torácica · T1–T12', lombar: 'Região lombar · L1–L5', all: 'Coluna completa' };
-  function setRegion(r) {
-    scrollSpine.items.forEach(({ g }) => {
-      const on = r === 'all' || g.dataset.region === r;
-      g.classList.toggle('lit', on);
-      g.classList.toggle('dim', !on);
-    });
-    tag.textContent = names[r];
-  }
-  setRegion('all');
-  const steps = $$('.step');
-  const stepObs = new IntersectionObserver(es => es.forEach(e => {
-    if (!e.isIntersecting) return;
-    steps.forEach(s => s.classList.toggle('on', s === e.target));
-    setRegion(e.target.dataset.region);
-  }), { rootMargin: '-45% 0px -45% 0px' });
-  steps.forEach(s => stepObs.observe(s));
 
   /* ---------- Método horizontal ---------- */
   const method = $('#metodo'), track = $('#methodTrack'), mBar = $('#methodBar');
