@@ -2,84 +2,87 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dr. Lucas Mendes · Quiropraxia</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dr. Lucas Mendes Quiropraxia</title>
 <meta name="description" content="Quiropraxia baseada em evidências para aliviar a dor, restaurar o movimento e melhorar sua qualidade de vida.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 <div class="progress" aria-hidden="true"><span></span></div>
 
 <header class="nav" id="nav">
-  <a href="#inicio" class="brand" aria-label="Dr. Lucas Mendes, Quiropraxia">
+  <a href="#inicio" class="brand" aria-label="Lucas Mendes Quiropraxia, início">
     <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M16 3c-3 3-3 6 0 8s3 5 0 8-3 6 0 10"/><path d="M11 8h10M10 14h12M11 20h10M12 26h8" opacity=".55"/></g></svg>
     <span><strong>Lucas Mendes</strong><small>Quiropraxia</small></span>
   </a>
-  <nav class="links" id="links">
-    <a href="#inicio">Início</a>
+  <nav class="links" id="links" aria-label="Principal">
     <a href="#sobre">Sobre</a>
-    <a href="#servicos">Serviços</a>
+    <a href="#alinhamento">Alinhamento</a>
     <a href="#coluna">Condições</a>
     <a href="#metodo">Método</a>
     <a href="#depoimentos">Depoimentos</a>
     <a href="#contato">Contato</a>
   </nav>
   <a href="#contato" class="btn btn-dark nav-cta">Agendar consulta</a>
-  <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
+  <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="links"><span></span><span></span></button>
 </header>
 
 <main>
 <!-- HERO -->
 <section class="hero" id="inicio">
-  <div class="hero-bg" aria-hidden="true"></div>
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow reveal">Ajudando você a se mover</p>
-      <h1 class="reveal d1">Movimento livre.<br><em>Vida</em> sem dor.</h1>
-      <span class="rule reveal d2"></span>
-      <p class="lead reveal d2">Quiropraxia baseada em evidências para aliviar a dor, restaurar a função e devolver a leveza ao seu dia a dia.</p>
-      <div class="hero-actions reveal d3">
+      <p class="eyebrow load l0">Quiropraxia · São Paulo</p>
+      <h1>
+        <span class="line"><span class="load l1">Movimento livre.</span></span>
+        <span class="line"><span class="load l2"><em>Vida</em> sem dor.</span></span>
+      </h1>
+      <span class="rule load l3"></span>
+      <p class="lead load l3">Cuidado baseado em evidências para aliviar a dor, restaurar a função e devolver a leveza ao seu dia a dia.</p>
+      <div class="hero-actions load l4">
         <a href="#contato" class="btn btn-dark">Agendar consulta <i class="arrow"></i></a>
-        <a href="#coluna" class="play"><span><svg viewBox="0 0 24 24" width="16" height="16"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span><b>Entenda a coluna<small>Veja onde você sente dor</small></b></a>
+        <a href="#alinhamento" class="play"><span><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span><b>Veja o alinhamento<small>Role e acompanhe a coluna</small></b></a>
       </div>
     </div>
 
-    <figure class="hero-visual reveal d2" id="heroVisual">
-      <div class="halo"></div>
-      <img class="photo" src="img/hero.jpg" alt="Quiropraxista realizando ajuste cervical em paciente" width="1024" height="1024" fetchpriority="high" onerror="this.remove()">
-      <svg class="spine spine-hero" id="spineHero" viewBox="0 0 200 600" aria-label="Ilustração da coluna vertebral"></svg>
-      <div class="chip chip-a"><b>7+</b> anos de experiência</div>
-      <div class="chip chip-b"><i class="dot"></i> Avaliação completa</div>
+    <figure class="hero-visual" id="heroVisual">
+      <div class="halo" aria-hidden="true"></div>
+      <div class="arch load-clip">
+        <img class="photo" src="img/hero.jpg" alt="Quiropraxista realizando ajuste cervical em paciente" width="1024" height="1024" fetchpriority="high" data-speed="-0.06">
+      </div>
+      <div class="chip chip-a load l4" data-speed="0.12"><b>7+</b><span>anos de<br>experiência</span></div>
+      <div class="chip chip-b load l5" data-speed="-0.1"><i class="dot"></i> Agenda aberta esta semana</div>
     </figure>
   </div>
-  <a href="#servicos" class="scroll-hint" aria-label="Role para baixo"><span class="mouse"><i></i></span><small>Role</small></a>
+  <a href="#servicos" class="scroll-hint" aria-label="Rolar para baixo"><span class="mouse"><i></i></span><small>Role</small></a>
 </section>
 
 <!-- SERVIÇOS -->
-<section class="strip wrap" id="servicos">
+<section class="strip wrap" id="servicos" aria-label="Serviços">
   <ul class="cards">
     <li class="reveal">
-      <svg viewBox="0 0 48 48"><g><circle cx="24" cy="10" r="4"/><path d="M14 40V26c0-5 4-8 10-8s10 3 10 8v14M24 18v22"/></g></svg>
+      <svg viewBox="0 0 48 48" aria-hidden="true"><g><circle cx="24" cy="10" r="4"/><path d="M14 40V26c0-5 4-8 10-8s10 3 10 8v14M24 18v22"/></g></svg>
       <h3>Alívio da dor</h3><p>Reduza dores e recupere a mobilidade</p>
     </li>
     <li class="reveal d1">
-      <svg viewBox="0 0 48 48"><g><circle cx="30" cy="9" r="4"/><path d="M26 16l-6 8 8 5-4 11M20 24l-8 2M28 29l9 3"/></g></svg>
+      <svg viewBox="0 0 48 48" aria-hidden="true"><g><circle cx="30" cy="9" r="4"/><path d="M26 16l-6 8 8 5-4 11M20 24l-8 2M28 29l9 3"/></g></svg>
       <h3>Lesões esportivas</h3><p>Retorne ao seu melhor desempenho</p>
     </li>
     <li class="reveal d2">
-      <svg viewBox="0 0 48 48"><g><path d="M24 4c-4 3-4 6 0 8s4 5 0 8-4 5 0 8-4 5 0 8"/><path d="M18 8h12M17 14h14M18 20h12M18 26h12M19 32h10" opacity=".5"/></g></svg>
+      <svg viewBox="0 0 48 48" aria-hidden="true"><g><path d="M24 4c-4 3-4 6 0 8s4 5 0 8-4 5 0 8-4 5 0 8"/><path d="M18 8h12M17 14h14M18 20h12M18 26h12M19 32h10" opacity=".5"/></g></svg>
       <h3>Correção postural</h3><p>Alinhe o corpo e previna novas dores</p>
     </li>
     <li class="reveal d3">
-      <svg viewBox="0 0 48 48"><g><path d="M8 30c4-1 7 1 9 4l8 2c3 0 3 4 0 4H14M8 24c6 0 10 2 12 5M30 22a7 7 0 1 0-1-14"/><path d="M26 15l3 3 6-6"/></g></svg>
+      <svg viewBox="0 0 48 48" aria-hidden="true"><g><path d="M8 30c4-1 7 1 9 4l8 2c3 0 3 4 0 4H14M8 24c6 0 10 2 12 5M30 22a7 7 0 1 0-1-14"/><path d="M26 15l3 3 6-6"/></g></svg>
       <h3>Reabilitação</h3><p>Recuperação personalizada e segura</p>
     </li>
     <li class="reveal d4">
-      <svg viewBox="0 0 48 48"><g><path d="M24 40c-8 0-14-5-16-12 6 0 10 2 12 5M24 40c8 0 14-5 16-12-6 0-10 2-12 5M24 40c-5-5-5-14 0-22 5 8 5 17 0 22z"/></g></svg>
-      <h3>Bem-estar e prevenção</h3><p>Mantenha-se ativo, forte e sem dor</p>
+      <svg viewBox="0 0 48 48" aria-hidden="true"><g><path d="M24 40c-8 0-14-5-16-12 6 0 10 2 12 5M24 40c8 0 14-5 16-12-6 0-10 2-12 5M24 40c-5-5-5-14 0-22 5 8 5 17 0 22z"/></g></svg>
+      <h3>Bem-estar</h3><p>Mantenha-se ativo, forte e sem dor</p>
     </li>
   </ul>
 </section>
@@ -87,96 +90,134 @@
 <!-- SOBRE -->
 <section class="about" id="sobre">
   <div class="wrap about-grid">
-    <figure class="about-photo reveal">
-      <img class="photo" src="img/clinica.jpg" alt="Sala de atendimento da clínica" width="1024" height="1024" loading="lazy" onerror="this.remove()">
-      <svg class="room" viewBox="0 0 400 480" aria-hidden="true">
-        <rect width="400" height="480" fill="#ece5db"/>
-        <rect x="260" y="40" width="110" height="260" rx="4" fill="#f7f4ef" stroke="#d9cfc1"/>
-        <path d="M315 40v260M260 170h110" stroke="#d9cfc1"/>
-        <rect y="340" width="400" height="140" fill="#d8cdbd"/>
-        <g class="table"><rect x="40" y="300" width="250" height="34" rx="12" fill="#1b2d4f"/><rect x="60" y="334" width="210" height="10" fill="#9aa4b5"/><path d="M90 344l-14 60M240 344l14 60" stroke="#8f98a8" stroke-width="8" stroke-linecap="round"/></g>
-        <circle cx="330" cy="400" r="34" fill="#243a63"/><circle cx="290" cy="425" r="22" fill="#c9ced8"/>
-        <g stroke="#2d6a4f" stroke-width="3" fill="none" stroke-linecap="round"><path d="M60 300c-8-50-4-90 14-130M60 300c14-40 30-70 52-90M60 300c-20-30-36-50-50-60"/></g>
-        <text x="48" y="96" font-family="Cormorant Garamond, Georgia, serif" font-size="30" font-style="italic" fill="#1b2d4f">“Movimento é</text>
-        <text x="48" y="130" font-family="Cormorant Garamond, Georgia, serif" font-size="30" font-style="italic" fill="#1b2d4f">medicina.”</text>
-      </svg>
-      <figcaption class="chip chip-c">Atendimento individual e acolhedor</figcaption>
+    <figure class="about-photo clip">
+      <img class="photo" src="img/clinica.jpg" alt="Sala de atendimento da clínica, com maca e pôster da coluna" width="1024" height="1024" loading="lazy" data-speed="-0.08">
+      <figcaption class="chip chip-c">Atendimento individual, sem pressa</figcaption>
     </figure>
     <div class="about-copy">
       <p class="eyebrow reveal">Sobre mim</p>
       <h2 class="reveal d1">Comprometido com a sua <em>recuperação</em> e bem-estar.</h2>
-      <p class="reveal d2">Sou Lucas Mendes, quiropraxista com mais de 7 anos de experiência ajudando pessoas a superar a dor, se recuperar de lesões e alcançar seus objetivos de saúde. Meu trabalho une técnicas atuais e um cuidado humano, sempre ajustado a você.</p>
+      <p class="reveal d2">Sou Lucas Mendes, quiropraxista com mais de 7 anos de experiência ajudando pessoas a superar a dor, se recuperar de lesões e alcançar seus objetivos de saúde. Uno técnicas atuais a um cuidado humano, sempre ajustado a você.</p>
       <ul class="stats">
-        <li class="reveal"><b data-count="7" data-suffix="+">0</b><span>Anos de<br>experiência</span></li>
-        <li class="reveal d1"><b data-count="500" data-suffix="+">0</b><span>Pacientes<br>atendidos</span></li>
-        <li class="reveal d2"><b data-count="100" data-suffix="%">0</b><span>Cuidado<br>personalizado</span></li>
+        <li class="reveal"><b data-count="7" data-suffix="+">7+</b><span>Anos de<br>experiência</span></li>
+        <li class="reveal d1"><b data-count="500" data-suffix="+">500+</b><span>Pacientes<br>atendidos</span></li>
+        <li class="reveal d2"><b data-count="50" data-suffix=" min">50 min</b><span>Primeira<br>avaliação</span></li>
         <li class="reveal d3"><b>Ciência</b><span>Prática baseada<br>em evidências</span></li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- MARQUEE -->
+<!-- MARQUEE (velocidade acompanha o scroll) -->
 <div class="marquee" aria-hidden="true">
-  <div class="track">
-    <span>Dor lombar</span><span>Cervicalgia</span><span>Hérnia de disco</span><span>Ciática</span><span>Dor de cabeça</span><span>Postura</span><span>Lesões esportivas</span><span>Tensão muscular</span>
-    <span>Dor lombar</span><span>Cervicalgia</span><span>Hérnia de disco</span><span>Ciática</span><span>Dor de cabeça</span><span>Postura</span><span>Lesões esportivas</span><span>Tensão muscular</span>
+  <div class="track" id="track">
+    <span>Dor lombar</span><span>Cervicalgia</span><span>Hérnia de disco</span><span>Ciática</span><span>Cefaleia tensional</span><span>Postura</span><span>Lesões esportivas</span><span>Tensão muscular</span>
   </div>
 </div>
 
-<!-- COLUNA (scroll interativo) -->
+<!-- ALINHAMENTO (seção fixa guiada pelo scroll) -->
+<section class="align" id="alinhamento">
+  <div class="align-sticky">
+    <div class="wrap align-grid">
+      <div class="align-copy">
+        <p class="eyebrow">Avaliação postural</p>
+        <h2>Do desequilíbrio ao <em>alinhamento.</em></h2>
+        <ol class="phases" id="phases">
+          <li class="on"><b>Antes</b><span>Ombros e pelve inclinados. O corpo compensa e a dor aparece.</span></li>
+          <li><b>Durante</b><span>Ajustes suaves, mobilidade e fortalecimento direcionado.</span></li>
+          <li><b>Depois</b><span>Carga distribuída e movimento livre no dia a dia.</span></li>
+        </ol>
+      </div>
+
+      <div class="figure-wrap">
+        <svg class="body-fig" id="alignFig" viewBox="-60 -80 320 720" aria-label="Ilustração da coluna vista de frente, alinhando-se conforme a página rola">
+          <line class="plumb" x1="100" y1="-80" x2="100" y2="640"/>
+          <g id="head"><circle class="head" cx="100" cy="-22" r="30"/></g>
+          <g id="shoulders"><rect class="bar" x="-10" y="186" width="220" height="10" rx="5"/><circle class="joint" cx="-10" cy="191" r="9"/><circle class="joint" cx="210" cy="191" r="9"/></g>
+          <g id="alignSpine"></g>
+          <g id="pelvis"><path class="pelvis" d="M20 590 Q100 548 180 590 L166 622 Q100 600 34 622 Z"/><circle class="joint" cx="20" cy="598" r="9"/><circle class="joint" cx="180" cy="598" r="9"/></g>
+        </svg>
+      </div>
+
+      <dl class="readout">
+        <div><dt>Inclinação dos ombros</dt><dd><b id="rShoulder">6,0</b>°</dd></div>
+        <div><dt>Inclinação da pelve</dt><dd><b id="rPelvis">4,0</b>°</dd></div>
+        <div><dt>Desvio do prumo</dt><dd><b id="rPlumb">18</b> mm</dd></div>
+        <div class="meter" aria-hidden="true"><span id="meter"></span></div>
+        <p class="fine">Ilustração educativa. A evolução varia de pessoa para pessoa.</p>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- COLUNA (regiões) -->
 <section class="column" id="coluna">
   <div class="wrap column-grid">
     <div class="column-sticky">
-      <svg class="spine spine-scroll" id="spineScroll" viewBox="0 0 200 600" aria-label="Coluna vertebral com regiões destacadas"></svg>
-      <div class="region-tag" id="regionTag">Coluna completa</div>
+      <svg class="spine spine-scroll" id="spineScroll" viewBox="0 0 200 600" aria-label="Coluna vertebral com a região em destaque"></svg>
+      <div class="region-tag" id="regionTag" aria-live="polite">Coluna completa</div>
     </div>
     <div class="column-steps">
       <header class="column-head">
         <p class="eyebrow reveal">Onde dói?</p>
-        <h2 class="reveal d1">Role a página e <em>conheça</em> cada região da sua coluna.</h2>
+        <h2 class="reveal d1">Conheça cada <em>região</em> da sua coluna.</h2>
       </header>
       <article class="step" data-region="cervical">
-        <span class="num">01</span>
+        <span class="num">C1–C7</span>
         <h3>Região cervical</h3>
-        <p>Pescoço rígido, dores de cabeça e formigamento nos braços costumam nascer aqui, muitas vezes por horas diante do computador ou do celular.</p>
+        <p>Pescoço rígido, dores de cabeça e formigamento nos braços costumam nascer aqui, muitas vezes depois de horas diante do computador ou do celular.</p>
         <ul><li>Cervicalgia</li><li>Cefaleia tensional</li><li>Tontura cervicogênica</li></ul>
       </article>
       <article class="step" data-region="toracica">
-        <span class="num">02</span>
+        <span class="num">T1–T12</span>
         <h3>Região torácica</h3>
         <p>Dor entre as escápulas, ombros projetados e dificuldade para respirar fundo. A postura mantida ao longo do dia pesa nesta região.</p>
         <ul><li>Dor nas costas</li><li>Hipercifose</li><li>Tensão nos ombros</li></ul>
       </article>
       <article class="step" data-region="lombar">
-        <span class="num">03</span>
+        <span class="num">L1–L5</span>
         <h3>Região lombar</h3>
-        <p>A queixa mais comum: dor ao se levantar, ao carregar peso ou depois de longos períodos sentado. Tratamos a causa, não só o sintoma.</p>
+        <p>A queixa mais comum: dor ao levantar, ao carregar peso ou depois de muito tempo sentado. O tratamento busca a causa, não só o sintoma.</p>
         <ul><li>Lombalgia</li><li>Ciática</li><li>Hérnia de disco</li></ul>
       </article>
       <article class="step" data-region="all">
-        <span class="num">04</span>
-        <h3>Equilíbrio do corpo todo</h3>
-        <p>A coluna trabalha como um conjunto. Por isso a avaliação é global e o plano de cuidado inclui exercícios e orientações para o dia a dia.</p>
+        <span class="num">C1–L5</span>
+        <h3>O corpo todo</h3>
+        <p>A coluna trabalha como um conjunto. Por isso a avaliação é global e o plano inclui exercícios e orientações para o dia a dia.</p>
         <a href="#contato" class="btn btn-dark">Agendar avaliação <i class="arrow"></i></a>
       </article>
     </div>
   </div>
 </section>
 
-<!-- MÉTODO -->
+<!-- MÉTODO (scroll horizontal) -->
 <section class="method" id="metodo">
-  <div class="wrap">
-    <header class="center">
-      <p class="eyebrow reveal">Como funciona</p>
-      <h2 class="reveal d1">Um caminho simples até <em>sentir-se melhor</em></h2>
-    </header>
-    <ol class="steps-line">
-      <li class="reveal"><span>1</span><h3>Avaliação</h3><p>Histórico, exame postural e testes de mobilidade para entender a origem da dor.</p></li>
-      <li class="reveal d1"><span>2</span><h3>Plano de cuidado</h3><p>Objetivos claros e um plano sob medida, explicado com calma e transparência.</p></li>
-      <li class="reveal d2"><span>3</span><h3>Ajustes</h3><p>Técnicas manuais suaves e seguras para devolver mobilidade e aliviar a tensão.</p></li>
-      <li class="reveal d3"><span>4</span><h3>Manutenção</h3><p>Exercícios e hábitos para manter os resultados e prevenir novas crises.</p></li>
-    </ol>
+  <div class="method-sticky">
+    <div class="method-head wrap">
+      <div>
+        <p class="eyebrow">Como funciona</p>
+        <h2>Quatro etapas até <em>sentir-se melhor</em></h2>
+      </div>
+      <div class="method-progress" aria-hidden="true"><span id="methodBar"></span></div>
+    </div>
+    <div class="method-track" id="methodTrack">
+      <article class="panel">
+        <div class="panel-img"><img src="img/avaliacao.jpg" alt="Avaliação postural com o paciente em pé" width="1024" height="834" loading="lazy"></div>
+        <div class="panel-text"><span>Etapa 1</span><h3>Avaliação</h3><p>Histórico, exame postural e testes de mobilidade para entender a origem da dor.</p></div>
+      </article>
+      <article class="panel">
+        <div class="panel-img"><img src="img/clinica.jpg" alt="Sala de atendimento preparada para a consulta" width="1024" height="1024" loading="lazy"></div>
+        <div class="panel-text"><span>Etapa 2</span><h3>Plano de cuidado</h3><p>Objetivos claros e um plano sob medida, explicado com calma e transparência.</p></div>
+      </article>
+      <article class="panel">
+        <div class="panel-img"><img src="img/ajuste.jpg" alt="Ajuste manual na região lombar" width="1024" height="1024" loading="lazy"></div>
+        <div class="panel-text"><span>Etapa 3</span><h3>Ajustes</h3><p>Técnicas manuais suaves e seguras para devolver mobilidade e aliviar a tensão.</p></div>
+      </article>
+      <article class="panel">
+        <div class="panel-img"><img src="img/exercicio.jpg" alt="Paciente fazendo alongamento orientado" width="1024" height="1024" loading="lazy"></div>
+        <div class="panel-text"><span>Etapa 4</span><h3>Manutenção</h3><p>Exercícios e hábitos para manter os resultados e prevenir novas crises.</p></div>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -184,10 +225,10 @@
 <section class="quotes" id="depoimentos">
   <div class="wrap">
     <p class="eyebrow reveal">Depoimentos</p>
-    <div class="slider reveal d1" id="slider">
+    <div class="slider reveal d1" id="slider" aria-roledescription="carrossel">
       <blockquote class="on"><p>“Convivi anos com dor lombar. Em poucas sessões voltei a treinar e a dormir bem. O cuidado e a atenção fizeram toda a diferença.”</p><cite>Mariana S. <small>Designer</small></cite></blockquote>
       <blockquote><p>“Explicou tudo com clareza, sem pressa e sem promessas exageradas. Hoje trabalho o dia todo sem aquela dor no pescoço.”</p><cite>Rafael P. <small>Engenheiro</small></cite></blockquote>
-      <blockquote><p>“Atendimento acolhedor e profissional. Minha postura melhorou e as dores de cabeça praticamente desapareceram.”</p><cite>Camila T. <small>Professora</small></cite></blockquote>
+      <blockquote><p>“Atendimento acolhedor e profissional. Minha postura melhorou e as dores de cabeça quase sumiram.”</p><cite>Camila T. <small>Professora</small></cite></blockquote>
       <div class="dots" id="dots"></div>
     </div>
     <p class="note">Depoimentos de exemplo. Substitua pelos relatos reais dos seus pacientes.</p>
@@ -196,13 +237,12 @@
 
 <!-- CTA -->
 <section class="cta">
-  <img class="cta-photo" src="img/cta.jpg" alt="" loading="lazy" onerror="this.remove()">
-  <svg class="spine spine-cta" id="spineCta" viewBox="0 0 200 600" aria-hidden="true"></svg>
+  <img class="cta-photo" src="img/cta.jpg" alt="" loading="lazy" data-speed="-0.1">
   <div class="wrap cta-inner">
     <p class="eyebrow light reveal">Pronto para se sentir melhor?</p>
     <h2 class="reveal d1">Vamos cuidar de você<br>para voltar a <em>se mover bem.</em></h2>
     <a href="#contato" class="btn btn-light reveal d2">Agendar consulta <i class="arrow"></i></a>
-    <div class="rating reveal d3"><span class="stars">★★★★★</span><b>5,0</b><small>Avaliação dos pacientes</small></div>
+    <div class="rating reveal d3"><span class="stars" aria-hidden="true">★★★★★</span><b>5,0</b><small>Avaliação dos pacientes</small></div>
   </div>
 </section>
 
@@ -212,7 +252,7 @@
     <div>
       <p class="eyebrow reveal">Contato</p>
       <h2 class="reveal d1">Agende sua <em>consulta</em></h2>
-      <p class="reveal d2 muted">Envie seus dados e entraremos em contato para confirmar o melhor horário. Se preferir, chame direto no WhatsApp.</p>
+      <p class="reveal d2 muted">Envie seus dados e retornamos para confirmar o melhor horário. Se preferir, fale direto pelo WhatsApp.</p>
       <ul class="info reveal d3">
         <li><b>Telefone</b><a href="tel:+5511999999999">(11) 99999-9999</a></li>
         <li><b>E-mail</b><a href="mailto:contato@lucasmendes.com.br">contato@lucasmendes.com.br</a></li>
@@ -221,9 +261,9 @@
       </ul>
     </div>
     <form class="form reveal d2" id="form" novalidate>
-      <label>Nome<input name="nome" required autocomplete="name" placeholder="Seu nome"></label>
-      <label>Telefone<input name="tel" required autocomplete="tel" inputmode="tel" placeholder="(11) 90000-0000"></label>
-      <label>Como posso ajudar?<textarea name="msg" rows="4" placeholder="Conte brevemente o que você sente"></textarea></label>
+      <label for="fNome">Nome</label><input id="fNome" name="nome" required autocomplete="name" placeholder="Seu nome">
+      <label for="fTel">Telefone</label><input id="fTel" name="tel" required autocomplete="tel" inputmode="tel" placeholder="(11) 90000-0000">
+      <label for="fMsg">Como posso ajudar?</label><textarea id="fMsg" name="msg" rows="4" placeholder="Conte brevemente o que você sente"></textarea>
       <button class="btn btn-dark" type="submit">Enviar pelo WhatsApp <i class="arrow"></i></button>
       <p class="form-msg" id="formMsg" role="status"></p>
     </form>
@@ -234,12 +274,13 @@
 <footer class="footer">
   <div class="wrap foot">
     <div><strong>Lucas Mendes</strong><p>Quiropraxia baseada em evidências.<br>Mova-se melhor, viva melhor.</p></div>
-    <div><b>Navegação</b><a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#coluna">Condições</a><a href="#metodo">Método</a></div>
+    <div><b>Navegação</b><a href="#sobre">Sobre</a><a href="#alinhamento">Alinhamento</a><a href="#coluna">Condições</a><a href="#metodo">Método</a></div>
     <div><b>Atendimento</b><a href="#contato">Agendamento</a><a href="#depoimentos">Depoimentos</a></div>
   </div>
-  <div class="wrap legal"><span>© 2026 Lucas Mendes Quiropraxia. Todos os direitos reservados.</span><span>Este site não substitui avaliação profissional.</span></div>
+  <div class="wrap legal"><span>© 2026 Lucas Mendes Quiropraxia</span><span>Este site não substitui uma avaliação profissional.</span></div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
