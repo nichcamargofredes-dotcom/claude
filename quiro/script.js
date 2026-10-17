@@ -79,6 +79,7 @@
     bar.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
     nav.classList.toggle('scrolled', y > 30);
     if (!reduce) {
+      const hp = $('.hero-visual .photo'); if (hp && y < innerHeight * 1.2) hp.style.transform = `translateY(${y * 0.06}px) scale(${1 + y * 0.00008})`;
       if (y < innerHeight * 1.2) hero.style.transform = `translateY(${y * 0.08}px) rotate(${y * 0.012}deg)`;
       const r = ctaSec.getBoundingClientRect();
       if (r.top < innerHeight && r.bottom > 0) {
