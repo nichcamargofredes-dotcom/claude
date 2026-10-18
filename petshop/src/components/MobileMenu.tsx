@@ -1,0 +1,92 @@
+import { ArrowUpRight, X } from 'lucide-react'
+import { AnimatePresence, motion } from 'motion/react'
+import { useEffect, useRef } from 'react'
+import { heroAssets } from '../lib/assets'
+import { NAV_LINKS } from '../lib/nav'
+import { scrollToTarget, setScrollLocked } from '../lib/smooth-scroll'
+import { EASE_OUT } from '../lib/motion'
+
+export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const closeRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    if (!open) return
+    setScrollLocked(true)
+    closeRef.current?.focus()
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+    window.addEventListener('keydown', onKey)
+    return () => {
+      setScrollLocked(false)
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [open, onClose])
+
+  const go = (href: string) => {
+    onClose()
+    // Wait for the scroll lock to lift before scrolling.
+    window.setTimeout(() => scrollToTarget(href), 60)
+  }
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu"
+          className="fixed inset-0 z-[60] flex flex-col bg-forest px-5 pb-8 pt-4 text-white"
+          initial={{ clipPath: 'inset(0% 0% 100% 0%)' }}
+          animate={{ clipPath: 'inset(0% 0% 0% 0%)' }}
+          exit={{ clipPath: 'inset(0% 0% 100% 0%)' }}
+          transition={{ duration: 0.6, ease: EASE_OUT }}
+        >
+          <div className="flex items-center justify-between">
+            <img src={heroAssets.logo} alt="CozyPaws" width={130} height={33} className="h-[33px] w-[130px] brightness-0 invert" />
+            <button
+              ref={closeRef}
+              type="button"
+              onClick={onClose}
+              aria-label="Close menu"
+              className="grid size-10 place-items-center rounded-full bg-white/10 transition-colors hover:bg-white/20"
+            >
+              <X className="size-5" />
+            </button>
+          </div>
+
+          <nav aria-label="Mobile" className="mt-14 flex-1">
+            <ul className="space-y-2">
+              {NAV_LINKS.map((link, i) => (
+                <motion.li
+                  key={link.href}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.15 + i * 0.05 }}
+                >
+                  <a
+                    href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      go(link.href)
+                    }}
+                    className="flex items-center justify-between border-b border-white/10 py-4 font-serif-display text-4xl"
+                  >
+                    {link.label}
+                    <ArrowUpRight className="size-6 text-leaf" />
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="space-y-1 text-sm text-white/70">
+            <p>14 Willow Street, Greenfield</p>
+            <p>Mon–Sat 9:00–20:00 · Sun 10:00–18:00</p>
+            <a href="tel:+15550123456" className="block font-medium text-white">
+              +1 (555) 012-3456
+            </a>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}

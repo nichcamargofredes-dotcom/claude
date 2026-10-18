@@ -1,0 +1,11 @@
+export function PawIcon({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 64 64" aria-hidden="true" className={className} fill="currentColor">
+      <ellipse cx="18" cy="27" rx="5.5" ry="7" transform="rotate(-18 18 27)" />
+      <ellipse cx="27" cy="17.5" rx="5.5" ry="7.5" transform="rotate(-6 27 17.5)" />
+      <ellipse cx="38" cy="17.5" rx="5.5" ry="7.5" transform="rotate(6 38 17.5)" />
+      <ellipse cx="47" cy="27" rx="5.5" ry="7" transform="rotate(18 47 27)" />
+      <path d="M32.5 30c6.2 0 13 8.6 13 14.6 0 4.6-3.6 6.4-7.4 6.4-2.6 0-3.9-1.4-5.6-1.4s-3 1.4-5.6 1.4c-3.8 0-7.4-1.8-7.4-6.4 0-6 6.8-14.6 13-14.6z" />
+    </svg>
+  )
+}

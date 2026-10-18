@@ -245,3 +245,20 @@
     opacity: 1;
   }
 }
+
+/* ---------- Hero sizing ----------
+   The photo strip is 0.40575x as tall as it is wide (the centre photo sets the height) and all
+   three photos share a 0.1338W panel band. On short desktop screens the strip narrows so the
+   golden retriever only overlaps the bottom of the headline, as it does at 1440x900, and leaf
+   bands carry the wall to the edges. */
+.hero-desktop {
+  container-type: size;
+  --hero-pt: min(5.4rem, 10vh);
+  --hero-fs: clamp(60px, min(7.5vw, 12.5vh), 110px);
+  --strip-w: clamp(60cqw, (100cqh - var(--hero-pt) - 1.33 * var(--hero-fs)) / 0.40575, 100cqw);
+}
+
+.hero-tablet {
+  container-type: size;
+  --strip-w: 100cqw;
+}

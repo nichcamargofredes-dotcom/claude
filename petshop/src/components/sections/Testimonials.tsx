@@ -1,0 +1,134 @@
+import { Star } from 'lucide-react'
+import { motion, useScroll, useTransform } from 'motion/react'
+import { useRef } from 'react'
+import { photos, type Photo } from '../../lib/assets'
+import { useMediaQuery } from '../../lib/hooks'
+import { Container, Eyebrow, Reveal, SectionTitle } from '../ui'
+
+type Review = { quote: string; name: string; pet: string; image: Photo }
+
+const REVIEWS: Review[] = [
+  {
+    quote: 'Luna’s donut bed arrived the same afternoon and she hasn’t left it since. The team even remembered her name at pickup.',
+    name: 'Maya R.',
+    pet: 'Luna’s human · Corgi',
+    image: photos.dog,
+  },
+  {
+    quote: 'Finally a shop that explains ingredients instead of pushing the most expensive bag. Milo’s tummy is so much happier.',
+    name: 'Daniel K.',
+    pet: 'Milo’s human · Tabby',
+    image: photos.cat,
+  },
+  {
+    quote: 'The groomers were so patient with our anxious rescue. She came home fluffy and calm, which honestly felt like a miracle.',
+    name: 'Priya S.',
+    pet: 'Nala’s human · Bichon',
+    image: photos.grooming,
+  },
+  {
+    quote: 'Ordered at noon, the cat tree was standing by dinner. It’s sturdy, cozy, and our two cats actually share it.',
+    name: 'Tom & Lea',
+    pet: 'Pumpkin & Fig’s humans',
+    image: photos.delivery,
+  },
+  {
+    quote: 'Kiwi’s seed mix shows up every month and the reminder emails mean I never run out. Small thing, big difference.',
+    name: 'Sofia M.',
+    pet: 'Kiwi’s human · Budgie',
+    image: photos.bird,
+  },
+  {
+    quote: 'Daycare sends the cutest photo updates, and our beagle sleeps the whole evening after a day there.',
+    name: 'Jonas B.',
+    pet: 'Biscuit’s human · Beagle',
+    image: photos.daycare,
+  },
+]
+
+function ReviewCard({ review }: { review: Review }) {
+  return (
+    <figure className="rounded-[28px] bg-white p-7 shadow-[0_1px_0_rgba(26,61,26,0.04)]">
+      <div className="flex gap-0.5 text-orange" aria-label="5 out of 5 stars">
+        {Array.from({ length: 5 }, (_, i) => (
+          <Star key={i} className="size-4" fill="currentColor" strokeWidth={0} />
+        ))}
+      </div>
+      <blockquote className="mt-5 text-[17px] leading-relaxed text-gray-800">“{review.quote}”</blockquote>
+      <figcaption className="mt-6 flex items-center gap-3">
+        <img
+          src={review.image.src}
+          alt=""
+          width={review.image.width}
+          height={review.image.height}
+          loading="lazy"
+          decoding="async"
+          className="size-11 rounded-full object-cover object-[50%_30%]"
+        />
+        <div>
+          <p className="font-semibold text-gray-900">{review.name}</p>
+          <p className="text-sm text-gray-500">{review.pet}</p>
+        </div>
+      </figcaption>
+    </figure>
+  )
+}
+
+export function Testimonials() {
+  const ref = useRef<HTMLDivElement>(null)
+  const wide = useMediaQuery('(min-width: 1024px)')
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  // Columns drift at different speeds on desktop for a little depth.
+  const offsets = [
+    useTransform(scrollYProgress, [0, 1], [60, -40]),
+    useTransform(scrollYProgress, [0, 1], [140, -120]),
+    useTransform(scrollYProgress, [0, 1], [90, -60]),
+  ]
+  const columns = wide ? [0, 1, 2].map((c) => REVIEWS.filter((_, i) => i % 3 === c)) : [REVIEWS]
+
+  return (
+    <section id="reviews" aria-labelledby="reviews-title" className="scroll-mt-20 overflow-hidden py-24 md:py-32">
+      <Container>
+        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <Reveal className="max-w-2xl">
+            <Eyebrow>Reviews</Eyebrow>
+            <SectionTitle className="mt-4 text-forest">
+              <span id="reviews-title">Loved by pets, and their humans</span>
+            </SectionTitle>
+          </Reveal>
+          <Reveal delay={0.1} className="flex items-center gap-4">
+            <p className="font-serif-display text-6xl leading-none text-forest">4.6</p>
+            <div>
+              <div className="flex gap-0.5 text-orange" aria-hidden="true">
+                {Array.from({ length: 5 }, (_, i) => (
+                  <Star key={i} className="size-4" fill="currentColor" strokeWidth={0} />
+                ))}
+              </div>
+              <p className="mt-1 text-sm text-gray-600">from 12,000+ reviews</p>
+            </div>
+          </Reveal>
+        </div>
+
+        <div ref={ref} className="mt-14 grid gap-5 sm:grid-cols-2 md:mt-20 lg:grid-cols-3">
+          {columns.map((reviews, c) =>
+            wide ? (
+              <motion.div key={c} style={{ y: offsets[c] }} className="flex flex-col gap-5">
+                {reviews.map((review) => (
+                  <Reveal key={review.name}>
+                    <ReviewCard review={review} />
+                  </Reveal>
+                ))}
+              </motion.div>
+            ) : (
+              reviews.map((review, i) => (
+                <Reveal key={review.name} delay={(i % 2) * 0.08}>
+                  <ReviewCard review={review} />
+                </Reveal>
+              ))
+            ),
+          )}
+        </div>
+      </Container>
+    </section>
+  )
+}
