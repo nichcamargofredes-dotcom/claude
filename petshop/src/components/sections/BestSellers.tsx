@@ -141,7 +141,10 @@ function Rating({ value, reviews }: { value: number; reviews: string }) {
     <p className="flex items-center gap-1 text-xs text-gray-600">
       <Star className="size-3.5 text-orange" fill="currentColor" strokeWidth={0} />
       <span className="font-semibold text-gray-800">{value.toFixed(1)}</span>
-      <span>· {reviews} reviews</span>
+      <span>
+        · {reviews}
+        <span className="max-sm:sr-only"> reviews</span>
+      </span>
     </p>
   )
 }
@@ -168,18 +171,18 @@ function ProductCard({ product }: { product: Product }) {
         )}
         <FavoriteButton id={product.id} name={product.name} className="absolute right-3 top-3" />
       </div>
-      <div className="flex flex-1 flex-col px-2 pb-1 pt-4">
+      <div className="flex flex-1 flex-col px-1 pb-1 pt-4 sm:px-2">
         <h3 className="font-semibold leading-snug text-gray-900">{product.name}</h3>
         <p className="mt-0.5 text-sm text-gray-500">{product.note}</p>
-        <div className="mt-auto flex items-end justify-between gap-3 pt-4">
-          <div>
-            <Rating value={product.rating} reviews={product.reviews} />
-            <p className="mt-1.5 flex items-baseline gap-2">
+        <div className="mt-auto pt-4">
+          <Rating value={product.rating} reviews={product.reviews} />
+          <div className="mt-2 flex items-center justify-between gap-2">
+            <p className="flex min-w-0 flex-wrap items-baseline gap-x-2">
               <span className="text-lg font-semibold text-forest">{money(product.price)}</span>
               {product.was && <span className="text-sm text-gray-400 line-through">{money(product.was)}</span>}
             </p>
+            <AddButton name={product.name} />
           </div>
-          <AddButton name={product.name} />
         </div>
       </div>
     </article>

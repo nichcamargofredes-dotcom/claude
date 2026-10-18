@@ -47,7 +47,7 @@ export function Newsletter() {
           </div>
 
           <Reveal className="relative mx-auto max-w-2xl">
-            <h2 id="newsletter-title" className="font-serif-display text-[clamp(36px,5vw,64px)] leading-[1] tracking-tight text-forest">
+            <h2 id="newsletter-title" className="text-balance font-serif-display text-[clamp(36px,5vw,64px)] leading-[1] tracking-tight text-forest">
               Get 15% off your first order
             </h2>
             <p className="mx-auto mt-5 max-w-lg leading-relaxed text-forest/80">

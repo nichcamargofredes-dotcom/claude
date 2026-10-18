@@ -6,7 +6,7 @@ import { Container, Eyebrow, Reveal } from '../ui'
 type Token = string | { image: Photo; alt: string }
 
 const STATEMENT: Token[] = [
-  ...'We opened CozyPaws in 2016 with one rule'.split(' '),
+  ...'We opened CozyPaws in 2016 with one rule:'.split(' '),
   { image: photos.dog, alt: 'Corgi' },
   ...'if we wouldn’t give it to our own pets, it doesn’t go on the shelf. Today that means vet-checked food, toys that survive the zoomies'.split(' '),
   { image: photos.cat, alt: 'Ginger cat' },

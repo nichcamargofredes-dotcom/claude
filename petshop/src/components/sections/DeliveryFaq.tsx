@@ -80,10 +80,10 @@ export function DeliveryFaq() {
               <span id="delivery-title">Simple, fast and free over $49</span>
             </SectionTitle>
           </Reveal>
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+          <ul className="mt-10 grid grid-cols-2 gap-3 sm:gap-4">
             {FACTS.map(({ icon: Icon, title, text }, i) => (
               <li key={title}>
-                <Reveal delay={i * 0.06} className="h-full rounded-[24px] bg-white p-5">
+                <Reveal delay={i * 0.06} className="h-full rounded-[24px] bg-white p-4 sm:p-5">
                   <span className="grid size-11 place-items-center rounded-full bg-sage text-forest">
                     <Icon className="size-5" strokeWidth={1.75} />
                   </span>

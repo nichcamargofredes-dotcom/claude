@@ -19,8 +19,8 @@ export function Footer() {
   return (
     <footer className="overflow-hidden border-t border-forest/10 pt-16 md:pt-20">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-[1.3fr_repeat(3,0.7fr)_1fr]">
-          <div>
+        <div className="grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 lg:grid-cols-[1.3fr_repeat(3,0.7fr)_1fr]">
+          <div className="col-span-2 sm:col-span-3 lg:col-span-1">
             <img src={heroAssets.logo} alt="CozyPaws" width={164} height={42} loading="lazy" className="h-[42px] w-[164px]" />
             <p className="mt-5 max-w-xs leading-relaxed text-gray-600">
               A neighbourhood pet store for food, toys, grooming and care, since 2016.

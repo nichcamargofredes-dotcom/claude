@@ -43,7 +43,9 @@ export function Eyebrow({ children, tone = 'dark' }: { children: ReactNode; tone
 
 export function SectionTitle({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
-    <h2 className={`font-serif-display text-[clamp(38px,5.2vw,68px)] leading-[1] tracking-tight ${className}`}>{children}</h2>
+    <h2 className={`text-balance font-serif-display text-[clamp(38px,5.2vw,68px)] leading-[1] tracking-tight ${className}`}>
+      {children}
+    </h2>
   )
 }
 
