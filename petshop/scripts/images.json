@@ -1,0 +1,14 @@
+{
+  "source": "Generated with Higgsfield (z_image) for this site.",
+  "images": [
+    { "name": "pet-dog", "widths": [640, 1280], "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KebfCwmR8R7tdh2FSLc84py3Bd/hf_20261018_232017_0a9ccec9-bb36-4491-88f5-e7351d9f8047.png" },
+    { "name": "pet-cat", "widths": [640, 1280], "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KebfCwmR8R7tdh2FSLc84py3Bd/hf_20261018_232305_698625b6-41a3-424a-a7af-d80696ad8d3e.png" },
+    { "name": "pet-bird", "widths": [640, 1280], "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KebfCwmR8R7tdh2FSLc84py3Bd/hf_20261018_232305_cf93d130-c586-490d-a086-0df242990e22.png" },
+    { "name": "pet-fish", "widths": [640, 1280], "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KebfCwmR8R7tdh2FSLc84py3Bd/hf_20261018_232159_6653ee69-553d-4a56-81d8-faa5fca275e4.png" },
+    { "name": "pet-rabbit", "widths": [640, 1280], "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KebfCwmR8R7tdh2FSLc84py3Bd/hf_20261018_232159_3d51f567-167c-4b83-bbd8-b4d091db47d8.png" },
+    { "name": "product-donut-bed", "widths": [800], "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KebfCwmR8R7tdh2FSLc84py3Bd/hf_20261018_232159_5e70fc1c-8d84-4fff-b92a-868d6c87ae04.png" },
+    { "name": "product-kibble", "widths": [800], "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KebfCwmR8R7tdh2FSLc84py3Bd/hf_20261018_232306_0230ad9a-eb9d-4bfc-a1b6-75abafcb5336.png" },
+    { "name": "product-toys", "widths": [800], "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KebfCwmR8R7tdh2FSLc84py3Bd/hf_20261018_232413_086f1d04-d4aa-47e1-8a28-4a0c77235711.png" },
+    { "name": "product-collar", "widths": [800], "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3KebfCwmR8R7tdh2FSLc84py3Bd/hf_20261018_232413_d94f93fb-7a07-49da-95c2-bbc696e06cbb.png" }
+  ]
+}
