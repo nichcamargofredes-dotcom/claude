@@ -23,7 +23,7 @@
   const VW = 1280, VH = 720;
   // Onde a foto original (1732×1154) cai sobre o primeiro quadro do vídeo, em coordenadas do vídeo
   const PHOTO = { x: 5.06, y: -63.1, s: 0.7316, w: 1732, h: 1154 };
-  const SPRAYER_Y = 165;
+  const SPRAYER_Y = 200;
 
   const hero = document.querySelector('.hero');
   const stage = hero.querySelector('.hero__stage');
@@ -81,92 +81,128 @@
     return -1;
   };
 
-  let W = 0, H = 0, dpr = 1, fit = { s: 1, x: 0, y: 0 };
+  // Painéis de informação: o frasco se afasta para o lado oposto ao do texto
+  const panels = [...hero.querySelectorAll('.panel')].map((el) => ({
+    el,
+    side: el.classList.contains('panel--left') ? 1 : el.classList.contains('panel--right') ? -1 : 0,
+    center: 0,
+  }));
+
+  const off = document.createElement('canvas');
+  const octx = off.getContext('2d');
+
+  let W = 0, H = 0, dpr = 1, base = 1, mobile = false;
+  let fit = { s: 1, x: 0, y: 0 };
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 1.75);
     W = stage.clientWidth; H = stage.clientHeight;
-    for (const c of [bg, fg]) { c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); }
-    // Cobre a tela em telas largas; em telas estreitas limita o zoom para o frasco ocupar ~50% da largura
-    let s = Math.max(W / VW, H / VH);
-    s = Math.min(s, (W * 1.6) / VW);
-    s = Math.max(s, W / VW);
-    fit = { s, x: (W - VW * s) / 2, y: H / 2 - (VH / 2) * s };
-    // O título fica na altura do borrifador (y≈165 no vídeo), em qualquer tamanho de tela
-    for (const w of words) w.style.top = `${fit.y + SPRAYER_Y * s}px`;
+    for (const c of [bg, fg, off]) { c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); }
+    mobile = W < 861;
+    // Abertura: cobre a tela em telas largas; em telas estreitas o frasco ocupa ~50% da largura
+    base = Math.max(W / VW, H / VH);
+    base = Math.min(base, (W * 1.6) / VW);
+    base = Math.max(base, W / VW);
+    for (const p of panels) {
+      const r = p.el.getBoundingClientRect();
+      p.center = r.top + window.scrollY + r.height / 2;
+    }
+    onScroll();
+    lay.side = lay.sideT; lay.zoom = lay.zoomT;
     draw(true);
   }
 
-  const rgb = (a, o) => `rgb(${a[o]},${a[o + 1]},${a[o + 2]})`;
-  const rgba = (a, o, al) => `rgba(${a[o]},${a[o + 1]},${a[o + 2]},${al})`;
+  // Posição e tamanho do frasco: z = 0 no centro, z = 1 ao lado do texto; side = +1 direita, -1 esquerda
+  const P = { x: 640, y: 380 }; // centro do frasco no vídeo
+  function layout(side, z) {
+    const s0 = base;
+    const x0 = W / 2, y0 = H / 2 + (P.y - VH / 2) * s0;
+    let s1, x1, y1;
+    if (mobile) { s1 = (W * 1.1) / VW; x1 = W / 2; y1 = H * 0.26; }
+    else { s1 = s0 * 0.62; x1 = W / 2 + side * W * 0.21; y1 = H / 2; }
+    const s = s0 + (s1 - s0) * z;
+    const px = x0 + (x1 - x0) * z, py = y0 + (y1 - y0) * z;
+    fit = { s, x: px - P.x * s, y: py - P.y * s };
+    for (const w of words) {
+      w.style.top = `${fit.y + SPRAYER_Y * s}px`;
+      w.style.left = `${fit.x + P.x * s}px`;
+    }
+  }
 
-  let target = 0, cur = 0, lastDrawn = -1;
+  const rgb = (a, o) => `rgb(${a[o]},${a[o + 1]},${a[o + 2]})`;
+  const clamp01 = (v) => Math.max(0, Math.min(1, v));
+
+  let target = 0, cur = 0, lastKey = '';
+  const lay = { side: 0, zoom: 0, sideT: 0, zoomT: 0 };
+
+  function feather(ctx, x, y, fw, fh) {
+    // Apaga suavemente as bordas do quadro que ficam dentro da tela
+    ctx.globalCompositeOperation = 'destination-out';
+    const fx = Math.min(160, fw * 0.2), fy = Math.min(140, fh * 0.25);
+    const band = (x0, y0, x1, y1, rx, ry, rw, rh) => {
+      const g = ctx.createLinearGradient(x0, y0, x1, y1);
+      g.addColorStop(0, 'rgba(0,0,0,1)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = g; ctx.fillRect(rx, ry, rw, rh);
+    };
+    if (x > 0.5) band(x, 0, x + fx, 0, x - 1, y - 1, fx + 1, fh + 2);
+    if (x + fw < W - 0.5) band(x + fw, 0, x + fw - fx, 0, x + fw - fx, y - 1, fx + 1, fh + 2);
+    if (y > 0.5) band(0, y, 0, y + fy, x - 1, y - 1, fw + 2, fy + 1);
+    if (y + fh < H - 0.5) band(0, y + fh, 0, y + fh - fy, x - 1, y + fh - fy, fw + 2, fy + 1);
+    ctx.globalCompositeOperation = 'source-over';
+  }
+
   function draw(force) {
     const n = Math.max(0, Math.min(FRAMES - 1, Math.round(cur)));
     const photoAlpha = photo ? Math.max(0, 1 - cur / 1.5) : 0;
-    const key = n * 10 + Math.round(photoAlpha * 9);
-    if (!force && key === lastDrawn) return;
-    lastDrawn = key;
-
+    layout(lay.side, lay.zoom);
     const { s, x, y } = fit;
-    const fw = VW * s, fh = VH * s;
-    const gap = fh < H - 1;
-    const e = edges && edges[n];
+    const key = `${n}|${photoAlpha.toFixed(2)}|${s.toFixed(4)}|${x.toFixed(1)}|${y.toFixed(1)}`;
+    if (!force && key === lastKey) return;
+    lastKey = key;
 
+    const fw = VW * s, fh = VH * s;
+    const e = edges && edges[n];
+    const fi = nearest(n);
+
+    // Fundo liso nas cores das bordas do quadro atual
     bctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    if (gap && e) {
+    if (e) {
       const g = bctx.createLinearGradient(0, 0, 0, H);
-      g.addColorStop(0, rgb(e, 0)); g.addColorStop(y / H, rgb(e, 0));
-      g.addColorStop((y + fh) / H, rgb(e, 3)); g.addColorStop(1, rgb(e, 3));
+      g.addColorStop(0, rgb(e, 0)); g.addColorStop(clamp01(y / H), rgb(e, 0));
+      g.addColorStop(clamp01((y + fh) / H), rgb(e, 3)); g.addColorStop(1, rgb(e, 3));
       bctx.fillStyle = g;
     } else {
       bctx.fillStyle = '#a995b3';
     }
     bctx.fillRect(0, 0, W, H);
 
-    const fi = nearest(n);
-    if (fi >= 0) bctx.drawImage(frames[fi], x, y, fw, fh);
+    // Quadro (e a foto original no início) num canvas à parte, com as bordas esfumadas
+    octx.setTransform(1, 0, 0, 1, 0, 0);
+    octx.clearRect(0, 0, off.width, off.height);
+    octx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    if (fi >= 0) octx.drawImage(frames[fi], x, y, fw, fh);
     if (photoAlpha > 0) {
-      bctx.save();
-      bctx.beginPath(); bctx.rect(x, y, fw, fh); bctx.clip();
-      bctx.globalAlpha = fi >= 0 ? photoAlpha : 1;
-      bctx.drawImage(photo, x + PHOTO.x * s, y + PHOTO.y * s, PHOTO.w * PHOTO.s * s, PHOTO.h * PHOTO.s * s);
-      bctx.restore();
+      octx.save();
+      octx.beginPath(); octx.rect(x, y, fw, fh); octx.clip();
+      octx.globalAlpha = fi >= 0 ? photoAlpha : 1;
+      octx.drawImage(photo, x + PHOTO.x * s, y + PHOTO.y * s, PHOTO.w * PHOTO.s * s, PHOTO.h * PHOTO.s * s);
+      octx.restore();
     }
+    feather(octx, x, y, fw, fh);
+    bctx.setTransform(1, 0, 0, 1, 0, 0);
+    bctx.drawImage(off, 0, 0);
 
-    // Frente: copia o fundo e mantém só o que a máscara marca (frasco, tampa, ingredientes)
+    // Frente: o mesmo quadro, só onde a máscara marca (frasco, tampa, ingredientes)
     fctx.setTransform(1, 0, 0, 1, 0, 0);
     fctx.clearRect(0, 0, fg.width, fg.height);
-    fctx.globalCompositeOperation = 'source-over';
-    fctx.drawImage(bg, 0, 0);
+    fctx.drawImage(off, 0, 0);
     fctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     fctx.globalCompositeOperation = 'destination-in';
-    const usePhotoMask = photoMask && (photoAlpha > 0.5 || fi < 0);
-    if (usePhotoMask) {
+    if (photoMask && (photoAlpha > 0.5 || fi < 0)) {
       fctx.drawImage(photoMask, x + PHOTO.x * s, y + PHOTO.y * s, PHOTO.w * PHOTO.s * s, PHOTO.h * PHOTO.s * s);
     } else if (fi >= 0) {
       fctx.drawImage(masks[fi], x, y, fw, fh);
     }
     fctx.globalCompositeOperation = 'source-over';
-
-    // Em telas estreitas o vídeo não preenche a altura: esfuma as bordas no fundo
-    if (gap && e) {
-      const f = Math.min(120, fh * 0.3);
-      for (const ctx of [bctx, fctx]) {
-        const top = ctx.createLinearGradient(0, y, 0, y + f);
-        const bot = ctx.createLinearGradient(0, y + fh - f, 0, y + fh);
-        if (ctx === fctx) {
-          ctx.globalCompositeOperation = 'destination-out';
-          top.addColorStop(0, 'rgba(0,0,0,1)'); top.addColorStop(1, 'rgba(0,0,0,0)');
-          bot.addColorStop(0, 'rgba(0,0,0,0)'); bot.addColorStop(1, 'rgba(0,0,0,1)');
-        } else {
-          top.addColorStop(0, rgba(e, 0, 1)); top.addColorStop(1, rgba(e, 0, 0));
-          bot.addColorStop(0, rgba(e, 3, 0)); bot.addColorStop(1, rgba(e, 3, 1));
-        }
-        ctx.fillStyle = top; ctx.fillRect(0, y - 1, W, f + 1);
-        ctx.fillStyle = bot; ctx.fillRect(0, y + fh - f, W, f + 1);
-        ctx.globalCompositeOperation = 'source-over';
-      }
-    }
   }
 
   function progress() {
@@ -175,17 +211,38 @@
     return Math.max(0, Math.min(1, -r.top / total));
   }
 
-  let p = 0;
   function onScroll() {
-    p = progress();
-    target = p * (FRAMES - 1);
+    target = progress() * (FRAMES - 1);
+    // Interpola o lado e o zoom entre os centros dos painéis
+    const c = window.scrollY + H / 2;
+    let side = 0, zoom = 0;
+    if (panels.length) {
+      if (c <= panels[0].center) { side = panels[0].side; zoom = panels[0].side ? 1 : 0; }
+      else if (c >= panels[panels.length - 1].center) { const l = panels[panels.length - 1]; side = l.side; zoom = l.side ? 1 : 0; }
+      else {
+        for (let i = 0; i < panels.length - 1; i++) {
+          const A = panels[i], B = panels[i + 1];
+          if (c >= A.center && c < B.center) {
+            // fica parado perto do centro de cada painel e se move na passagem
+            let t = (c - A.center) / (B.center - A.center);
+            t = clamp01((t - 0.2) / 0.6); t = t * t * (3 - 2 * t);
+            side = A.side + (B.side - A.side) * t;
+            zoom = (A.side ? 1 : 0) + ((B.side ? 1 : 0) - (A.side ? 1 : 0)) * t;
+            break;
+          }
+        }
+      }
+    }
+    lay.sideT = side; lay.zoomT = zoom;
   }
 
   function updateOverlay() {
     const q = cur / (FRAMES - 1);
+    // O título aparece na abertura e some quando o frasco vai para o lado
+    const fade = clamp01(1 - lay.zoom * 2.2);
     for (const word of words) {
-      word.style.transform = `translate(-50%, -50%) scale(${1 + q * 0.14})`;
-      word.style.letterSpacing = `${-0.015 + q * 0.04}em`;
+      word.style.transform = `translate(-50%, -50%) scale(${(fit.s / base) * (1 + q * 0.3)})`;
+      word.style.opacity = (word.classList.contains('hero__word--ghost') ? 0.32 : 1) * fade;
     }
     if (bar) bar.style.transform = `scaleY(${q})`;
     for (const c of caps) {
@@ -198,6 +255,11 @@
     const k = reduce ? 1 : 0.14;
     cur += (target - cur) * k;
     if (Math.abs(target - cur) < 0.01) cur = target;
+    const k2 = reduce ? 1 : 0.1;
+    lay.side += (lay.sideT - lay.side) * k2;
+    lay.zoom += (lay.zoomT - lay.zoom) * k2;
+    if (Math.abs(lay.sideT - lay.side) < 0.001) lay.side = lay.sideT;
+    if (Math.abs(lay.zoomT - lay.zoom) < 0.001) lay.zoom = lay.zoomT;
     draw(false);
     updateOverlay();
     requestAnimationFrame(tick);
@@ -205,7 +267,7 @@
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', resize);
-  resize(); onScroll(); cur = target; updateOverlay();
+  resize(); cur = target; updateOverlay();
   requestAnimationFrame(tick);
 
   /* ---------- Cabeçalho ---------- */
@@ -213,40 +275,11 @@
   const setTop = () => top.classList.toggle('is-solid', hero.getBoundingClientRect().bottom < 80);
   window.addEventListener('scroll', setTop, { passive: true }); setTop();
 
-  /* ---------- Revelações e parallax ---------- */
+  /* ---------- Revelações ---------- */
   const io = new IntersectionObserver((entries) => {
     for (const en of entries) if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
   }, { rootMargin: '0px 0px -10% 0px' });
   document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-
-  const ritualImg = document.querySelector('.ritual__media img');
-  const ritual = document.querySelector('.ritual');
-  const bottle = document.querySelector('.buy__bottle');
-  const buy = document.querySelector('.buy__visual');
-  const noteImgs = [...document.querySelectorAll('.note__img img')];
-  if (!reduce) {
-    const parallax = () => {
-      const vh = innerHeight;
-      const rr = ritual.getBoundingClientRect();
-      if (rr.bottom > 0 && rr.top < vh) {
-        const t = (rr.top + rr.height / 2 - vh / 2) / vh;
-        ritualImg.style.transform = `translateY(${t * -8}%)`;
-      }
-      const br = buy.getBoundingClientRect();
-      if (br.bottom > 0 && br.top < vh) {
-        const t = (br.top + br.height / 2 - vh / 2) / vh;
-        bottle.style.transform = `translateY(${t * 40}px) rotate(${t * -6}deg)`;
-      }
-      for (const img of noteImgs) {
-        const r = img.parentElement.getBoundingClientRect();
-        if (r.bottom < 0 || r.top > vh) continue;
-        const t = (r.top + r.height / 2 - vh / 2) / vh;
-        img.style.transform = `scale(1.08) translateY(${t * -4}%)`;
-      }
-    };
-    window.addEventListener('scroll', parallax, { passive: true });
-    parallax();
-  }
 
   /* ---------- Compra e newsletter ---------- */
   const toast = document.getElementById('toast');
