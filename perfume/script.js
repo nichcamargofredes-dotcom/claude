@@ -211,12 +211,10 @@
     return Math.max(0, Math.min(1, -r.top / total));
   }
 
-  // Ida e volta: o vídeo avança até o painel de fundo/ritual e volta ao frasco fechado no painel de compra
-  const smooth = (t) => t * t * (3 - 2 * t);
+  // Ida e volta sem pausa: o vídeo avança até o meio do site e volta ao frasco fechado no painel de compra
   function frameAt(p) {
-    if (p < 0.6) return smooth(p / 0.6);
-    if (p < 0.68) return 1;
-    return 1 - smooth(clamp01((p - 0.68) / 0.26));
+    if (p < 0.5) return p / 0.5;
+    return 1 - clamp01((p - 0.5) / 0.44);
   }
 
   let scrollP = 0;
