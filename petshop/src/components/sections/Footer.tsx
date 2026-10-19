@@ -6,10 +6,12 @@ import { Container } from '../ui'
 const COLUMNS = [
   { title: 'Loja', links: [['Cães', '#shop'], ['Gatos', '#shop'], ['Pássaros', '#shop'], ['Peixes', '#shop'], ['Pequenos pets', '#shop']] },
   { title: 'Ajuda', links: [['Entrega e pagamento', '#delivery'], ['Trocas', '#delivery'], ['Perguntas frequentes', '#delivery'], ['Avaliações', '#reviews']] },
-  { title: 'Empresa', links: [['Serviços', '#services'], ['Marcas', '#brands'], ['Mais vendidos', '#bestsellers'], ['Galeria', '#gallery']] },
+  { title: 'Empresa', links: [['Serviços', '#services'], ['Marcas parceiras', '#brands'], ['Mais vendidos', '#bestsellers'], ['Galeria', '#gallery']] },
 ] as const
 
 const SOCIAL = ['Instagram', 'TikTok', 'YouTube', 'Pinterest']
+
+const BRANDS = ['Barkwell', 'Purrfect', 'Wild Meadow', 'Nordpaw', 'Happy Tails', 'Feather & Fin']
 
 export function Footer() {
   const ref = useRef<HTMLDivElement>(null)
@@ -78,7 +80,16 @@ export function Footer() {
           </address>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-forest/10 py-6 text-sm text-gray-500 sm:flex-row sm:items-center sm:justify-between">
+        <div id="brands" className="mt-14 flex scroll-mt-24 flex-col gap-3 border-t border-forest/10 pt-6 sm:flex-row sm:items-center sm:gap-6">
+          <p className="shrink-0 text-xs font-semibold uppercase tracking-[0.14em] text-gray-500">Marcas parceiras</p>
+          <ul className="flex flex-wrap gap-x-5 gap-y-1 font-serif-display text-lg text-forest/55">
+            {BRANDS.map((brand) => (
+              <li key={brand}>{brand}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mt-6 flex flex-col gap-3 border-t border-forest/10 py-6 text-sm text-gray-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© 2026 CozyPaws. Todos os direitos reservados.</p>
           <p className="flex gap-5">
             <a href="#top" className="hover:text-forest">

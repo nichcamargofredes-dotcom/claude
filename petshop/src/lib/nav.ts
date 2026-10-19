@@ -3,5 +3,5 @@ export const NAV_LINKS = [
   { label: 'Loja', href: '#shop' },
   { label: 'Serviços', href: '#services' },
   { label: 'Entrega e pagamento', href: '#delivery' },
-  { label: 'Marcas', href: '#brands' },
+  { label: 'Avaliações', href: '#reviews' },
 ] as const

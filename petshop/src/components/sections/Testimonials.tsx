@@ -122,7 +122,7 @@ export function Testimonials() {
               </motion.div>
             ) : (
               reviews.map((review, i) => (
-                <Reveal key={review.name} delay={(i % 2) * 0.08}>
+                <Reveal key={review.name} delay={0.05} x={i % 2 ? 48 : -48} y={16}>
                   <ReviewCard review={review} />
                 </Reveal>
               ))

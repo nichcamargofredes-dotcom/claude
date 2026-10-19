@@ -5,7 +5,6 @@ import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { MobileMenu } from './components/MobileMenu'
 import { BestSellers } from './components/sections/BestSellers'
-import { Brands } from './components/sections/Brands'
 import { Categories } from './components/sections/Categories'
 import { DeliveryFaq } from './components/sections/DeliveryFaq'
 import { Footer } from './components/sections/Footer'
@@ -41,7 +40,6 @@ export default function App() {
         <Categories />
         <BestSellers />
         <Services />
-        <Brands />
         <Testimonials />
         <Gallery />
         <DeliveryFaq />

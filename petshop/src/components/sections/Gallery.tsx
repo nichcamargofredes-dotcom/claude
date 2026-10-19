@@ -2,7 +2,6 @@ import { ArrowUpRight } from 'lucide-react'
 import { motion, useMotionValue, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { useLayoutEffect, useRef } from 'react'
 import { photos, type Photo } from '../../lib/assets'
-import { useMediaQuery } from '../../lib/hooks'
 import { PawIcon } from '../PawIcon'
 import { Eyebrow, Reveal } from '../ui'
 
@@ -104,7 +103,7 @@ function PinnedGallery() {
   return (
     <section ref={sectionRef} id="gallery" aria-labelledby="gallery-title" className="relative scroll-mt-20">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <motion.div ref={trackRef} style={{ x }} className="flex w-max items-center gap-6 px-12 xl:px-[max(3rem,calc((100vw-1320px)/2+3rem))]">
+        <motion.div ref={trackRef} style={{ x }} className="flex w-max items-center gap-4 px-5 sm:gap-6 sm:px-12 xl:px-[max(3rem,calc((100vw-1320px)/2+3rem))]">
           <Intro />
           {MOMENTS.map((moment, i) => (
             <MomentCard key={moment.handle} moment={moment} index={i} />
@@ -139,7 +138,6 @@ function SwipeGallery() {
 }
 
 export function Gallery() {
-  const wide = useMediaQuery('(min-width: 1024px)')
   const still = useReducedMotion()
-  return wide && !still ? <PinnedGallery /> : <SwipeGallery />
+  return still ? <SwipeGallery /> : <PinnedGallery />
 }

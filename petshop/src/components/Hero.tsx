@@ -281,50 +281,39 @@ function TabletHero() {
 function MobileHero() {
   return (
     <div className="flex flex-1 flex-col md:hidden">
-      <div className="px-5 pt-5 text-center">
-        <HeroHeading className="text-[36px] leading-[1.02]" delays={['delay-200', 'delay-300', 'delay-400', 'delay-500']} />
-        <p className="mx-auto mt-3 max-w-[30ch] animate-fade-up text-[15px] leading-relaxed text-gray-600 delay-500">
-          Ração aprovada por veterinários, caminhas e brinquedos, entregues na sua porta.
-        </p>
-        <div className="mt-5 animate-fade-up delay-600">
-          <ExploreButton className="px-6 py-3 text-sm" />
-        </div>
-      </div>
-
-      <div className="mt-6 flex items-start gap-3 px-4">
-        <CatHouseCard
-          className="min-w-0 flex-1 animate-slide-in-left delay-700"
-          aspect="aspect-square"
-          sizes="45vw"
-          textClass={['text-sm', 'text-base']}
-        />
-        <VideoCard
-          className="min-w-0 flex-1 animate-slide-in-right delay-700"
-          aspect="aspect-[3/4]"
-          arch="56.6%"
-          textClass="text-[11px]"
-        />
-      </div>
-
-      <div className="mx-4 mt-5 flex animate-fade-up items-center justify-center gap-5 delay-800">
-        <div className="flex items-center gap-2.5">
-          <AvatarStack size="size-9" />
-          <div className="text-left">
-            <p className="text-xl font-semibold leading-none text-forest">98 mil+</p>
-            <p className="mt-0.5 text-xs text-gray-600">Tutores felizes</p>
+      {/* Text block sits in the middle of the space left above the photos. */}
+      <div className="flex flex-1 flex-col justify-center py-8">
+        <div className="px-5 text-center">
+          <HeroHeading className="text-[clamp(40px,12vw,52px)] leading-[1]" delays={['delay-200', 'delay-300', 'delay-400', 'delay-500']} />
+          <p className="mx-auto mt-3 max-w-[30ch] animate-fade-up text-[15px] leading-relaxed text-gray-600 delay-500">
+            Ração aprovada por veterinários, caminhas e brinquedos, entregues na sua porta.
+          </p>
+          <div className="mt-5 animate-fade-up delay-600">
+            <ExploreButton className="px-6 py-3 text-sm" />
           </div>
         </div>
-        <span aria-hidden="true" className="h-9 w-px bg-forest/15" />
-        <div className="flex items-center gap-2">
-          <Star className="size-6 text-orange" fill="currentColor" strokeWidth={0} />
-          <div className="text-left">
-            <p className="text-xl font-semibold leading-none text-forest">4,6</p>
-            <p className="mt-0.5 text-xs text-gray-600">Nota média</p>
+
+        <div className="mx-4 mt-8 flex animate-fade-up items-center justify-center gap-5 delay-700">
+          <div className="flex items-center gap-2.5">
+            <AvatarStack size="size-9" />
+            <div className="text-left">
+              <p className="text-xl font-semibold leading-none text-forest">98 mil+</p>
+              <p className="mt-0.5 text-xs text-gray-600">Tutores felizes</p>
+            </div>
+          </div>
+          <span aria-hidden="true" className="h-9 w-px bg-forest/15" />
+          <div className="flex items-center gap-2">
+            <Star className="size-6 text-orange" fill="currentColor" strokeWidth={0} />
+            <div className="text-left">
+              <p className="text-xl font-semibold leading-none text-forest">4,6</p>
+              <p className="mt-0.5 text-xs text-gray-600">Nota média</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <PhotoStrip className="mt-auto pt-6" overlays="none" />
+      {/* Slightly wider than the screen so the pets read bigger; the outer edges of the wall crop off. */}
+      <PhotoStrip className="-mx-[7%] w-[114%] shrink-0" overlays="none" />
     </div>
   )
 }

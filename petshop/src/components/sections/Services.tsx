@@ -1,5 +1,5 @@
 import { ArrowRight, House, Scissors, Stethoscope, Truck, type LucideIcon } from 'lucide-react'
-import { motion, useScroll, useTransform, type MotionValue } from 'motion/react'
+import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
 import { useRef } from 'react'
 import { photos, type Photo } from '../../lib/assets'
 import { Container, Eyebrow, Reveal, SectionTitle } from '../ui'
@@ -119,6 +119,32 @@ function DesktopServices() {
   )
 }
 
+/** On phones each photo opens up from a narrow window and settles as it scrolls into view. */
+function WipePhoto({ service }: { service: Service }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const still = useReducedMotion()
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'center 0.55'] })
+  const clip = useTransform(scrollYProgress, [0, 1], ['inset(18% 12% 18% 12% round 28px)', 'inset(0% 0% 0% 0% round 28px)'])
+  const scale = useTransform(scrollYProgress, [0, 1], [1.3, 1])
+
+  return (
+    <motion.div ref={ref} style={still ? undefined : { clipPath: clip }} className="aspect-[4/5] overflow-hidden rounded-[28px]">
+      <motion.img
+        src={service.image.src}
+        srcSet={service.image.srcSet}
+        sizes="(min-width: 640px) 45vw, 90vw"
+        width={service.image.width}
+        height={service.image.height}
+        alt={service.alt}
+        loading="lazy"
+        decoding="async"
+        style={still ? undefined : { scale }}
+        className="h-full w-full object-cover"
+      />
+    </motion.div>
+  )
+}
+
 function MobileServices() {
   return (
     <div className="grid gap-12 sm:grid-cols-2 lg:hidden">
@@ -127,19 +153,7 @@ function MobileServices() {
         return (
           <Reveal key={service.id} delay={(i % 2) * 0.08}>
             <article>
-              <div className="aspect-[4/5] overflow-hidden rounded-[28px]">
-                <img
-                  src={service.image.src}
-                  srcSet={service.image.srcSet}
-                  sizes="(min-width: 640px) 45vw, 90vw"
-                  width={service.image.width}
-                  height={service.image.height}
-                  alt={service.alt}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-full w-full object-cover"
-                />
-              </div>
+              <WipePhoto service={service} />
               <div className="mt-6 flex items-center gap-3">
                 <span className="font-serif-display text-xl text-leaf">0{i + 1}</span>
                 <Icon className="size-5 text-leaf" strokeWidth={1.75} />

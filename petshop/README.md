@@ -19,14 +19,14 @@ npm run preview   # serve o build localmente
 |-------|--------|
 | Hero (prompt CozyPaws) | Header, layouts desktop/tablet/mobile, palavras do título com `word-pop`, cards deslizando, fotos subindo em sequência |
 | Faixa de benefícios | Letreiro infinito que acelera e inverte com a velocidade do scroll |
-| Compre por pet | Cards com parallax na foto e entrada escalonada |
+| Compre por pet | Grade de cards com parallax na foto e entrada escalonada |
 | Mais vendidos | Bento com produto destaque e preços em reais |
 | Serviços | Texto rolando com a foto fixa ao lado, que troca com "wipe" a cada serviço |
-| Marcas, avaliações | Colunas de avaliações em velocidades diferentes |
-| #CozyPawsFamily | Galeria horizontal presa na tela enquanto você rola (no celular vira carrossel de arrastar) |
+| Avaliações | Colunas em velocidades diferentes (no celular, cards entram pelos lados) |
+| #FamíliaCozyPaws | Galeria horizontal presa na tela enquanto você rola, também no celular |
 | Entrega e pagamento | FAQ em acordeão |
 | Newsletter | O dachshund sobe por trás do painel conforme a seção aparece |
-| Rodapé | Logotipo gigante subindo com o scroll |
+| Rodapé | Faixa compacta de marcas parceiras e logotipo gigante subindo com o scroll |
 
 Quem usa "reduzir movimento" no sistema vê tudo estático, sem perder conteúdo.
 

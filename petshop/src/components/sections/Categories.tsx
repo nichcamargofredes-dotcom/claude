@@ -43,16 +43,16 @@ export function Categories() {
       </Container>
 
       <div className="mt-12 md:mt-16">
-        <div className="mx-auto w-full max-w-[1320px] sm:px-8 lg:px-12">
-          <ul className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 sm:px-0 lg:grid lg:grid-cols-5 lg:gap-5 lg:overflow-visible">
+        <div className="mx-auto w-full max-w-[1320px] px-5 sm:px-8 lg:px-12">
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5 lg:gap-5">
             {CATEGORIES.map((cat, i) => (
               <motion.li
                 key={cat.name}
-                className="w-[68vw] max-w-[300px] shrink-0 snap-start sm:w-[42vw] lg:w-auto lg:max-w-none"
+                className={i === CATEGORIES.length - 1 ? 'col-span-2 sm:col-span-1' : undefined}
                 initial={{ opacity: 0, y: 48 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '0px 0px -8% 0px' }}
-                transition={{ duration: 1, ease: EASE_OUT, delay: i * 0.08 }}
+                transition={{ duration: 1, ease: EASE_OUT, delay: (i % 2) * 0.08 }}
               >
                 <a
                   href="#bestsellers"
@@ -62,17 +62,17 @@ export function Categories() {
                   <ParallaxImage
                     image={cat.image}
                     alt={cat.alt}
-                    sizes="(min-width: 1024px) 19vw, (min-width: 640px) 42vw, 68vw"
-                    className="aspect-[3/4]"
+                    sizes="(min-width: 1024px) 19vw, (min-width: 640px) 30vw, 46vw"
+                    className={i === CATEGORIES.length - 1 ? 'aspect-[16/10] sm:aspect-[3/4]' : 'aspect-[3/4]'}
                     imgClassName="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
                     strength={6}
                   />
-                  <div className="absolute inset-x-3 bottom-3 flex items-center justify-between gap-2 rounded-2xl bg-white/85 py-3 pl-4 pr-3 backdrop-blur-md">
+                  <div className="absolute inset-x-2 bottom-2 flex items-center justify-between gap-2 rounded-2xl bg-white/85 py-2.5 pl-3 pr-2 backdrop-blur-md sm:inset-x-3 sm:bottom-3 sm:py-3 sm:pl-4 sm:pr-3">
                     <div>
                       <p className="font-semibold text-forest">{cat.name}</p>
                       <p className="text-xs text-gray-600">{cat.count}</p>
                     </div>
-                    <span className="grid size-9 shrink-0 place-items-center rounded-full bg-forest text-white transition-colors group-hover:bg-orange">
+                    <span className="grid size-8 shrink-0 place-items-center rounded-full bg-forest text-white transition-colors group-hover:bg-orange sm:size-9">
                       <ArrowUpRight className="size-4" />
                     </span>
                   </div>
