@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maison Vespéra</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Vespéra Eau de Parfum: lima-da-pérsia, jasmim sambac, âmbar e oud.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap">
+<link rel="preload" as="image" href="media/hero.webp">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="top__in">
+    <a class="logo" href="#hero" aria-label="Maison Vespéra, início">Vespéra</a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#fragrancia">Fragrância</a>
+      <a href="#notas">Notas</a>
+      <a href="#ritual">Ritual</a>
+    </nav>
+    <a class="top__cta" href="#comprar">Comprar</a>
+  </div>
+</header>
+
+<main>
+  <!-- HERO: o scroll avança os quadros do vídeo. Camadas: fundo (canvas) → palavra → frente (canvas recortado) -->
+  <section class="hero" id="hero" aria-label="Vespéra Eau de Parfum">
+    <div class="hero__stage">
+      <canvas class="hero__bg" aria-hidden="true"></canvas>
+      <h1 class="hero__word" aria-label="Vespéra"><span>Vespéra</span></h1>
+      <canvas class="hero__fg" aria-hidden="true"></canvas>
+
+      <div class="hero__cap hero__cap--intro" data-from="0" data-to="0.1">
+        <p class="eyebrow">Eau de Parfum · 50 ml</p>
+        <p class="hero__scroll"><span class="hero__line" aria-hidden="true"></span>Role para abrir o frasco</p>
+      </div>
+
+      <div class="hero__cap hero__cap--story" data-from="0.18" data-to="0.44">
+        <p class="eyebrow">Maison Vespéra · Coleção Crepúsculo</p>
+        <p class="hero__lede">A luz do fim da tarde, guardada em vidro.</p>
+      </div>
+
+      <ol class="hero__notes" aria-label="Notas da fragrância">
+        <li class="hero__cap" data-from="0.52" data-to="1.01"><span class="eyebrow">Topo</span>Lima-da-pérsia</li>
+        <li class="hero__cap" data-from="0.62" data-to="1.01"><span class="eyebrow">Coração</span>Jasmim sambac</li>
+        <li class="hero__cap" data-from="0.72" data-to="1.01"><span class="eyebrow">Fundo</span>Âmbar &amp; oud</li>
+      </ol>
+
+      <div class="hero__progress" aria-hidden="true"><span></span></div>
+    </div>
+  </section>
+
+  <section class="intro" id="fragrancia">
+    <div class="wrap intro__grid">
+      <p class="eyebrow reveal">A fragrância</p>
+      <h2 class="intro__title reveal">Vespéra é o instante em que o dia vira&nbsp;âmbar.</h2>
+      <div class="intro__body reveal">
+        <p>Abre fresca, com o verde ácido da lima. Aquece devagar com o jasmim aberto ao sol e termina rente à pele, em âmbar resinoso e madeira de oud. Um perfume para usar quando a tarde começa a ir embora.</p>
+        <dl class="specs">
+          <div><dt>Família olfativa</dt><dd>Âmbar floral</dd></div>
+          <div><dt>Concentração</dt><dd>Eau de Parfum, 18%</dd></div>
+          <div><dt>Fixação</dt><dd>8 a 10 horas</dd></div>
+          <div><dt>Projeção</dt><dd>Moderada, íntima</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="notes" id="notas">
+    <div class="wrap">
+      <header class="notes__head">
+        <p class="eyebrow reveal">Pirâmide olfativa</p>
+        <h2 class="section-title reveal">Três notas, três tempos na pele</h2>
+      </header>
+      <div class="notes__grid">
+        <article class="note reveal">
+          <figure class="note__img"><img src="media/nota-lima.webp" alt="Lima cortada ao meio flutuando com flores de jasmim" loading="lazy" width="600" height="800"></figure>
+          <p class="note__time"><span>Topo</span><span>0 a 30 min</span></p>
+          <h3>Lima-da-pérsia</h3>
+          <p>A primeira borrifada. Cítrica, verde e brilhante, evapora rápido e abre caminho para o coração.</p>
+        </article>
+        <article class="note reveal">
+          <figure class="note__img"><img src="media/nota-jasmim.webp" alt="Flor de jasmim sobre lascas de madeira" loading="lazy" width="480" height="640"></figure>
+          <p class="note__time"><span>Coração</span><span>30 min a 4 h</span></p>
+          <h3>Jasmim sambac</h3>
+          <p>Floral branco, cremoso e solar. É a fase que as pessoas percebem quando você passa.</p>
+        </article>
+        <article class="note reveal">
+          <figure class="note__img"><img src="media/nota-ambar.webp" alt="Pedras de âmbar e lascas de oud em queda" loading="lazy" width="520" height="780"></figure>
+          <p class="note__time"><span>Fundo</span><span>4 h em diante</span></p>
+          <h3>Âmbar &amp; oud</h3>
+          <p>Resinas quentes e madeira escura. Fica na pele e nas roupas até o dia seguinte.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="ritual" id="ritual">
+    <div class="ritual__media" aria-hidden="true">
+      <img src="media/editorial.webp" alt="" loading="lazy" width="1280" height="720">
+    </div>
+    <div class="wrap ritual__in">
+      <p class="eyebrow">Ritual</p>
+      <h2 class="section-title">Como usar</h2>
+      <ol class="steps">
+        <li><span class="steps__n">1</span><p>Borrife a cerca de 15 cm da pele, logo depois do banho.</p></li>
+        <li><span class="steps__n">2</span><p>Pulsos, nuca e atrás das orelhas, onde a pele é mais quente.</p></li>
+        <li><span class="steps__n">3</span><p>Deixe secar sem esfregar, para não quebrar as notas de topo.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="buy" id="comprar">
+    <div class="wrap buy__grid">
+      <div class="buy__visual">
+        <img class="buy__bottle" src="media/bottle.webp" alt="Frasco de Vespéra Eau de Parfum com tampa dourada" loading="lazy" width="603" height="896">
+      </div>
+      <div class="buy__info">
+        <p class="eyebrow">Eau de Parfum</p>
+        <h2 class="buy__title">Vespéra</h2>
+        <p class="buy__desc">Âmbar floral com lima-da-pérsia, jasmim sambac, âmbar e oud. Frasco de vidro com tampa em metal dourado, recarregável.</p>
+        <fieldset class="sizes">
+          <legend class="eyebrow">Tamanho</legend>
+          <label class="size"><input type="radio" name="size" id="size-50" value="50" data-price="489" checked><span>50 ml</span><span>R$ 489</span></label>
+          <label class="size"><input type="radio" name="size" id="size-100" value="100" data-price="689"><span>100 ml</span><span>R$ 689</span></label>
+        </fieldset>
+        <button class="btn" type="button" id="add">Adicionar à sacola · <span id="price">R$ 489</span></button>
+        <p class="buy__fine">Frete grátis para todo o Brasil. Amostra de 2 ml em cada pedido.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <form class="news" id="news" novalidate>
+      <label for="email" class="eyebrow">Novidades da Maison</label>
+      <div class="news__row">
+        <input id="email" type="email" placeholder="seu@email.com" autocomplete="email" required>
+        <button type="submit">Assinar</button>
+      </div>
+      <p class="news__msg" id="news-msg" role="status"></p>
+    </form>
+    <nav class="foot__links" aria-label="Rodapé">
+      <a href="#fragrancia">Fragrância</a>
+      <a href="#notas">Notas</a>
+      <a href="#ritual">Ritual</a>
+      <a href="#comprar">Comprar</a>
+    </nav>
+  </div>
+  <p class="foot__word" aria-hidden="true">Vespéra</p>
+  <p class="wrap foot__legal">© 2026 Maison Vespéra. Marca fictícia criada para demonstração.</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
