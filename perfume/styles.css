@@ -113,20 +113,20 @@ a { color: inherit; }
 .hero__word {
   position: absolute;
   left: 50%;
-  top: 34%;
-  z-index: 1;
+  top: 58%;
+  z-index: 3;
   margin: 0;
-  font: 400 clamp(4.75rem, 15.5vw, 19rem)/.8 var(--display);
+  font: 400 30vw/.8 var(--display); /* maior que a tela: a palavra passa das bordas */
   font-variation-settings: "opsz" 96;
   letter-spacing: -.015em;
   color: var(--cream);
   white-space: nowrap;
   transform: translate(-50%, -50%);
-  text-shadow: 0 2px 40px rgba(120, 70, 80, .18);
+  text-shadow: 0 4px 50px rgba(90, 45, 55, .28);
+  pointer-events: none;
   will-change: transform;
 }
 /* Cópia da palavra por cima do frasco, quase transparente: o título aparece através do vidro */
-.hero__word--ghost { z-index: 2; opacity: .32; text-shadow: none; pointer-events: none; }
 .hero__word span { display: inline-block; animation: rise 1.6s var(--ease) both .2s; }
 @keyframes rise { from { transform: translateY(18%); opacity: .2; } to { transform: none; opacity: 1; } }
 

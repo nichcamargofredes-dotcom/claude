@@ -12,9 +12,8 @@ Site minimalista para uma marca de perfume fictícia, **Vespéra** (Eau de Parfu
 - **Perfume animado durante o site inteiro:** a foto enviada é a primeira imagem; o frasco fica fixo no fundo e, enquanto o site desce, avança quadro a quadro pelo vídeo (frasco sobe, a tampa sai e as notas explodem em volta).
 - **Volta ao frasco fechado:** a animação vai até o meio do site e depois roda de trás para frente, sem pausa, e o frasco flutua devagar o tempo todo, mesmo sem rolar; na seção de compra o frasco aparece fechado, como na foto original.
 - **Informações ao lado do frasco:** a cada painel o frasco diminui e vai para o lado oposto ao texto. No celular, ele sobe e o texto aparece embaixo.
-- **Texto atrás do perfume:** a palavra "Vespéra" fica centralizada atrás do frasco e dos ingredientes durante toda a animação (máscara por quadro, feita com rembg).
 - Painéis: Fragrância (ficha técnica), nota de topo (lima-da-pérsia), coração (jasmim sambac), fundo (âmbar & oud), Ritual de uso, Comprar (50 ml / 100 ml). Depois, rodapé com newsletter.
-- Título "Vespéra" na altura do borrifador, translúcido sobre o frasco.
+- Título "Vespéra" na frente do frasco, um pouco abaixo do meio da tela e maior que a tela (passa das bordas).
 - Fontes: Bodoni Moda + Jost. Paleta tirada da foto (lilás, rosa, âmbar, dourado, mármore).
 
 ## Links

@@ -23,7 +23,6 @@
   const VW = 1280, VH = 720;
   // Onde a foto original (1732×1154) cai sobre o primeiro quadro do vídeo, em coordenadas do vídeo
   const PHOTO = { x: 5.06, y: -63.1, s: 0.7316, w: 1732, h: 1154 };
-  const SPRAYER_Y = 200;
 
   const hero = document.querySelector('.hero');
   const stage = hero.querySelector('.hero__stage');
@@ -127,8 +126,9 @@
     const px = x0 + (x1 - x0) * z, py = y0 + (y1 - y0) * z + bob;
     fit = { s, x: px - P.x * s, y: py - P.y * s };
     for (const w of words) {
-      w.style.top = `${fit.y + SPRAYER_Y * s}px`;
-      w.style.left = `${fit.x + P.x * s}px`;
+      // Na frente do frasco, um pouco abaixo do meio da tela
+      w.style.top = `${H * 0.58}px`;
+      w.style.left = `${W / 2}px`;
     }
   }
 
@@ -254,7 +254,7 @@
     const fade = clamp01(1 - lay.zoom * 2.2);
     for (const word of words) {
       word.style.transform = `translate(-50%, -50%) scale(${(fit.s / base) * (1 + q * 0.3)})`;
-      word.style.opacity = (word.classList.contains('hero__word--ghost') ? 0.32 : 1) * fade;
+      word.style.opacity = fade;
     }
     if (bar) bar.style.transform = `scaleY(${scrollP})`;
     for (const c of caps) {

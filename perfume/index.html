@@ -28,13 +28,12 @@
 
 <main>
   <!-- O frasco fica fixo no fundo durante o site inteiro; o scroll avança os quadros do vídeo
-       e os painéis de informação passam por cima. Camadas: fundo (canvas) → palavra → frente (canvas recortado) → painéis -->
+       e os painéis de informação passam por cima. Camadas: fundo (canvas) → frente (canvas recortado) → palavra → painéis -->
   <div class="hero" id="hero">
     <div class="hero__stage" aria-hidden="true">
       <canvas class="hero__bg"></canvas>
-      <p class="hero__word"><span>Vespéra</span></p>
       <canvas class="hero__fg"></canvas>
-      <p class="hero__word hero__word--ghost"><span>Vespéra</span></p>
+      <p class="hero__word"><span>Vespéra</span></p>
       <div class="hero__progress"><span></span></div>
     </div>
 
