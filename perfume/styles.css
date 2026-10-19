@@ -118,7 +118,7 @@ a { color: inherit; }
 .hero__word {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 41%;
   z-index: 1;
   margin: 0;
   font: 400 clamp(4.75rem, 15.5vw, 19rem)/.8 var(--display);
@@ -130,6 +130,8 @@ a { color: inherit; }
   text-shadow: 0 2px 40px rgba(120, 70, 80, .18);
   will-change: transform;
 }
+/* Cópia da palavra por cima do frasco, quase transparente: o título aparece através do vidro */
+.hero__word--ghost { z-index: 2; opacity: .32; text-shadow: none; pointer-events: none; }
 .hero__word span { display: inline-block; animation: rise 1.6s var(--ease) both .2s; }
 @keyframes rise { from { transform: translateY(18%); opacity: .2; } to { transform: none; opacity: 1; } }
 
@@ -160,14 +162,6 @@ a { color: inherit; }
 .hero__line { width: 1px; height: 44px; background: linear-gradient(var(--ink), transparent); transform-origin: top; animation: drip 2.2s var(--ease) infinite; }
 @keyframes drip { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 
-.hero__cap--story {
-  left: max(32px, var(--gutter));
-  bottom: max(48px, calc(env(safe-area-inset-bottom, 0px) + 32px));
-  max-width: 24rem;
-  display: grid; gap: 12px;
-}
-.hero__cap--story .eyebrow { color: var(--ink); }
-.hero__lede { margin: 0; font: italic 400 var(--step-2)/1.08 var(--display); color: var(--ink); text-wrap: balance; }
 
 .hero__notes {
   list-style: none; margin: 0; padding: 0;

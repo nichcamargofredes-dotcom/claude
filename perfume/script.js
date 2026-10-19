@@ -28,7 +28,7 @@
   const stage = hero.querySelector('.hero__stage');
   const bg = hero.querySelector('.hero__bg');
   const fg = hero.querySelector('.hero__fg');
-  const word = hero.querySelector('.hero__word');
+  const words = [...hero.querySelectorAll('.hero__word')];
   const bar = hero.querySelector('.hero__progress span');
   const caps = [...hero.querySelectorAll('[data-from]')];
   const bctx = bg.getContext('2d');
@@ -180,8 +180,10 @@
 
   function updateOverlay() {
     const q = cur / (FRAMES - 1);
-    word.style.transform = `translate(-50%, -50%) scale(${1 + q * 0.14})`;
-    word.style.letterSpacing = `${-0.015 + q * 0.04}em`;
+    for (const word of words) {
+      word.style.transform = `translate(-50%, -50%) scale(${1 + q * 0.14})`;
+      word.style.letterSpacing = `${-0.015 + q * 0.04}em`;
+    }
     if (bar) bar.style.transform = `scaleY(${q})`;
     for (const c of caps) {
       const on = q >= +c.dataset.from && q < +c.dataset.to;
