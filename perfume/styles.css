@@ -118,7 +118,7 @@ a { color: inherit; }
 .hero__word {
   position: absolute;
   left: 50%;
-  top: 41%;
+  top: 34%;
   z-index: 1;
   margin: 0;
   font: 400 clamp(4.75rem, 15.5vw, 19rem)/.8 var(--display);
