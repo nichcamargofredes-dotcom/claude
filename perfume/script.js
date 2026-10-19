@@ -114,13 +114,17 @@
   // Posição e tamanho do frasco: z = 0 no centro, z = 1 ao lado do texto; side = +1 direita, -1 esquerda
   const P = { x: 640, y: 380 }; // centro do frasco no vídeo
   function layout(side, z) {
-    const s0 = base;
+    const s0 = base * 1.035; // sobra nas bordas para a flutuação não mostrar o fim do quadro
     const x0 = W / 2, y0 = H / 2 + (P.y - VH / 2) * s0;
     let s1, x1, y1;
     if (mobile) { s1 = (W * 1.1) / VW; x1 = W / 2; y1 = H * 0.26; }
     else { s1 = s0 * 0.62; x1 = W / 2 + side * W * 0.21; y1 = H / 2; }
-    const s = s0 + (s1 - s0) * z;
-    const px = x0 + (x1 - x0) * z, py = y0 + (y1 - y0) * z;
+    // Flutuação contínua: o frasco nunca fica parado, mesmo sem rolar a página
+    const t = performance.now() / 1000;
+    const bob = reduce ? 0 : Math.sin(t * 1.1) * H * 0.009;
+    const breathe = reduce ? 1 : 1 + Math.sin(t * 0.7) * 0.008;
+    const s = (s0 + (s1 - s0) * z) * breathe;
+    const px = x0 + (x1 - x0) * z, py = y0 + (y1 - y0) * z + bob;
     fit = { s, x: px - P.x * s, y: py - P.y * s };
     for (const w of words) {
       w.style.top = `${fit.y + SPRAYER_Y * s}px`;
