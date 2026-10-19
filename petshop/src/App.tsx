@@ -5,6 +5,7 @@ import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { MobileMenu } from './components/MobileMenu'
 import { BestSellers } from './components/sections/BestSellers'
+import { Booking } from './components/sections/Booking'
 import { Categories } from './components/sections/Categories'
 import { Faq } from './components/sections/Faq'
 import { Footer } from './components/sections/Footer'
@@ -42,6 +43,7 @@ export default function App() {
         <Testimonials />
         <Gallery />
         <Faq />
+        <Booking />
       </main>
       <Footer />
 

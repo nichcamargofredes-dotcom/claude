@@ -173,10 +173,10 @@ export function Services() {
           </Reveal>
           <Reveal delay={0.15}>
             <a
-              href="#contact"
+              href="#agendar"
               className="group inline-flex items-center gap-2 rounded-full bg-orange px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-orange-hover"
             >
-              Agendar uma visita
+              Agendar horário
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
             </a>
           </Reveal>

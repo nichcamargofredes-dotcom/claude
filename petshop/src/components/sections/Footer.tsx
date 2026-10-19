@@ -5,7 +5,7 @@ import { Container } from '../ui'
 
 const COLUMNS = [
   { title: 'Loja', links: [['Cães', '#shop'], ['Gatos', '#shop'], ['Pássaros', '#shop'], ['Peixes', '#shop'], ['Pequenos pets', '#shop']] },
-  { title: 'Ajuda', links: [['Perguntas frequentes', '#faq'], ['Serviços', '#services'], ['Avaliações', '#reviews'], ['Visite a loja', '#contact']] },
+  { title: 'Ajuda', links: [['Perguntas frequentes', '#faq'], ['Serviços', '#services'], ['Avaliações', '#reviews'], ['Agendar horário', '#agendar']] },
   { title: 'Empresa', links: [['Marcas parceiras', '#brands'], ['Mais vendidos', '#bestsellers'], ['Galeria', '#gallery']] },
 ] as const
 

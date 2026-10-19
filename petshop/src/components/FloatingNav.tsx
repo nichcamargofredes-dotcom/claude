@@ -39,10 +39,10 @@ export function FloatingNav({ onOpenMenu }: { onOpenMenu: () => void }) {
             </ul>
             <div className="flex items-center gap-2">
               <a
-                href="#contact"
-                className="hidden rounded-full bg-forest px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-forest-hover sm:inline-block"
+                href="#agendar"
+                className="rounded-full bg-forest px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-forest-hover sm:px-5"
               >
-                Visite a loja
+                Agendar
               </a>
               <button
                 type="button"

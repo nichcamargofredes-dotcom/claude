@@ -1,6 +1,6 @@
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion, useMotionValue, useReducedMotion, useScroll, useTransform } from 'motion/react'
-import { useLayoutEffect, useRef } from 'react'
+import { useLayoutEffect, useRef, useState, type PointerEvent } from 'react'
 import { photos, type Photo } from '../../lib/assets'
 import { useMediaQuery } from '../../lib/hooks'
 import { PawIcon } from '../PawIcon'
@@ -43,6 +43,7 @@ function MomentCard({ moment, index }: { moment: (typeof MOMENTS)[number]; index
           alt={moment.alt}
           loading="lazy"
           decoding="async"
+          draggable={false}
           className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
         />
       </div>
@@ -116,32 +117,67 @@ function PinnedGallery() {
   )
 }
 
-/** Phones and reduced motion: a swipeable row that also drifts sideways as the page scrolls past. */
+/** Phones and reduced motion: a row you can swipe, drag with the mouse or step through with the arrows. */
 function SwipeGallery() {
-  const ref = useRef<HTMLElement>(null)
-  const still = useReducedMotion()
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const x = useTransform(scrollYProgress, [0, 1], ['18%', '-12%'])
+  const rowRef = useRef<HTMLDivElement>(null)
+  const drag = useRef<{ x: number; left: number } | null>(null)
+  const [dragging, setDragging] = useState(false)
+
+  const step = (dir: 1 | -1) => {
+    const row = rowRef.current
+    const card = row?.querySelector('figure')
+    if (!row || !card) return
+    row.scrollBy({ left: dir * (card.getBoundingClientRect().width + 16), behavior: 'smooth' })
+  }
+
+  const onPointerDown = (e: PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'mouse' || !rowRef.current) return
+    drag.current = { x: e.clientX, left: rowRef.current.scrollLeft }
+    setDragging(true)
+  }
+  const onPointerMove = (e: PointerEvent<HTMLDivElement>) => {
+    if (!drag.current || !rowRef.current) return
+    rowRef.current.scrollLeft = drag.current.left - (e.clientX - drag.current.x)
+  }
+  const endDrag = () => {
+    drag.current = null
+    setDragging(false)
+  }
 
   return (
-    <section ref={ref} id="gallery" aria-labelledby="gallery-title" className="scroll-mt-20 overflow-hidden pb-20 pt-8">
-      <div className="px-5 sm:px-8">
+    <section id="gallery" aria-labelledby="gallery-title" className="scroll-mt-20 overflow-hidden pb-20 pt-8">
+      <div className="flex items-end justify-between gap-4 px-5 sm:px-8">
         <Reveal>
           <Intro />
         </Reveal>
-      </div>
-      <motion.div style={still ? undefined : { x }}>
-        <div className="no-scrollbar mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 sm:px-8">
-          {MOMENTS.map((moment, i) => (
-            <div key={moment.handle} className="snap-start">
-              <MomentCard moment={moment} index={i} />
-            </div>
-          ))}
-          <div className="snap-start">
-            <Outro />
-          </div>
+        <div className="hidden shrink-0 gap-2 sm:flex">
+          <button type="button" onClick={() => step(-1)} aria-label="Fotos anteriores" className="grid size-11 place-items-center rounded-full border border-forest/20 text-forest transition-colors hover:bg-forest hover:text-white">
+            <ChevronLeft className="size-5" />
+          </button>
+          <button type="button" onClick={() => step(1)} aria-label="Próximas fotos" className="grid size-11 place-items-center rounded-full border border-forest/20 text-forest transition-colors hover:bg-forest hover:text-white">
+            <ChevronRight className="size-5" />
+          </button>
         </div>
-      </motion.div>
+      </div>
+      <div
+        ref={rowRef}
+        data-lenis-prevent
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerLeave={endDrag}
+        className={`no-scrollbar mt-8 flex gap-4 overflow-x-auto overscroll-x-contain px-5 pb-2 [touch-action:pan-x_pan-y] sm:px-8 ${dragging ? 'cursor-grabbing select-none' : 'cursor-grab snap-x snap-mandatory'}`}
+      >
+        {MOMENTS.map((moment, i) => (
+          <Reveal key={moment.handle} x={40} y={0} delay={Math.min(i, 3) * 0.08} className="snap-start">
+            <MomentCard moment={moment} index={i} />
+          </Reveal>
+        ))}
+        <div className="snap-start">
+          <Outro />
+        </div>
+      </div>
+      <p className="mt-4 px-5 text-sm text-gray-500 sm:hidden">Arraste para o lado para ver mais fotos</p>
     </section>
   )
 }

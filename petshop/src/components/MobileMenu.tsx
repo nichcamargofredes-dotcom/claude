@@ -99,6 +99,17 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
             </ul>
           </nav>
 
+          <a
+            href="#agendar"
+            onClick={(e) => {
+              e.preventDefault()
+              go('#agendar')
+            }}
+            className="mb-8 flex items-center justify-center rounded-full bg-orange px-6 py-4 font-semibold text-white"
+          >
+            Agendar horário
+          </a>
+
           <div className="space-y-1 text-sm text-white/70">
             <p>Rua das Palmeiras, 140 · Pinheiros, São Paulo</p>
             <p>Seg. a sáb. 9h–20h · Dom. 10h–18h</p>
