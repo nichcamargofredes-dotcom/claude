@@ -7,17 +7,37 @@ import { scrollToTarget, setScrollLocked } from '../lib/smooth-scroll'
 import { EASE_OUT } from '../lib/motion'
 
 export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const dialogRef = useRef<HTMLDivElement>(null)
   const closeRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     if (!open) return
+    const dialog = dialogRef.current
+    const opener = document.activeElement as HTMLElement | null
     setScrollLocked(true)
     closeRef.current?.focus()
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose()
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+      if (e.key !== 'Tab' || !dialog) return
+      // Keep Tab inside the menu while it is open.
+      const items = dialog.querySelectorAll<HTMLElement>('a[href], button')
+      const first = items[0]
+      const last = items[items.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
     window.addEventListener('keydown', onKey)
     return () => {
       setScrollLocked(false)
       window.removeEventListener('keydown', onKey)
+      // Closed without following a link: hand focus back to the button that opened the menu.
+      if (dialog?.contains(document.activeElement)) opener?.focus({ preventScroll: true })
     }
   }, [open, onClose])
 
@@ -31,6 +51,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
     <AnimatePresence>
       {open && (
         <motion.div
+          ref={dialogRef}
           role="dialog"
           aria-modal="true"
           aria-label="Menu"

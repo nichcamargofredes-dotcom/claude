@@ -1,5 +1,5 @@
 import { ArrowRight, Check } from 'lucide-react'
-import { motion, useScroll, useTransform } from 'motion/react'
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { useId, useRef, useState, type FormEvent } from 'react'
 import { figmaSrcSet, heroAssets, heroSizes } from '../../lib/assets'
 import { Container, Reveal } from '../ui'
@@ -8,6 +8,7 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
 export function Newsletter() {
   const ref = useRef<HTMLDivElement>(null)
+  const still = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'start 0.45'] })
   // The dachshund climbs up from behind the panel edge as it scrolls into view.
   const y = useTransform(scrollYProgress, [0, 1], ['72%', '0%'])
@@ -41,7 +42,7 @@ export function Newsletter() {
               height={heroSizes.bottomLeft.height}
               alt=""
               loading="lazy"
-              style={{ y }}
+              style={still ? undefined : { y }}
               className="block w-full"
             />
           </div>

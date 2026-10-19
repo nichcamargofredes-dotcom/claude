@@ -30,7 +30,13 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <ShopProvider>
-        <div id="top" className="relative flex min-h-svh flex-col md:h-screen md:min-h-0 md:overflow-hidden">
+        <a
+          href="#welcome"
+          className="fixed left-4 top-4 z-[80] -translate-y-24 rounded-full bg-forest px-5 py-3 text-sm font-semibold text-white transition-transform focus-visible:translate-y-0"
+        >
+          Skip to content
+        </a>
+        <div id="top" className="relative flex min-h-svh flex-col md:h-svh md:min-h-0 md:overflow-hidden">
           <Header onOpenMenu={openMenu} />
           <Hero />
         </div>

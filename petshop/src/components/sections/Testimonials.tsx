@@ -1,5 +1,5 @@
 import { Star } from 'lucide-react'
-import { motion, useScroll, useTransform } from 'motion/react'
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { useRef } from 'react'
 import { photos, type Photo } from '../../lib/assets'
 import { useMediaQuery } from '../../lib/hooks'
@@ -77,6 +77,7 @@ function ReviewCard({ review }: { review: Review }) {
 export function Testimonials() {
   const ref = useRef<HTMLDivElement>(null)
   const wide = useMediaQuery('(min-width: 1024px)')
+  const still = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   // Columns drift at different speeds on desktop for a little depth.
   const offsets = [
@@ -112,7 +113,7 @@ export function Testimonials() {
         <div ref={ref} className="mt-14 grid gap-5 sm:grid-cols-2 md:mt-20 lg:grid-cols-3">
           {columns.map((reviews, c) =>
             wide ? (
-              <motion.div key={c} style={{ y: offsets[c] }} className="flex flex-col gap-5">
+              <motion.div key={c} style={still ? undefined : { y: offsets[c] }} className="flex flex-col gap-5">
                 {reviews.map((review) => (
                   <Reveal key={review.name}>
                     <ReviewCard review={review} />

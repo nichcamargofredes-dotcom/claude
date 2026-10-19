@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'motion/react'
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { useRef } from 'react'
 import { heroAssets } from '../../lib/assets'
 import { Container } from '../ui'
@@ -13,6 +13,7 @@ const SOCIAL = ['Instagram', 'TikTok', 'YouTube', 'Pinterest']
 
 export function Footer() {
   const ref = useRef<HTMLDivElement>(null)
+  const still = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end end'] })
   const y = useTransform(scrollYProgress, [0, 1], ['45%', '0%'])
 
@@ -95,7 +96,7 @@ export function Footer() {
 
       <div ref={ref} aria-hidden="true" className="select-none overflow-hidden">
         <motion.p
-          style={{ y }}
+          style={still ? undefined : { y }}
           className="whitespace-nowrap text-center font-serif-display text-[23.5vw] leading-[0.78] tracking-tight text-forest"
         >
           CozyPaws

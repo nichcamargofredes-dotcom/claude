@@ -1,5 +1,5 @@
 import { ArrowUpRight } from 'lucide-react'
-import { motion, useMotionValue, useScroll, useTransform } from 'motion/react'
+import { motion, useMotionValue, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { useLayoutEffect, useRef } from 'react'
 import { photos, type Photo } from '../../lib/assets'
 import { useMediaQuery } from '../../lib/hooks'
@@ -140,5 +140,6 @@ function SwipeGallery() {
 
 export function Gallery() {
   const wide = useMediaQuery('(min-width: 1024px)')
-  return wide ? <PinnedGallery /> : <SwipeGallery />
+  const still = useReducedMotion()
+  return wide && !still ? <PinnedGallery /> : <SwipeGallery />
 }

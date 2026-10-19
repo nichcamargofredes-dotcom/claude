@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'motion/react'
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { useRef, type ReactNode } from 'react'
 import type { Photo } from '../lib/assets'
 import { EASE_OUT } from '../lib/motion'
@@ -66,6 +66,7 @@ export function ParallaxImage({
   strength?: number
 }) {
   const ref = useRef<HTMLDivElement>(null)
+  const still = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const y = useTransform(scrollYProgress, [0, 1], [`-${strength}%`, `${strength}%`])
 
@@ -80,7 +81,7 @@ export function ParallaxImage({
         alt={alt}
         loading="lazy"
         decoding="async"
-        style={{ y, scale: 1 + (strength * 2.2) / 100 }}
+        style={still ? undefined : { y, scale: 1 + (strength * 2.2) / 100 }}
         className={`h-full w-full object-cover ${imgClassName}`}
       />
     </div>

@@ -330,7 +330,7 @@ function MobileHero() {
 
 export function Hero() {
   return (
-    <section aria-label="Welcome" className="flex flex-1 flex-col overflow-hidden">
+    <section id="welcome" tabIndex={-1} aria-label="Welcome" className="flex flex-1 flex-col overflow-hidden outline-none">
       <DesktopHero />
       <TabletHero />
       <MobileHero />

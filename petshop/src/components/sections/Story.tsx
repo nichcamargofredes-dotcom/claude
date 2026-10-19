@@ -1,4 +1,4 @@
-import { animate, motion, useInView, useScroll, useTransform, type MotionValue } from 'motion/react'
+import { animate, motion, useInView, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
 import { useEffect, useRef } from 'react'
 import { photos, type Photo } from '../../lib/assets'
 import { Container, Eyebrow, Reveal } from '../ui'
@@ -15,8 +15,11 @@ const STATEMENT: Token[] = [
 ]
 
 function RevealToken({ token, progress, range }: { token: Token; progress: MotionValue<number>; range: [number, number] }) {
-  const opacity = useTransform(progress, range, [0.16, 1])
-  const scale = useTransform(progress, range, [0.6, 1])
+  const still = useReducedMotion()
+  const fade = useTransform(progress, range, [0.16, 1])
+  const grow = useTransform(progress, range, [0.6, 1])
+  const opacity = still ? 1 : fade
+  const scale = still ? 1 : grow
 
   if (typeof token === 'string') {
     return (
