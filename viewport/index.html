@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Viewport Sites</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Viewport é o estúdio de Nicolas Freds. Sites rápidos, bonitos e feitos para o celular, para clínicas, barbearias, pet shops e pequenos negócios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav" id="topo">
+  <div class="nav-in">
+    <a href="#inicio" class="brand" aria-label="Viewport, início">
+      <svg class="mark" viewBox="0 0 28 28" aria-hidden="true"><path d="M2 9V2h7M19 2h7v7M26 19v7h-7M9 26H2v-7"/><rect x="10" y="10" width="8" height="8" rx="1.5"/></svg>
+      <span>viewport</span>
+    </a>
+    <nav class="links" id="links" aria-label="Principal">
+      <a href="#trabalhos">Trabalhos</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#processo">Processo</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+    <a href="#contato" class="btn btn-solid nav-cta">Pedir orçamento</a>
+    <button class="burger" id="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="links"><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot"></span>Estúdio de sites de Nicolas Freds</p>
+        <h1>Seu negócio, bem visto em <span class="hl">qualquer tela.</span></h1>
+        <p class="lead">Eu crio sites rápidos e bonitos para pequenos negócios: clínicas, barbearias, pet shops e escritórios. Do primeiro rascunho ao site no ar, você fala direto comigo.</p>
+        <div class="actions">
+          <a href="#contato" class="btn btn-solid">Pedir orçamento <span class="arr" aria-hidden="true">→</span></a>
+          <a href="#trabalhos" class="btn btn-line">Ver trabalhos</a>
+        </div>
+        <dl class="readout" aria-live="off">
+          <div><dt>Sua tela agora</dt><dd><b class="vw">1440</b> × <b class="vh">900</b> px</dd></div>
+          <div><dt>Layout testado em</dt><dd>390 · 768 · 1440 px</dd></div>
+        </dl>
+      </div>
+
+      <figure class="hero-stage" aria-label="Exemplos de sites feitos pela Viewport no computador e no celular">
+        <span class="crop c1"></span><span class="crop c2"></span><span class="crop c3"></span><span class="crop c4"></span>
+        <div class="browser">
+          <div class="bar"><i></i><i></i><i></i><span>Quiropraxia · Dr. Lucas Mendes</span></div>
+          <img src="img/quiro-desktop.jpg" alt="Página inicial do site de quiropraxia do Dr. Lucas Mendes" width="1440" height="900" fetchpriority="high">
+        </div>
+        <div class="phone">
+          <img src="img/pets-mobile.jpg" alt="Site do pet shop CozyPaws aberto no celular" width="585" height="1266">
+        </div>
+        <span class="tag tag-desk">div.browser <em>1440 × 900</em></span>
+        <span class="tag tag-mob">div.phone <em>390 × 844</em></span>
+      </figure>
+    </div>
+
+    <div class="wrap niches">
+      <span>Feito para</span>
+      <ul>
+        <li>Clínicas</li><li>Consultórios</li><li>Barbearias</li><li>Salões</li><li>Pet shops</li><li>Escritórios</li><li>Arquitetura</li><li>Restaurantes</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TRABALHOS -->
+  <section class="work" id="trabalhos">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Trabalhos recentes</p>
+        <h2>Cada site com uma identidade própria.</h2>
+        <p class="sec-sub">Troque entre computador e celular para ver como cada projeto se adapta à tela.</p>
+      </div>
+
+      <article class="case" data-case="quiro">
+        <div class="case-stage" data-mode="desk">
+          <div class="seg" role="group" aria-label="Escolher tela">
+            <button type="button" class="on" data-to="desk" aria-pressed="true">Computador <small>1440</small></button>
+            <button type="button" data-to="mob" aria-pressed="false">Celular <small>390</small></button>
+          </div>
+          <div class="screen">
+            <img class="i-desk" src="img/quiro-desktop.jpg" alt="Site de quiropraxia no computador" width="1440" height="900" loading="lazy">
+            <img class="i-mob" src="img/quiro-mobile.jpg" alt="Site de quiropraxia no celular" width="585" height="1266" loading="lazy">
+          </div>
+          <span class="size"><b>1440 × 900</b></span>
+        </div>
+        <div class="case-copy">
+          <p class="kicker">Saúde · Quiropraxia</p>
+          <h3>Dr. Lucas Mendes</h3>
+          <p>Site de clínica de quiropraxia com visual calmo e editorial. A coluna vertebral se alinha enquanto a pessoa rola a página, mostrando o antes, o durante e o depois do tratamento.</p>
+          <ul class="feats">
+            <li>Coluna animada guiada pela rolagem</li>
+            <li>Galeria horizontal com as etapas do método</li>
+            <li>Depoimentos com arraste no celular</li>
+            <li>Formulário de agendamento</li>
+          </ul>
+          <a class="live" href="https://claude.ai/artifact/7Ub98iuMvMMZbPeQbjZLRj" target="_blank" rel="noopener">Ver site ao vivo <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <article class="case flip" data-case="pets">
+        <div class="case-stage" data-mode="desk">
+          <div class="seg" role="group" aria-label="Escolher tela">
+            <button type="button" class="on" data-to="desk" aria-pressed="true">Computador <small>1440</small></button>
+            <button type="button" data-to="mob" aria-pressed="false">Celular <small>390</small></button>
+          </div>
+          <div class="screen">
+            <img class="i-desk" src="img/pets-desktop.jpg" alt="Site do pet shop CozyPaws no computador" width="1440" height="900" loading="lazy">
+            <img class="i-mob" src="img/pets-mobile.jpg" alt="Site do pet shop CozyPaws no celular" width="585" height="1266" loading="lazy">
+          </div>
+          <span class="size"><b>1440 × 900</b></span>
+        </div>
+        <div class="case-copy">
+          <p class="kicker">Varejo · Pet shop</p>
+          <h3>CozyPaws</h3>
+          <p>Loja e serviços para pets. Os cachorros e o gato aparecem apoiados na faixa verde do topo, e a página leva o visitante da vitrine de produtos até o agendamento de banho e tosa.</p>
+          <ul class="feats">
+            <li>Vitrine com preço e avaliações</li>
+            <li>Categorias por tipo de pet</li>
+            <li>Serviços: banho e tosa, veterinário, creche e entrega</li>
+            <li>Animações de entrada no topo da página</li>
+          </ul>
+          <a class="live" href="https://claude.ai/artifact/FfrFoMqNqmBeFeTUZQRvhd" target="_blank" rel="noopener">Ver site ao vivo <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <article class="case" data-case="hously">
+        <div class="case-stage" data-mode="desk">
+          <div class="seg" role="group" aria-label="Escolher tela">
+            <button type="button" class="on" data-to="desk" aria-pressed="true">Computador <small>1440</small></button>
+            <button type="button" data-to="mob" aria-pressed="false">Celular <small>390</small></button>
+          </div>
+          <div class="screen">
+            <img class="i-desk" src="img/hously-detail.jpg" alt="Site do estúdio de arquitetura Hously no computador" width="1440" height="900" loading="lazy">
+            <img class="i-mob" src="img/hously-mobile.jpg" alt="Site do estúdio de arquitetura Hously no celular" width="585" height="1266" loading="lazy">
+          </div>
+          <span class="size"><b>1440 × 900</b></span>
+        </div>
+        <div class="case-copy">
+          <p class="kicker">Arquitetura · Estúdio</p>
+          <h3>Hously</h3>
+          <p>Site para estúdio de arquitetura, com tipografia grande e muito espaço em branco. O título se inclina em 3D no primeiro movimento da rolagem e os projetos se revelam um a um.</p>
+          <ul class="feats">
+            <li>Título com animação 3D na rolagem</li>
+            <li>Projetos revelados ao entrar na tela</li>
+            <li>Tema claro e escuro automático</li>
+            <li>Perguntas frequentes em acordeão</li>
+          </ul>
+          <a class="live" href="https://claude.ai/artifact/RAzScrTQaFjUAAxXhYxwf7" target="_blank" rel="noopener">Ver site ao vivo <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- POR QUE UM SITE -->
+  <section class="why">
+    <div class="wrap why-grid">
+      <div>
+        <p class="eyebrow">Para quem depende só do Instagram</p>
+        <h2>Quem procura você no Google precisa encontrar um site.</h2>
+      </div>
+      <ul class="why-list">
+        <li><b>Aparece nas buscas</b><span>Quando alguém pesquisa “barbearia perto de mim” ou “dentista em Campinas”, o Google mostra sites e fichas do Maps. Um perfil só no Instagram quase nunca aparece.</span></li>
+        <li><b>Passa confiança</b><span>Endereço, horários, fotos do espaço e depoimentos num só lugar. O cliente decide antes de mandar a primeira mensagem.</span></li>
+        <li><b>Leva direto ao WhatsApp</b><span>Todo botão do site abre uma conversa com você, já com a mensagem escrita. Menos cliques, mais agendamentos.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="services" id="servicos">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Serviços</p>
+        <h2>O que eu faço por você.</h2>
+        <p class="sec-sub">Passe o mouse sobre um cartão para ver as medidas dele, do jeito que eu vejo no navegador enquanto trabalho.</p>
+      </div>
+      <div class="svc-grid">
+        <section class="svc">
+          <span class="inspect"></span>
+          <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="7" width="30" height="24" rx="3"/><path d="M5 13h30M13 35h14M20 31v4"/></svg>
+          <h3>Site institucional</h3>
+          <p>A página completa do seu negócio: serviços, fotos, equipe, depoimentos, mapa e contato. Ideal para clínicas, escritórios e estúdios.</p>
+        </section>
+        <section class="svc">
+          <span class="inspect"></span>
+          <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 6h24v28H8z"/><path d="M13 13h14M13 18h9"/><rect x="13" y="24" width="14" height="5" rx="2.5"/></svg>
+          <h3>Landing page</h3>
+          <p>Uma página focada em uma oferta ou campanha, pensada para transformar visitas em mensagens no WhatsApp.</p>
+        </section>
+        <section class="svc">
+          <span class="inspect"></span>
+          <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="5" y="6" width="13" height="13" rx="2"/><rect x="22" y="6" width="13" height="13" rx="2"/><rect x="5" y="23" width="13" height="13" rx="2"/><rect x="22" y="23" width="13" height="13" rx="2"/></svg>
+          <h3>Vitrine e catálogo</h3>
+          <p>Produtos com foto, preço e botão de pedido. Bom para pet shops, lojas de bairro e quem vende pelo WhatsApp.</p>
+        </section>
+        <section class="svc">
+          <span class="inspect"></span>
+          <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 35s-11-10-11-18a11 11 0 0 1 22 0c0 8-11 18-11 18z"/><circle cx="20" cy="17" r="4"/></svg>
+          <h3>Google e manutenção</h3>
+          <p>Domínio .com.br, hospedagem, ficha no Google Maps e ajustes sempre que precisar. Você não se preocupa com a parte técnica.</p>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESSO -->
+  <section class="process" id="processo">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Processo</p>
+        <h2>Do primeiro contato ao site no ar.</h2>
+      </div>
+      <ol class="steps">
+        <li><small>etapa 01</small><b>Conversa</b><span>Você me conta sobre o negócio, o público e o que precisa. Sem compromisso.</span></li>
+        <li><small>etapa 02</small><b>Layout</b><span>Mostro a primeira versão do site para você aprovar ou pedir ajustes.</span></li>
+        <li><small>etapa 03</small><b>Desenvolvimento</b><span>Monto o site completo e testo no computador, no tablet e no celular.</span></li>
+        <li><small>etapa 04</small><b>No ar</b><span>Publico no seu domínio, conecto o WhatsApp e o Google e te ensino a acompanhar.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="about" id="sobre">
+    <div class="wrap about-grid">
+      <div class="monogram" aria-hidden="true">
+        <span class="crop c1"></span><span class="crop c2"></span><span class="crop c3"></span><span class="crop c4"></span>
+        <b>NF</b>
+        <small>Nicolas Freds · Viewport</small>
+      </div>
+      <div class="about-copy">
+        <p class="eyebrow">Sobre</p>
+        <h2>Oi, eu sou o Nicolas Freds.</h2>
+        <p>A Viewport é o meu estúdio. Viewport é o nome da área da tela onde o site aparece, e é nela que eu penso o tempo todo: no celular do seu cliente, no computador do escritório, no tablet de quem pesquisa no sofá.</p>
+        <p>Trabalho sozinho, então quem conversa com você é quem desenha e programa o site. Gosto de sites que carregam rápido, funcionam bem no celular e têm um detalhe que faz o visitante lembrar da marca, como a coluna que se alinha no site de quiropraxia.</p>
+        <ul class="facts">
+          <li><small>Atendimento</small>Campinas e região, e online para todo o Brasil</li>
+          <li><small>Contato</small>Direto comigo, do orçamento à entrega</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- DÚVIDAS -->
+  <section class="faq" id="duvidas">
+    <div class="wrap faq-grid">
+      <div class="sec-head">
+        <p class="eyebrow">Dúvidas</p>
+        <h2>Perguntas que todo cliente faz.</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Quanto custa um site?</summary>
+          <p>Depende do tamanho e das funções. Depois de uma conversa rápida eu mando um orçamento fechado, com tudo que está incluso.</p>
+        </details>
+        <details>
+          <summary>Quanto tempo leva para ficar pronto?</summary>
+          <p>Um site institucional costuma ficar pronto em poucas semanas. O prazo exato vai escrito no orçamento.</p>
+        </details>
+        <details>
+          <summary>Preciso ter textos e fotos?</summary>
+          <p>Ajuda, mas não é obrigatório. Eu escrevo os textos com você e uso imagens de qualidade até você ter fotos próprias do espaço.</p>
+        </details>
+        <details>
+          <summary>Você cuida do domínio e da hospedagem?</summary>
+          <p>Sim. Eu registro o domínio .com.br, configuro a hospedagem e deixo tudo no seu nome.</p>
+        </details>
+        <details>
+          <summary>O site funciona no celular?</summary>
+          <p>Funciona. Todo site é desenhado e testado primeiro no celular, que é onde a maioria dos seus clientes vai abrir.</p>
+        </details>
+        <details>
+          <summary>Posso pedir alterações depois?</summary>
+          <p>Pode. Faço ajustes avulsos ou por um plano de manutenção mensal, como for melhor para você.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="contact" id="contato">
+    <div class="wrap contact-grid">
+      <div class="contact-copy">
+        <p class="eyebrow">Contato</p>
+        <h2>Vamos colocar seu negócio na tela certa.</h2>
+        <p>Preencha ao lado e a mensagem abre pronta no WhatsApp. Eu respondo com as próximas etapas e um orçamento sem compromisso.</p>
+      </div>
+      <form class="form" id="form" novalidate>
+        <label for="f-nome">Seu nome</label>
+        <input id="f-nome" name="nome" autocomplete="name" placeholder="Ex.: Ana Souza" required>
+        <label for="f-negocio">Nome e ramo do negócio</label>
+        <input id="f-negocio" name="negocio" placeholder="Ex.: Barbearia Central, barbearia" required>
+        <label for="f-tipo">O que você precisa</label>
+        <select id="f-tipo" name="tipo">
+          <option>Site institucional</option>
+          <option>Landing page</option>
+          <option>Vitrine e catálogo</option>
+          <option>Google e manutenção</option>
+          <option>Ainda não sei</option>
+        </select>
+        <label for="f-msg">Conte um pouco mais <span>(opcional)</span></label>
+        <textarea id="f-msg" name="msg" rows="3" placeholder="Ex.: hoje só tenho Instagram e quero aparecer no Google"></textarea>
+        <a class="btn btn-solid send" id="send" href="#" target="_blank" rel="noopener">Enviar pelo WhatsApp <span class="arr" aria-hidden="true">→</span></a>
+        <p class="form-msg" id="form-msg" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap foot">
+    <a href="#inicio" class="brand">
+      <svg class="mark" viewBox="0 0 28 28" aria-hidden="true"><path d="M2 9V2h7M19 2h7v7M26 19v7h-7M9 26H2v-7"/><rect x="10" y="10" width="8" height="8" rx="1.5"/></svg>
+      <span>viewport</span>
+    </a>
+    <nav aria-label="Rodapé">
+      <a href="#trabalhos">Trabalhos</a><a href="#servicos">Serviços</a><a href="#processo">Processo</a><a href="#sobre">Sobre</a><a href="#contato">Contato</a>
+    </nav>
+    <p class="legal">© <span id="ano">2026</span> Viewport · Nicolas Freds<br><span class="mono">Esta página está sendo vista em <b class="vw">1440</b> × <b class="vh">900</b> px</span></p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
