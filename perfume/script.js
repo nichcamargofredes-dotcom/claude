@@ -23,6 +23,7 @@
   const VW = 1280, VH = 720;
   // Onde a foto original (1732×1154) cai sobre o primeiro quadro do vídeo, em coordenadas do vídeo
   const PHOTO = { x: 5.06, y: -63.1, s: 0.7316, w: 1732, h: 1154 };
+  const SPRAYER_Y = 165;
 
   const hero = document.querySelector('.hero');
   const stage = hero.querySelector('.hero__stage');
@@ -90,6 +91,8 @@
     s = Math.min(s, (W * 1.6) / VW);
     s = Math.max(s, W / VW);
     fit = { s, x: (W - VW * s) / 2, y: H / 2 - (VH / 2) * s };
+    // O título fica na altura do borrifador (y≈165 no vídeo), em qualquer tamanho de tela
+    for (const w of words) w.style.top = `${fit.y + SPRAYER_Y * s}px`;
     draw(true);
   }
 
