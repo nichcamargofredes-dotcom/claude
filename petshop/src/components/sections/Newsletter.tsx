@@ -49,10 +49,10 @@ export function Newsletter() {
 
           <Reveal className="relative mx-auto max-w-2xl">
             <h2 id="newsletter-title" className="text-balance font-serif-display text-[clamp(36px,5vw,64px)] leading-[1] tracking-tight text-forest">
-              Ganhe 15% na primeira compra
+              Ganhe 15% no primeiro banho e tosa
             </h2>
             <p className="mx-auto mt-5 max-w-lg leading-relaxed text-forest/80">
-              Junte-se a 40 mil tutores e receba novidades, dicas de cuidado e ofertas exclusivas. Um e-mail por semana, sem spam.
+              Junte-se a 40 mil tutores e receba novidades da loja, dicas de cuidado e ofertas exclusivas. Um e-mail por semana, sem spam.
             </p>
 
             {status === 'done' ? (

@@ -6,7 +6,7 @@ import { Hero } from './components/Hero'
 import { MobileMenu } from './components/MobileMenu'
 import { BestSellers } from './components/sections/BestSellers'
 import { Categories } from './components/sections/Categories'
-import { DeliveryFaq } from './components/sections/DeliveryFaq'
+import { Faq } from './components/sections/Faq'
 import { Footer } from './components/sections/Footer'
 import { Gallery } from './components/sections/Gallery'
 import { Marquee } from './components/sections/Marquee'
@@ -42,7 +42,7 @@ export default function App() {
         <Services />
         <Testimonials />
         <Gallery />
-        <DeliveryFaq />
+        <Faq />
         <Newsletter />
       </main>
       <Footer />

@@ -266,7 +266,7 @@ function TabletHero() {
       <div className="absolute inset-x-0 top-[300px] bottom-[calc(var(--strip-w)*0.40575)] z-5 flex flex-col items-center justify-center px-8 text-center">
         <HeroHeading className="text-7xl leading-[0.95]" delays={['delay-200', 'delay-400', 'delay-500', 'delay-600']} />
         <p className="mt-5 max-w-md animate-fade-up text-lg leading-relaxed text-gray-600 delay-700">
-          Ração aprovada por veterinários, caminhas, brinquedos e banho e tosa, com entrega no mesmo dia.
+          Ração aprovada por veterinários, caminhas, brinquedos e banho e tosa, tudo num só lugar.
         </p>
         <div className="mt-7 animate-fade-up delay-800">
           <ExploreButton className="px-7 py-3.5 text-base" />
@@ -286,7 +286,7 @@ function MobileHero() {
         <div className="px-5 text-center">
           <HeroHeading className="text-[clamp(40px,12vw,52px)] leading-[1]" delays={['delay-200', 'delay-300', 'delay-400', 'delay-500']} />
           <p className="mx-auto mt-3 max-w-[30ch] animate-fade-up text-[15px] leading-relaxed text-gray-600 delay-500">
-            Ração aprovada por veterinários, caminhas e brinquedos, entregues na sua porta.
+            Ração aprovada por veterinários, caminhas, brinquedos e banho e tosa.
           </p>
           <div className="mt-5 animate-fade-up delay-600">
             <ExploreButton className="px-6 py-3 text-sm" />

@@ -9,12 +9,6 @@ type Review = { quote: string; name: string; pet: string; image: Photo }
 
 const REVIEWS: Review[] = [
   {
-    quote: 'A cama da Luna chegou na mesma tarde e ela não sai mais de lá. A equipe até lembrou o nome dela quando fui na loja.',
-    name: 'Mariana R.',
-    pet: 'Tutora da Luna · Corgi',
-    image: photos.dog,
-  },
-  {
     quote: 'Finalmente uma loja que explica os ingredientes em vez de empurrar a ração mais cara. A barriguinha do Milo agradece.',
     name: 'Daniel K.',
     pet: 'Tutor do Milo · Gato rajado',
@@ -25,18 +19,6 @@ const REVIEWS: Review[] = [
     name: 'Priscila S.',
     pet: 'Tutora da Nala · Bichon',
     image: photos.grooming,
-  },
-  {
-    quote: 'Pedi ao meio-dia e a casinha já estava montada no jantar. É firme, confortável e os nossos dois gatos dividem sem brigar.',
-    name: 'Tiago e Lia',
-    pet: 'Tutores do Abóbora e da Figo',
-    image: photos.delivery,
-  },
-  {
-    quote: 'A mistura de sementes do Kiwi chega todo mês e o lembrete garante que nunca falte. Detalhe pequeno, diferença enorme.',
-    name: 'Sofia M.',
-    pet: 'Tutora do Kiwi · Periquito',
-    image: photos.bird,
   },
   {
     quote: 'A creche manda as fotos mais fofas durante o dia, e o nosso beagle dorme a noite inteira depois.',

@@ -13,12 +13,12 @@ import { useRef } from 'react'
 import { PawIcon } from '../PawIcon'
 
 const ITEMS = [
-  'Frete grátis acima de R$ 199',
+  'Banho e tosa com hora marcada',
   'Marcas aprovadas por veterinários',
-  'Banho e tosa no mesmo dia',
-  'Troca fácil em 30 dias',
+  'Veterinários parceiros',
+  'Creche e hotel para pets',
   'Embalagens recicláveis',
-  'Pontos em toda compra',
+  'Pets bem-vindos na loja',
 ]
 const COPIES = 4
 /** Percent of the track per second at rest. */
@@ -45,7 +45,7 @@ export function Marquee() {
   })
 
   return (
-    <section aria-label="Por que comprar com a gente" className="overflow-hidden bg-pine py-5 text-white md:py-6">
+    <section aria-label="Destaques da loja" className="overflow-hidden bg-pine py-5 text-white md:py-6">
       <p className="sr-only">{ITEMS.join(', ')}</p>
       <motion.div aria-hidden="true" className="flex w-max" style={{ x }}>
         {Array.from({ length: COPIES }, (_, copy) => (

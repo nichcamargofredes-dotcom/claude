@@ -5,8 +5,8 @@ import { Container } from '../ui'
 
 const COLUMNS = [
   { title: 'Loja', links: [['Cães', '#shop'], ['Gatos', '#shop'], ['Pássaros', '#shop'], ['Peixes', '#shop'], ['Pequenos pets', '#shop']] },
-  { title: 'Ajuda', links: [['Entrega e pagamento', '#delivery'], ['Trocas', '#delivery'], ['Perguntas frequentes', '#delivery'], ['Avaliações', '#reviews']] },
-  { title: 'Empresa', links: [['Serviços', '#services'], ['Marcas parceiras', '#brands'], ['Mais vendidos', '#bestsellers'], ['Galeria', '#gallery']] },
+  { title: 'Ajuda', links: [['Perguntas frequentes', '#faq'], ['Serviços', '#services'], ['Avaliações', '#reviews'], ['Visite a loja', '#contact']] },
+  { title: 'Empresa', links: [['Marcas parceiras', '#brands'], ['Mais vendidos', '#bestsellers'], ['Galeria', '#gallery']] },
 ] as const
 
 const SOCIAL = ['Instagram', 'TikTok', 'YouTube', 'Pinterest']

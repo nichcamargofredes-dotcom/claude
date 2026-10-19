@@ -11,7 +11,7 @@ const MOMENTS: { image: Photo; handle: string; alt: string }[] = [
   { image: photos.puppyToy, handle: '@biscoito.corre', alt: 'Filhote carregando um brinquedo de corda laranja na grama' },
   { image: photos.walk, handle: '@passeio.de.domingo', alt: 'Border collie com guia laranja passeando no parque no outono' },
   { image: photos.daycare, handle: '@cozypaws.daycare', alt: 'Beagle e poodle brincando juntos em um tapete' },
-  { image: photos.delivery, handle: '@figo.curiosa', alt: 'Gato rajado inspecionando uma caixa de entrega' },
+  { image: photos.delivery, handle: '@figo.curiosa', alt: 'Gato rajado inspecionando uma caixa de papelão' },
 ]
 
 function Intro() {

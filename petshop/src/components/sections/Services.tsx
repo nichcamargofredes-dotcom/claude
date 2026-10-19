@@ -1,4 +1,4 @@
-import { ArrowRight, House, Scissors, Stethoscope, Truck, type LucideIcon } from 'lucide-react'
+import { ArrowRight, House, Scissors, Stethoscope, type LucideIcon } from 'lucide-react'
 import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
 import { useRef } from 'react'
 import { photos, type Photo } from '../../lib/assets'
@@ -24,15 +24,6 @@ const SERVICES: Service[] = [
     icon: Stethoscope,
     image: photos.vet,
     alt: 'Veterinária examinando um filhote de golden retriever com estetoscópio',
-  },
-  {
-    id: 'delivery',
-    title: 'Entrega no mesmo dia',
-    text: 'Peça até as 14h e receba no mesmo dia, em caixas recicladas.',
-    meta: 'Grátis acima de R$ 199',
-    icon: Truck,
-    image: photos.delivery,
-    alt: 'Gato rajado espiando dentro de uma caixa de entrega aberta',
   },
   {
     id: 'daycare',
