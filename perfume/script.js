@@ -211,8 +211,18 @@
     return Math.max(0, Math.min(1, -r.top / total));
   }
 
+  // Ida e volta: o vídeo avança até o painel de fundo/ritual e volta ao frasco fechado no painel de compra
+  const smooth = (t) => t * t * (3 - 2 * t);
+  function frameAt(p) {
+    if (p < 0.6) return smooth(p / 0.6);
+    if (p < 0.68) return 1;
+    return 1 - smooth(clamp01((p - 0.68) / 0.26));
+  }
+
+  let scrollP = 0;
   function onScroll() {
-    target = progress() * (FRAMES - 1);
+    scrollP = progress();
+    target = frameAt(scrollP) * (FRAMES - 1);
     // Interpola o lado e o zoom entre os centros dos painéis
     const c = window.scrollY + H / 2;
     let side = 0, zoom = 0;
@@ -244,9 +254,9 @@
       word.style.transform = `translate(-50%, -50%) scale(${(fit.s / base) * (1 + q * 0.3)})`;
       word.style.opacity = (word.classList.contains('hero__word--ghost') ? 0.32 : 1) * fade;
     }
-    if (bar) bar.style.transform = `scaleY(${q})`;
+    if (bar) bar.style.transform = `scaleY(${scrollP})`;
     for (const c of caps) {
-      const on = q >= +c.dataset.from && q < +c.dataset.to;
+      const on = scrollP >= +c.dataset.from && scrollP < +c.dataset.to;
       c.classList.toggle('is-off', !on);
     }
   }
