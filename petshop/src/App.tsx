@@ -10,7 +10,6 @@ import { Faq } from './components/sections/Faq'
 import { Footer } from './components/sections/Footer'
 import { Gallery } from './components/sections/Gallery'
 import { Marquee } from './components/sections/Marquee'
-import { Newsletter } from './components/sections/Newsletter'
 import { Services } from './components/sections/Services'
 import { Testimonials } from './components/sections/Testimonials'
 import { initSmoothScroll } from './lib/smooth-scroll'
@@ -43,7 +42,6 @@ export default function App() {
         <Testimonials />
         <Gallery />
         <Faq />
-        <Newsletter />
       </main>
       <Footer />
 

@@ -70,7 +70,7 @@ export function Testimonials() {
   const columns = wide ? [0, 1, 2].map((c) => REVIEWS.filter((_, i) => i % 3 === c)) : [REVIEWS]
 
   return (
-    <section id="reviews" aria-labelledby="reviews-title" className="scroll-mt-20 overflow-hidden py-24 md:py-32">
+    <section id="reviews" aria-labelledby="reviews-title" className="scroll-mt-20 overflow-hidden pb-8 pt-24 md:py-32">
       <Container>
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <Reveal className="max-w-2xl">

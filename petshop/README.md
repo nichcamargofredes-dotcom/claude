@@ -23,9 +23,8 @@ npm run preview   # serve o build localmente
 | Mais vendidos | Bento com produto destaque e preços em reais |
 | Serviços | Texto rolando com a foto fixa ao lado, que troca com "wipe" a cada serviço |
 | Avaliações | Colunas em velocidades diferentes (no celular, cards entram pelos lados) |
-| #FamíliaCozyPaws | Galeria horizontal presa na tela enquanto você rola, também no celular |
+| #FamíliaCozyPaws | Galeria horizontal presa na tela enquanto você rola (no celular, carrossel que desliza com o scroll) |
 | Dúvidas | Perguntas frequentes em acordeão (horário, agendamento, vacinas) |
-| Newsletter | O dachshund sobe por trás do painel conforme a seção aparece |
 | Rodapé | Faixa compacta de marcas parceiras e logotipo gigante subindo com o scroll |
 
 Quem usa "reduzir movimento" no sistema vê tudo estático, sem perder conteúdo.

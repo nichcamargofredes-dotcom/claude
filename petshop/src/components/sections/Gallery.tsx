@@ -2,6 +2,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { motion, useMotionValue, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { useLayoutEffect, useRef } from 'react'
 import { photos, type Photo } from '../../lib/assets'
+import { useMediaQuery } from '../../lib/hooks'
 import { PawIcon } from '../PawIcon'
 import { Eyebrow, Reveal } from '../ui'
 
@@ -31,7 +32,7 @@ function Intro() {
 
 function MomentCard({ moment, index }: { moment: (typeof MOMENTS)[number]; index: number }) {
   return (
-    <figure className={`group w-[min(46vh,70vw)] shrink-0 ${index % 2 ? 'lg:translate-y-[5vh]' : 'lg:-translate-y-[5vh]'}`}>
+    <figure className={`group w-[min(46vh,62vw)] shrink-0 ${index % 2 ? 'lg:translate-y-[5vh]' : 'lg:-translate-y-[5vh]'}`}>
       <div className="aspect-[3/4] overflow-hidden rounded-[28px] bg-sage">
         <img
           src={moment.image.src}
@@ -115,29 +116,38 @@ function PinnedGallery() {
   )
 }
 
+/** Phones and reduced motion: a swipeable row that also drifts sideways as the page scrolls past. */
 function SwipeGallery() {
+  const ref = useRef<HTMLElement>(null)
+  const still = useReducedMotion()
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const x = useTransform(scrollYProgress, [0, 1], ['18%', '-12%'])
+
   return (
-    <section id="gallery" aria-labelledby="gallery-title" className="scroll-mt-20 py-24">
+    <section ref={ref} id="gallery" aria-labelledby="gallery-title" className="scroll-mt-20 overflow-hidden pb-20 pt-8">
       <div className="px-5 sm:px-8">
         <Reveal>
           <Intro />
         </Reveal>
       </div>
-      <div className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 sm:px-8">
-        {MOMENTS.map((moment, i) => (
-          <div key={moment.handle} className="snap-start">
-            <MomentCard moment={moment} index={i} />
+      <motion.div style={still ? undefined : { x }}>
+        <div className="no-scrollbar mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 sm:px-8">
+          {MOMENTS.map((moment, i) => (
+            <div key={moment.handle} className="snap-start">
+              <MomentCard moment={moment} index={i} />
+            </div>
+          ))}
+          <div className="snap-start">
+            <Outro />
           </div>
-        ))}
-        <div className="snap-start">
-          <Outro />
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }
 
 export function Gallery() {
+  const wide = useMediaQuery('(min-width: 1024px)')
   const still = useReducedMotion()
-  return still ? <SwipeGallery /> : <PinnedGallery />
+  return wide && !still ? <PinnedGallery /> : <SwipeGallery />
 }
