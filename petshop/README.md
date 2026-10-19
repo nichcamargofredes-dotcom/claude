@@ -23,7 +23,7 @@ npm run preview   # serve o build localmente
 | Mais vendidos | Bento com produto destaque e preços em reais |
 | Serviços | Texto rolando com a foto fixa ao lado, que troca com "wipe" a cada serviço |
 | Avaliações | Colunas em velocidades diferentes (no celular, cards entram pelos lados) |
-| #FamíliaCozyPaws | Galeria horizontal presa na tela enquanto você rola (no celular, carrossel que desliza com o scroll) |
+| #FamíliaCozyPaws | Galeria presa na tela: a rolagem da página (roda do mouse ou dedo) passa as fotos para o lado, em qualquer tamanho de tela |
 | Dúvidas | Perguntas frequentes em acordeão (horário, agendamento, vacinas) |
 | Agendamento | Formulário de serviço, data e horário que monta a mensagem e abre o WhatsApp da loja (número em `src/lib/contact.ts`) |
 | Rodapé | Faixa compacta de marcas parceiras e logotipo gigante subindo com o scroll |

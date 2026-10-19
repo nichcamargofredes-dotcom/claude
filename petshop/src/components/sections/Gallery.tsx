@@ -30,9 +30,9 @@ function Intro() {
   )
 }
 
-function MomentCard({ moment, index }: { moment: (typeof MOMENTS)[number]; index: number }) {
+function MomentCard({ moment, index, compact = false }: { moment: (typeof MOMENTS)[number]; index: number; compact?: boolean }) {
   return (
-    <figure className={`group w-[min(46vh,62vw)] shrink-0 ${index % 2 ? 'lg:translate-y-[5vh]' : 'lg:-translate-y-[5vh]'}`}>
+    <figure className={`group shrink-0 ${compact ? 'w-[min(34svh,62vw)]' : `w-[min(46vh,62vw)] ${index % 2 ? 'lg:translate-y-[5vh]' : 'lg:-translate-y-[5vh]'}`}`}>
       <div className="aspect-[3/4] overflow-hidden rounded-[28px] bg-sage">
         <img
           src={moment.image.src}
@@ -76,7 +76,7 @@ function Outro() {
 }
 
 /** Vertical scrolling drives the row sideways while the section is pinned. */
-function PinnedGallery() {
+function PinnedGallery({ wide }: { wide: boolean }) {
   const sectionRef = useRef<HTMLElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const distance = useMotionValue(0)
@@ -104,11 +104,17 @@ function PinnedGallery() {
 
   return (
     <section ref={sectionRef} id="gallery" aria-labelledby="gallery-title" className="relative scroll-mt-20">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <motion.div ref={trackRef} style={{ x }} className="flex w-max items-center gap-4 px-5 sm:gap-6 sm:px-12 xl:px-[max(3rem,calc((100vw-1320px)/2+3rem))]">
-          <Intro />
+      <div className="sticky top-0 flex h-svh flex-col justify-center gap-8 overflow-hidden">
+        {/* On narrower screens the title sits above the row instead of scrolling with it. */}
+        {!wide && (
+          <div className="px-5 pt-16 sm:px-8">
+            <Intro />
+          </div>
+        )}
+        <motion.div ref={trackRef} style={{ x }} className="flex w-max items-center gap-4 px-5 sm:gap-6 sm:px-8 lg:px-12 xl:px-[max(3rem,calc((100vw-1320px)/2+3rem))]">
+          {wide && <Intro />}
           {MOMENTS.map((moment, i) => (
-            <MomentCard key={moment.handle} moment={moment} index={i} />
+            <MomentCard key={moment.handle} moment={moment} index={i} compact={!wide} />
           ))}
           <Outro />
         </motion.div>
@@ -117,7 +123,7 @@ function PinnedGallery() {
   )
 }
 
-/** Phones and reduced motion: a row you can swipe, drag with the mouse or step through with the arrows. */
+/** Reduced motion: a row you can swipe, drag with the mouse or step through with the arrows. */
 function SwipeGallery() {
   const rowRef = useRef<HTMLDivElement>(null)
   const drag = useRef<{ x: number; left: number } | null>(null)
@@ -185,5 +191,6 @@ function SwipeGallery() {
 export function Gallery() {
   const wide = useMediaQuery('(min-width: 1024px)')
   const still = useReducedMotion()
-  return wide && !still ? <PinnedGallery /> : <SwipeGallery />
+  // Scrolling the page moves the photos sideways on every screen; reduced motion gets a plain swipe row.
+  return still ? <SwipeGallery /> : <PinnedGallery wide={wide} />
 }
