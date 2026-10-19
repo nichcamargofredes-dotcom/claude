@@ -3,32 +3,32 @@ import { useId, useState } from 'react'
 import { Container, Eyebrow, Reveal, SectionTitle } from '../ui'
 
 const FACTS: { icon: LucideIcon; title: string; text: string }[] = [
-  { icon: Truck, title: 'Free delivery over $49', text: 'A flat $4.90 below that, anywhere in the city.' },
-  { icon: Clock, title: 'Same day before 2 pm', text: 'Later orders arrive by noon the next day.' },
-  { icon: CreditCard, title: 'Pay your way', text: 'Cards, Apple Pay, Google Pay, PayPal or cash on pickup.' },
-  { icon: RotateCcw, title: '30-day happy returns', text: 'Unopened food and any toy your pet ignores.' },
+  { icon: Truck, title: 'Frete grátis acima de R$ 199', text: 'Abaixo disso, taxa fixa de R$ 14,90 em toda a cidade.' },
+  { icon: Clock, title: 'No mesmo dia até as 14h', text: 'Pedidos depois disso chegam até o meio-dia seguinte.' },
+  { icon: CreditCard, title: 'Pague como preferir', text: 'Pix, cartão de crédito ou débito, ou dinheiro na retirada.' },
+  { icon: RotateCcw, title: 'Troca fácil em 30 dias', text: 'Ração fechada e qualquer brinquedo que o seu pet ignorar.' },
 ]
 
 const FAQ = [
   {
-    q: 'How fast is delivery?',
-    a: 'Inside the city, orders placed before 2 pm arrive the same day between 4 and 9 pm. Everywhere else takes 1–3 business days, always with tracking.',
+    q: 'Como faço um pedido?',
+    a: 'Pelo WhatsApp, por telefone ou direto na loja. A gente confirma o estoque, combina a entrega e envia o link de pagamento.',
   },
   {
-    q: 'Can I pick up in store?',
-    a: 'Yes. Choose “Pickup” at checkout and your order will be ready within the hour at 14 Willow Street.',
+    q: 'Em quanto tempo chega?',
+    a: 'Na cidade, pedidos feitos até as 14h chegam no mesmo dia, entre 16h e 21h. Para outras regiões, de 1 a 3 dias úteis, sempre com rastreio.',
   },
   {
-    q: 'Which payment methods do you accept?',
-    a: 'All major cards, Apple Pay, Google Pay and PayPal. Payments are encrypted and we never store your card details.',
+    q: 'Quais formas de pagamento vocês aceitam?',
+    a: 'Pix, cartões de crédito e débito das principais bandeiras (parcelamos em até 3x sem juros) e dinheiro na retirada.',
   },
   {
-    q: 'Do you offer auto-delivery for food?',
-    a: 'Subscribe to any food or litter and save 10% on every order. Skip, pause or cancel anytime from your account.',
+    q: 'Posso retirar na loja?',
+    a: 'Pode. Avise pelo WhatsApp e o pedido fica separado em até uma hora na Rua das Palmeiras, 140.',
   },
   {
-    q: 'What if my pet doesn’t like it?',
-    a: 'Return unopened food or any toy within 30 days for a full refund. If an opened bag is a miss, we’ll swap it for another recipe once.',
+    q: 'E se o meu pet não gostar?',
+    a: 'Ração fechada e brinquedos podem ser trocados em até 30 dias. Se um pacote aberto não agradar, trocamos uma vez por outro sabor.',
   },
 ]
 
@@ -75,9 +75,9 @@ export function DeliveryFaq() {
       <Container className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <div>
           <Reveal>
-            <Eyebrow>Delivery and payment</Eyebrow>
+            <Eyebrow>Entrega e pagamento</Eyebrow>
             <SectionTitle className="mt-4 text-forest">
-              <span id="delivery-title">Simple, fast and free over $49</span>
+              <span id="delivery-title">Simples, rápido e grátis acima de R$ 199</span>
             </SectionTitle>
           </Reveal>
           <ul className="mt-10 grid grid-cols-2 gap-3 sm:gap-4">

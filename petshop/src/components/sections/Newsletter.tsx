@@ -49,10 +49,10 @@ export function Newsletter() {
 
           <Reveal className="relative mx-auto max-w-2xl">
             <h2 id="newsletter-title" className="text-balance font-serif-display text-[clamp(36px,5vw,64px)] leading-[1] tracking-tight text-forest">
-              Get 15% off your first order
+              Ganhe 15% na primeira compra
             </h2>
             <p className="mx-auto mt-5 max-w-lg leading-relaxed text-forest/80">
-              Join 40,000 pet parents for new arrivals, care tips and member-only offers. One email a week, never spam.
+              Junte-se a 40 mil tutores e receba novidades, dicas de cuidado e ofertas exclusivas. Um e-mail por semana, sem spam.
             </p>
 
             {status === 'done' ? (
@@ -60,12 +60,12 @@ export function Newsletter() {
                 <span className="grid size-7 place-items-center rounded-full bg-forest text-white">
                   <Check className="size-4" strokeWidth={2.5} />
                 </span>
-                You’re in! Your code is on its way to {email.trim()}.
+                Pronto! Seu cupom está a caminho de {email.trim()}.
               </p>
             ) : (
               <form onSubmit={onSubmit} noValidate className="mx-auto mt-9 max-w-lg text-left">
                 <label htmlFor={`${id}-email`} className="mb-2 block pl-5 text-sm font-medium text-forest">
-                  Email address
+                  Seu e-mail
                 </label>
                 <div className="flex flex-col gap-3 sm:flex-row sm:rounded-full sm:bg-white sm:p-1.5">
                   <input
@@ -73,7 +73,7 @@ export function Newsletter() {
                     type="email"
                     inputMode="email"
                     autoComplete="email"
-                    placeholder="name@example.com"
+                    placeholder="nome@exemplo.com"
                     value={email}
                     onChange={(e) => {
                       setEmail(e.target.value)
@@ -87,16 +87,16 @@ export function Newsletter() {
                     type="submit"
                     className="group inline-flex items-center justify-center gap-2 rounded-full bg-orange px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-orange-hover"
                   >
-                    Get my 15% off
+                    Quero meus 15%
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
                   </button>
                 </div>
                 {status === 'error' && (
                   <p id={`${id}-error`} role="alert" className="mt-2 pl-5 text-sm font-medium text-[#9a3412]">
-                    Please enter a valid email, like name@example.com.
+                    Digite um e-mail válido, como nome@exemplo.com.
                   </p>
                 )}
-                <p className="mt-4 pl-5 text-xs text-forest/70">You can unsubscribe at any time.</p>
+                <p className="mt-4 pl-5 text-xs text-forest/70">Você pode cancelar quando quiser.</p>
               </form>
             )}
           </Reveal>

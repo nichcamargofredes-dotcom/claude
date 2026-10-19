@@ -9,39 +9,39 @@ type Review = { quote: string; name: string; pet: string; image: Photo }
 
 const REVIEWS: Review[] = [
   {
-    quote: 'Luna’s donut bed arrived the same afternoon and she hasn’t left it since. The team even remembered her name at pickup.',
-    name: 'Maya R.',
-    pet: 'Luna’s human · Corgi',
+    quote: 'A cama da Luna chegou na mesma tarde e ela não sai mais de lá. A equipe até lembrou o nome dela quando fui na loja.',
+    name: 'Mariana R.',
+    pet: 'Tutora da Luna · Corgi',
     image: photos.dog,
   },
   {
-    quote: 'Finally a shop that explains ingredients instead of pushing the most expensive bag. Milo’s tummy is so much happier.',
+    quote: 'Finalmente uma loja que explica os ingredientes em vez de empurrar a ração mais cara. A barriguinha do Milo agradece.',
     name: 'Daniel K.',
-    pet: 'Milo’s human · Tabby',
+    pet: 'Tutor do Milo · Gato rajado',
     image: photos.cat,
   },
   {
-    quote: 'The groomers were so patient with our anxious rescue. She came home fluffy and calm, which honestly felt like a miracle.',
-    name: 'Priya S.',
-    pet: 'Nala’s human · Bichon',
+    quote: 'Os tosadores tiveram muita paciência com a nossa resgatada medrosa. Ela voltou fofinha e tranquila, parecia milagre.',
+    name: 'Priscila S.',
+    pet: 'Tutora da Nala · Bichon',
     image: photos.grooming,
   },
   {
-    quote: 'Ordered at noon, the cat tree was standing by dinner. It’s sturdy, cozy, and our two cats actually share it.',
-    name: 'Tom & Lea',
-    pet: 'Pumpkin & Fig’s humans',
+    quote: 'Pedi ao meio-dia e a casinha já estava montada no jantar. É firme, confortável e os nossos dois gatos dividem sem brigar.',
+    name: 'Tiago e Lia',
+    pet: 'Tutores do Abóbora e da Figo',
     image: photos.delivery,
   },
   {
-    quote: 'Kiwi’s seed mix shows up every month and the reminder emails mean I never run out. Small thing, big difference.',
+    quote: 'A mistura de sementes do Kiwi chega todo mês e o lembrete garante que nunca falte. Detalhe pequeno, diferença enorme.',
     name: 'Sofia M.',
-    pet: 'Kiwi’s human · Budgie',
+    pet: 'Tutora do Kiwi · Periquito',
     image: photos.bird,
   },
   {
-    quote: 'Daycare sends the cutest photo updates, and our beagle sleeps the whole evening after a day there.',
-    name: 'Jonas B.',
-    pet: 'Biscuit’s human · Beagle',
+    quote: 'A creche manda as fotos mais fofas durante o dia, e o nosso beagle dorme a noite inteira depois.',
+    name: 'João B.',
+    pet: 'Tutor do Biscoito · Beagle',
     image: photos.daycare,
   },
 ]
@@ -49,7 +49,7 @@ const REVIEWS: Review[] = [
 function ReviewCard({ review }: { review: Review }) {
   return (
     <figure className="rounded-[28px] bg-white p-7 shadow-[0_1px_0_rgba(26,61,26,0.04)]">
-      <div className="flex gap-0.5 text-orange" aria-label="5 out of 5 stars">
+      <div className="flex gap-0.5 text-orange" aria-label="5 de 5 estrelas">
         {Array.from({ length: 5 }, (_, i) => (
           <Star key={i} className="size-4" fill="currentColor" strokeWidth={0} />
         ))}
@@ -92,20 +92,20 @@ export function Testimonials() {
       <Container>
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <Reveal className="max-w-2xl">
-            <Eyebrow>Reviews</Eyebrow>
+            <Eyebrow>Avaliações</Eyebrow>
             <SectionTitle className="mt-4 text-forest">
-              <span id="reviews-title">Loved by pets, and their humans</span>
+              <span id="reviews-title">Amado pelos pets e pelos tutores</span>
             </SectionTitle>
           </Reveal>
           <Reveal delay={0.1} className="flex items-center gap-4">
-            <p className="font-serif-display text-6xl leading-none text-forest">4.6</p>
+            <p className="font-serif-display text-6xl leading-none text-forest">4,6</p>
             <div>
               <div className="flex gap-0.5 text-orange" aria-hidden="true">
                 {Array.from({ length: 5 }, (_, i) => (
                   <Star key={i} className="size-4" fill="currentColor" strokeWidth={0} />
                 ))}
               </div>
-              <p className="mt-1 text-sm text-gray-600">from 12,000+ reviews</p>
+              <p className="mt-1 text-sm text-gray-600">de mais de 12 mil avaliações</p>
             </div>
           </Reveal>
         </div>

@@ -20,12 +20,11 @@ npm run preview   # serve o build localmente
 | Hero (prompt CozyPaws) | Header, layouts desktop/tablet/mobile, palavras do título com `word-pop`, cards deslizando, fotos subindo em sequência |
 | Faixa de benefícios | Letreiro infinito que acelera e inverte com a velocidade do scroll |
 | Compre por pet | Cards com parallax na foto e entrada escalonada |
-| Mais vendidos | Bento com produto destaque; carrinho e favoritos funcionam (contadores no header e toast) |
-| Nossa história | Texto que acende palavra por palavra conforme a rolagem, com fotos dentro da frase e números contando |
+| Mais vendidos | Bento com produto destaque e preços em reais |
 | Serviços | Texto rolando com a foto fixa ao lado, que troca com "wipe" a cada serviço |
 | Marcas, avaliações | Colunas de avaliações em velocidades diferentes |
 | #CozyPawsFamily | Galeria horizontal presa na tela enquanto você rola (no celular vira carrossel de arrastar) |
-| Blog, entrega e pagamento | FAQ em acordeão |
+| Entrega e pagamento | FAQ em acordeão |
 | Newsletter | O dachshund sobe por trás do painel conforme a seção aparece |
 | Rodapé | Logotipo gigante subindo com o scroll |
 
@@ -33,7 +32,7 @@ Quem usa "reduzir movimento" no sistema vê tudo estático, sem perder conteúdo
 
 ## Hero
 
-Segue o prompt do CozyPaws: cores, fontes (Inter e DM Serif Display), tamanhos com `clamp()`, animações e ordem de entrada.
+Segue o prompt do CozyPaws, com os textos traduzidos para o português: cores, fontes (Inter e DM Serif Display), tamanhos com `clamp()`, animações e ordem de entrada.
 Um ajuste: em telas baixas (notebooks de 768 px de altura, por exemplo) a faixa de fotos estreita um pouco e o "muro" verde continua até as bordas, para o golden retriever não cobrir o título. Em 1440×900 o layout fica praticamente igual ao do prompt.
 
 ## Imagens

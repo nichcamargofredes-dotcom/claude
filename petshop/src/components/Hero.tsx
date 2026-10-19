@@ -9,11 +9,12 @@ const overlayBottom: CSSProperties = { bottom: 'clamp(20px, 4vh, 50px)' }
 function HeroHeading({ className, delays }: { className: string; delays: [string, string, string, string] }) {
   return (
     <h1 className={`font-serif-display tracking-tight text-forest ${className}`}>
-      <span className={`inline-block animate-word-pop ${delays[0]}`}>Everything</span>
+      <span className={`inline-block animate-word-pop ${delays[0]}`}>Tudo</span>{' '}
+      <span className={`inline-block animate-word-pop ${delays[0]}`}>que</span>
       <br />
-      <span className={`inline-block animate-word-pop ${delays[1]}`}>Your</span>{' '}
-      <span className={`inline-block animate-word-pop ${delays[2]}`}>Pets</span>{' '}
-      <span className={`inline-block animate-word-pop ${delays[3]}`}>Love</span>
+      <span className={`inline-block animate-word-pop ${delays[1]}`}>seu</span>{' '}
+      <span className={`inline-block animate-word-pop ${delays[2]}`}>pet</span>{' '}
+      <span className={`inline-block animate-word-pop ${delays[3]}`}>ama</span>
     </h1>
   )
 }
@@ -24,7 +25,7 @@ function ExploreButton({ className = '' }: { className?: string }) {
       href="#shop"
       className={`inline-flex items-center gap-2 rounded-full bg-orange font-semibold text-white shadow-[0_8px_24px_-10px_rgba(232,106,16,0.7)] transition-colors hover:bg-orange-hover ${className}`}
     >
-      Explore Products
+      Ver produtos
       <ArrowRight className="size-[1.15em]" strokeWidth={2.25} />
     </a>
   )
@@ -68,19 +69,19 @@ function CatHouseCard({
           sizes={sizes}
           width={heroSizes.catHouse.width}
           height={heroSizes.catHouse.height}
-          alt="Orange plush cat tree with a hideaway house"
+          alt="Arranhador de pelúcia laranja com toca"
           className="h-full w-full object-contain transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
         />
         <a
           href="#shop"
-          aria-label="View the Cozy Cat House"
+          aria-label="Ver a Casinha Aconchego"
           className="absolute bottom-[8%] right-[8%] grid size-[clamp(30px,2.6vw,44px)] place-items-center rounded-full bg-forest text-white transition-colors hover:bg-forest-hover"
         >
           <ArrowUpRight className="size-1/2" strokeWidth={2.25} />
         </a>
       </div>
-      <p className={`mt-[0.6em] text-gray-700 ${textClass[0]}`}>Cozy Cat House</p>
-      <p className={`font-semibold text-forest ${textClass[1]}`}>$49.99</p>
+      <p className={`mt-[0.6em] text-gray-700 ${textClass[0]}`}>Casinha Aconchego</p>
+      <p className={`font-semibold text-forest ${textClass[1]}`}>R$ 279,90</p>
     </article>
   )
 }
@@ -104,19 +105,19 @@ function VideoCard({
           src={heroAssets.videoCard}
           width={heroSizes.videoCard.width}
           height={heroSizes.videoCard.height}
-          alt="Shiba Inu unboxing a rope toy delivered by CozyPaws"
+          alt="Shiba Inu abrindo uma caixa com um brinquedo de corda"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-x-0 flex flex-col items-center px-[9%] text-center" style={{ top: arch }}>
           <a
             href="#reviews"
-            aria-label="Watch product reviews"
+            aria-label="Assistir avaliações de produtos"
             className="grid size-[clamp(32px,2.7vw,44px)] -translate-y-1/2 place-items-center rounded-full bg-forest text-white shadow-[0_8px_20px_-8px_rgba(26,61,26,0.8)] transition hover:scale-105 hover:bg-forest-hover"
           >
             <Play className="size-[42%] translate-x-[8%]" fill="currentColor" strokeWidth={0} />
           </a>
           <p className={`-mt-[0.4em] font-medium leading-snug text-gray-700 ${textClass}`}>
-            Watch Product Reviews on TikTok and YouTube
+            Veja avaliações dos produtos no TikTok e no YouTube
           </p>
         </div>
       </div>
@@ -143,7 +144,7 @@ function PhotoStrip({ maxHeights, overlays, className }: StripProps) {
           sizes="31vw"
           width={heroSizes.bottomLeft.width}
           height={heroSizes.bottomLeft.height}
-          alt="Dachshund peeking over a mint wall"
+          alt="Dachshund espiando por cima de um muro verde-menta"
           className="block h-auto w-full"
         />
         {sides && (
@@ -151,8 +152,8 @@ function PhotoStrip({ maxHeights, overlays, className }: StripProps) {
             <div className="flex items-center gap-[clamp(8px,1cqw,14px)]">
               <AvatarStack size="size-[clamp(32px,3.1cqw,46px)]" />
               <div>
-                <p className="text-[clamp(20px,2.55cqw,38px)] font-semibold leading-none tracking-tight text-forest">98K+</p>
-                <p className="mt-1 text-[clamp(11px,0.9cqw,14px)] font-medium text-forest/80">Happy pet parents</p>
+                <p className="text-[clamp(20px,2.55cqw,38px)] font-semibold leading-none tracking-tight text-forest">98 mil+</p>
+                <p className="mt-1 text-[clamp(11px,0.9cqw,14px)] font-medium text-forest/80">Tutores felizes</p>
               </div>
             </div>
           </div>
@@ -166,15 +167,15 @@ function PhotoStrip({ maxHeights, overlays, className }: StripProps) {
           sizes="39vw"
           width={heroSizes.bottomCenter.width}
           height={heroSizes.bottomCenter.height}
-          alt="Golden retriever resting its paws on a dark green wall"
+          alt="Golden retriever com as patas sobre um muro verde-escuro"
           className="block h-auto w-full"
         />
         {overlays === 'all' && (
           <div className="absolute inset-x-0 flex animate-scale-in flex-col items-center text-center delay-1100" style={overlayBottom}>
             <p className="text-[clamp(16px,1.8cqw,28px)] font-semibold leading-[1.15] tracking-tight text-white">
-              Best Products
+              O melhor
               <br />
-              for Your Pet
+              para o seu pet
             </p>
             <ExploreButton className="mt-[clamp(8px,1.1cqw,16px)] px-[clamp(14px,1.5cqw,24px)] py-[clamp(7px,0.75cqw,12px)] text-[clamp(12px,0.98cqw,15px)]" />
           </div>
@@ -188,16 +189,16 @@ function PhotoStrip({ maxHeights, overlays, className }: StripProps) {
           sizes="31vw"
           width={heroSizes.bottomRight.width}
           height={heroSizes.bottomRight.height}
-          alt="Ginger cat peeking over a mint wall"
+          alt="Gato laranja espiando por cima de um muro verde-menta"
           className="block h-auto w-full"
         />
         {sides && (
           <div className="absolute right-[8%] animate-scale-in text-right delay-1200" style={overlayBottom}>
             <div className="flex items-center justify-end gap-[clamp(6px,0.65cqw,10px)]">
               <Star className="size-[clamp(18px,2.1cqw,32px)] text-orange" fill="currentColor" strokeWidth={0} />
-              <p className="text-[clamp(20px,2.55cqw,38px)] font-semibold leading-none tracking-tight text-forest">4.6</p>
+              <p className="text-[clamp(20px,2.55cqw,38px)] font-semibold leading-none tracking-tight text-forest">4,6</p>
             </div>
-            <p className="mt-1 text-[clamp(11px,0.9cqw,14px)] font-medium text-forest/80">Average rating · 12K reviews</p>
+            <p className="mt-1 text-[clamp(11px,0.9cqw,14px)] font-medium text-forest/80">Nota média · 12 mil avaliações</p>
           </div>
         )}
       </figure>
@@ -265,7 +266,7 @@ function TabletHero() {
       <div className="absolute inset-x-0 top-[300px] bottom-[calc(var(--strip-w)*0.40575)] z-5 flex flex-col items-center justify-center px-8 text-center">
         <HeroHeading className="text-7xl leading-[0.95]" delays={['delay-200', 'delay-400', 'delay-500', 'delay-600']} />
         <p className="mt-5 max-w-md animate-fade-up text-lg leading-relaxed text-gray-600 delay-700">
-          Vet-approved food, cozy beds, toys and grooming, delivered to your door the same day.
+          Ração aprovada por veterinários, caminhas, brinquedos e banho e tosa, com entrega no mesmo dia.
         </p>
         <div className="mt-7 animate-fade-up delay-800">
           <ExploreButton className="px-7 py-3.5 text-base" />
@@ -283,7 +284,7 @@ function MobileHero() {
       <div className="px-5 pt-5 text-center">
         <HeroHeading className="text-[36px] leading-[1.02]" delays={['delay-200', 'delay-300', 'delay-400', 'delay-500']} />
         <p className="mx-auto mt-3 max-w-[30ch] animate-fade-up text-[15px] leading-relaxed text-gray-600 delay-500">
-          Vet-approved food, cozy beds and toys, delivered to your door.
+          Ração aprovada por veterinários, caminhas e brinquedos, entregues na sua porta.
         </p>
         <div className="mt-5 animate-fade-up delay-600">
           <ExploreButton className="px-6 py-3 text-sm" />
@@ -309,16 +310,16 @@ function MobileHero() {
         <div className="flex items-center gap-2.5">
           <AvatarStack size="size-9" />
           <div className="text-left">
-            <p className="text-xl font-semibold leading-none text-forest">98K+</p>
-            <p className="mt-0.5 text-xs text-gray-600">Happy pet parents</p>
+            <p className="text-xl font-semibold leading-none text-forest">98 mil+</p>
+            <p className="mt-0.5 text-xs text-gray-600">Tutores felizes</p>
           </div>
         </div>
         <span aria-hidden="true" className="h-9 w-px bg-forest/15" />
         <div className="flex items-center gap-2">
           <Star className="size-6 text-orange" fill="currentColor" strokeWidth={0} />
           <div className="text-left">
-            <p className="text-xl font-semibold leading-none text-forest">4.6</p>
-            <p className="mt-0.5 text-xs text-gray-600">Average rating</p>
+            <p className="text-xl font-semibold leading-none text-forest">4,6</p>
+            <p className="mt-0.5 text-xs text-gray-600">Nota média</p>
           </div>
         </div>
       </div>
@@ -330,7 +331,7 @@ function MobileHero() {
 
 export function Hero() {
   return (
-    <section id="welcome" tabIndex={-1} aria-label="Welcome" className="flex flex-1 flex-col overflow-hidden outline-none">
+    <section id="welcome" tabIndex={-1} aria-label="Boas-vindas" className="flex flex-1 flex-col overflow-hidden outline-none">
       <DesktopHero />
       <TabletHero />
       <MobileHero />

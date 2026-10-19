@@ -7,24 +7,24 @@ import { PawIcon } from '../PawIcon'
 import { Eyebrow, Reveal } from '../ui'
 
 const MOMENTS: { image: Photo; handle: string; alt: string }[] = [
-  { image: photos.hug, handle: '@maya.and.luna', alt: 'Woman laughing and hugging her golden retriever on a sofa' },
-  { image: photos.catNap, handle: '@pumpkin.naps', alt: 'Tabby cat asleep in an orange plush bed in the sun' },
-  { image: photos.puppyToy, handle: '@biscuit.zooms', alt: 'Puppy carrying an orange rope toy across the grass' },
-  { image: photos.walk, handle: '@sunday.strolls', alt: 'Border collie on an orange leash walking through an autumn park' },
-  { image: photos.daycare, handle: '@cozypaws.daycare', alt: 'Beagle and poodle playing together on a rug' },
-  { image: photos.delivery, handle: '@unboxing.fig', alt: 'Tabby cat inspecting a delivery box' },
+  { image: photos.hug, handle: '@mari.e.luna', alt: 'Mulher rindo e abraçando seu golden retriever no sofá' },
+  { image: photos.catNap, handle: '@abobora.dorminhoco', alt: 'Gato rajado dormindo em uma cama laranja ao sol' },
+  { image: photos.puppyToy, handle: '@biscoito.corre', alt: 'Filhote carregando um brinquedo de corda laranja na grama' },
+  { image: photos.walk, handle: '@passeio.de.domingo', alt: 'Border collie com guia laranja passeando no parque no outono' },
+  { image: photos.daycare, handle: '@cozypaws.daycare', alt: 'Beagle e poodle brincando juntos em um tapete' },
+  { image: photos.delivery, handle: '@figo.curiosa', alt: 'Gato rajado inspecionando uma caixa de entrega' },
 ]
 
 function Intro() {
   return (
     <div className="flex w-[min(420px,80vw)] shrink-0 flex-col justify-center pr-6">
-      <Eyebrow>#CozyPawsFamily</Eyebrow>
+      <Eyebrow>#FamíliaCozyPaws</Eyebrow>
       <h2 id="gallery-title" className="mt-4 font-serif-display text-[clamp(38px,5vw,64px)] leading-[1] tracking-tight text-forest">
-        Real pets, real naps
+        Pets de verdade, sonecas de verdade
       </h2>
       <p className="mt-5 max-w-sm leading-relaxed text-gray-600">
-        Tag <span className="font-semibold text-forest">@cozypaws</span> and your best friend could be next on our wall,
-        and on this page.
+        Marque <span className="font-semibold text-forest">@cozypaws</span> e o seu melhor amigo pode aparecer no nosso mural
+        e nesta página.
       </p>
     </div>
   )
@@ -64,9 +64,9 @@ function Outro() {
     >
       <span>
         <PawIcon className="mx-auto size-12 text-orange" />
-        <span className="mt-5 block font-serif-display text-3xl leading-tight">Share your moments</span>
+        <span className="mt-5 block font-serif-display text-3xl leading-tight">Compartilhe seus momentos</span>
         <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-leaf">
-          Follow @cozypaws
+          Siga @cozypaws
           <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </span>
       </span>
@@ -102,7 +102,7 @@ function PinnedGallery() {
   }, [distance])
 
   return (
-    <section ref={sectionRef} aria-labelledby="gallery-title" className="relative">
+    <section ref={sectionRef} id="gallery" aria-labelledby="gallery-title" className="relative scroll-mt-20">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <motion.div ref={trackRef} style={{ x }} className="flex w-max items-center gap-6 px-12 xl:px-[max(3rem,calc((100vw-1320px)/2+3rem))]">
           <Intro />
@@ -118,7 +118,7 @@ function PinnedGallery() {
 
 function SwipeGallery() {
   return (
-    <section aria-labelledby="gallery-title" className="py-24">
+    <section id="gallery" aria-labelledby="gallery-title" className="scroll-mt-20 py-24">
       <div className="px-5 sm:px-8">
         <Reveal>
           <Intro />

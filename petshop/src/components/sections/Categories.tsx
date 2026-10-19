@@ -5,11 +5,11 @@ import { Container, Eyebrow, ParallaxImage, SectionTitle } from '../ui'
 import { EASE_OUT } from '../../lib/motion'
 
 const CATEGORIES: { name: string; count: string; image: Photo; alt: string }[] = [
-  { name: 'Dogs', count: '420+ products', image: photos.dog, alt: 'Smiling corgi sitting on a mint background' },
-  { name: 'Cats', count: '380+ products', image: photos.cat, alt: 'Ginger tabby cat sitting upright' },
-  { name: 'Birds', count: '120+ products', image: photos.bird, alt: 'Green budgie on a wooden perch' },
-  { name: 'Fish', count: '90+ products', image: photos.fish, alt: 'Goldfish swimming in a round glass bowl' },
-  { name: 'Small pets', count: '150+ products', image: photos.rabbit, alt: 'White and brown rabbit with its ears up' },
+  { name: 'Cães', count: '420+ produtos', image: photos.dog, alt: 'Corgi sorridente sentado em fundo verde-menta' },
+  { name: 'Gatos', count: '380+ produtos', image: photos.cat, alt: 'Gato laranja rajado sentado' },
+  { name: 'Pássaros', count: '120+ produtos', image: photos.bird, alt: 'Periquito verde em um poleiro de madeira' },
+  { name: 'Peixes', count: '90+ produtos', image: photos.fish, alt: 'Peixinho dourado nadando em um aquário redondo' },
+  { name: 'Pequenos pets', count: '150+ produtos', image: photos.rabbit, alt: 'Coelho branco e marrom com as orelhas em pé' },
 ]
 
 export function Categories() {
@@ -23,9 +23,9 @@ export function Categories() {
             viewport={{ once: true, margin: '0px 0px -10% 0px' }}
             transition={{ duration: 0.9, ease: EASE_OUT }}
           >
-            <Eyebrow>Shop by pet</Eyebrow>
+            <Eyebrow>Compre por pet</Eyebrow>
             <SectionTitle className="mt-4 text-forest">
-              <span id="categories-title">Find what your best friend needs</span>
+              <span id="categories-title">Tudo para o seu melhor amigo</span>
             </SectionTitle>
           </motion.div>
           <motion.a
@@ -36,7 +36,7 @@ export function Categories() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="group inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-forest/20 px-5 py-3 text-sm font-semibold text-forest transition-colors hover:border-forest hover:bg-forest hover:text-white md:self-auto"
           >
-            View all products
+            Ver todos os produtos
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
           </motion.a>
         </div>
@@ -57,7 +57,7 @@ export function Categories() {
                 <a
                   href="#bestsellers"
                   className="group relative block overflow-hidden rounded-[28px] bg-sage"
-                  aria-label={`Shop ${cat.name.toLowerCase()}, ${cat.count}`}
+                  aria-label={`Ver ${cat.name.toLowerCase()}, ${cat.count}`}
                 >
                   <ParallaxImage
                     image={cat.image}

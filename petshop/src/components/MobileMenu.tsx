@@ -67,14 +67,14 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
               ref={closeRef}
               type="button"
               onClick={onClose}
-              aria-label="Close menu"
+              aria-label="Fechar menu"
               className="grid size-10 place-items-center rounded-full bg-white/10 transition-colors hover:bg-white/20"
             >
               <X className="size-5" />
             </button>
           </div>
 
-          <nav aria-label="Mobile" className="mt-14 flex-1">
+          <nav aria-label="Menu do celular" className="mt-14 flex-1">
             <ul className="space-y-2">
               {NAV_LINKS.map((link, i) => (
                 <motion.li
@@ -100,10 +100,10 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
           </nav>
 
           <div className="space-y-1 text-sm text-white/70">
-            <p>14 Willow Street, Greenfield</p>
-            <p>Mon–Sat 9:00–20:00 · Sun 10:00–18:00</p>
-            <a href="tel:+15550123456" className="block font-medium text-white">
-              +1 (555) 012-3456
+            <p>Rua das Palmeiras, 140 · Pinheiros, São Paulo</p>
+            <p>Seg. a sáb. 9h–20h · Dom. 10h–18h</p>
+            <a href="tel:+5511912345678" className="block font-medium text-white">
+              (11) 91234-5678
             </a>
           </div>
         </motion.div>

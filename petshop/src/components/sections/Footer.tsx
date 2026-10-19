@@ -4,9 +4,9 @@ import { heroAssets } from '../../lib/assets'
 import { Container } from '../ui'
 
 const COLUMNS = [
-  { title: 'Shop', links: [['Dogs', '#shop'], ['Cats', '#shop'], ['Birds', '#shop'], ['Fish', '#shop'], ['Small pets', '#shop']] },
-  { title: 'Help', links: [['Delivery and payment', '#delivery'], ['Returns', '#delivery'], ['FAQ', '#delivery'], ['Reviews', '#reviews']] },
-  { title: 'Company', links: [['Our story', '#story'], ['Services', '#services'], ['Brands', '#brands'], ['Blog', '#blog']] },
+  { title: 'Loja', links: [['Cães', '#shop'], ['Gatos', '#shop'], ['Pássaros', '#shop'], ['Peixes', '#shop'], ['Pequenos pets', '#shop']] },
+  { title: 'Ajuda', links: [['Entrega e pagamento', '#delivery'], ['Trocas', '#delivery'], ['Perguntas frequentes', '#delivery'], ['Avaliações', '#reviews']] },
+  { title: 'Empresa', links: [['Serviços', '#services'], ['Marcas', '#brands'], ['Mais vendidos', '#bestsellers'], ['Galeria', '#gallery']] },
 ] as const
 
 const SOCIAL = ['Instagram', 'TikTok', 'YouTube', 'Pinterest']
@@ -24,7 +24,7 @@ export function Footer() {
           <div className="col-span-2 sm:col-span-3 lg:col-span-1">
             <img src={heroAssets.logo} alt="CozyPaws" width={164} height={42} loading="lazy" className="h-[42px] w-[164px]" />
             <p className="mt-5 max-w-xs leading-relaxed text-gray-600">
-              A neighbourhood pet store for food, toys, grooming and care, since 2016.
+              Pet shop de bairro com ração, brinquedos, banho e tosa e cuidados, desde 2016.
             </p>
             <ul className="mt-6 flex flex-wrap gap-2">
               {SOCIAL.map((name) => (
@@ -56,36 +56,36 @@ export function Footer() {
           ))}
 
           <address id="contact" className="scroll-mt-24 not-italic">
-            <p className="font-semibold text-gray-900">Visit us</p>
+            <p className="font-semibold text-gray-900">Visite a loja</p>
             <p className="mt-4 leading-relaxed text-gray-600">
-              14 Willow Street
+              Rua das Palmeiras, 140
               <br />
-              Greenfield, GF 20410
+              Pinheiros, São Paulo · SP
             </p>
             <p className="mt-3 leading-relaxed text-gray-600">
-              Mon–Sat 9:00–20:00
+              Seg. a sáb. 9h–20h
               <br />
-              Sun 10:00–18:00
+              Dom. 10h–18h
             </p>
             <p className="mt-3 space-y-1">
-              <a href="mailto:hello@cozypaws.com" className="block font-medium text-forest hover:underline">
-                hello@cozypaws.com
+              <a href="mailto:contato@cozypaws.com.br" className="block font-medium text-forest hover:underline">
+                contato@cozypaws.com.br
               </a>
-              <a href="tel:+15550123456" className="block font-medium text-forest hover:underline">
-                +1 (555) 012-3456
+              <a href="tel:+5511912345678" className="block font-medium text-forest hover:underline">
+                (11) 91234-5678
               </a>
             </p>
           </address>
         </div>
 
         <div className="mt-16 flex flex-col gap-3 border-t border-forest/10 py-6 text-sm text-gray-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 CozyPaws. All rights reserved.</p>
+          <p>© 2026 CozyPaws. Todos os direitos reservados.</p>
           <p className="flex gap-5">
             <a href="#top" className="hover:text-forest">
-              Privacy
+              Privacidade
             </a>
             <a href="#top" className="hover:text-forest">
-              Terms
+              Termos
             </a>
             <a href="#top" className="hover:text-forest">
               Cookies

@@ -17,10 +17,10 @@ export function Brands() {
       <Container>
         <div className="flex flex-col items-center text-center">
           <Eyebrow>
-            <span id="brands-title">Brands we trust</span>
+            <span id="brands-title">Marcas em que confiamos</span>
           </Eyebrow>
           <p className="mt-4 max-w-xl text-gray-600">
-            We stock independent makers and vet-recommended labels, and we test every new product with our own pets first.
+            Trabalhamos com fabricantes independentes e marcas indicadas por veterinários, e testamos cada novidade com os nossos próprios pets antes.
           </p>
         </div>
         <ul className="mt-12 grid grid-cols-2 overflow-hidden rounded-[28px] border border-forest/10 bg-white/50 md:grid-cols-3 lg:grid-cols-6">

@@ -9,39 +9,39 @@ type Service = { id: string; title: string; text: string; meta: string; icon: Lu
 const SERVICES: Service[] = [
   {
     id: 'grooming',
-    title: 'Grooming & spa',
-    text: 'Warm baths, breed-specific cuts and nail trims by certified groomers who love the wiggly ones.',
-    meta: 'From $35 · 60–90 min',
+    title: 'Banho e tosa',
+    text: 'Banho morno, tosa de acordo com a raça e corte de unhas, com tosadores certificados e muita paciência com os agitados.',
+    meta: 'A partir de R$ 90 · 60 a 90 min',
     icon: Scissors,
     image: photos.grooming,
-    alt: 'Fluffy white bichon being brushed on a grooming table',
+    alt: 'Bichon branco sendo escovado na mesa de tosa',
   },
   {
     id: 'vet',
-    title: 'Vet consultations',
-    text: 'Check-ups, vaccines and nutrition plans with our partner vets, two doors down from the shop.',
-    meta: 'From $45 · Mon–Sat',
+    title: 'Consultas veterinárias',
+    text: 'Check-ups, vacinas e plano de alimentação com nossos veterinários parceiros, a duas portas da loja.',
+    meta: 'A partir de R$ 150 · seg. a sáb.',
     icon: Stethoscope,
     image: photos.vet,
-    alt: 'Vet listening to a golden retriever puppy with a stethoscope',
+    alt: 'Veterinária examinando um filhote de golden retriever com estetoscópio',
   },
   {
     id: 'delivery',
-    title: 'Same-day delivery',
-    text: 'Order before 2 pm and it’s at your door the same day, packed in recycled boxes.',
-    meta: 'Free on orders over $49',
+    title: 'Entrega no mesmo dia',
+    text: 'Peça até as 14h e receba no mesmo dia, em caixas recicladas.',
+    meta: 'Grátis acima de R$ 199',
     icon: Truck,
     image: photos.delivery,
-    alt: 'Tabby cat peeking into an opened delivery box',
+    alt: 'Gato rajado espiando dentro de uma caixa de entrega aberta',
   },
   {
     id: 'daycare',
-    title: 'Daycare & hotel',
-    text: 'Supervised play, cozy naps and photo updates while you’re at work or away for the weekend.',
-    meta: 'From $28 a day',
+    title: 'Creche e hotel',
+    text: 'Brincadeiras supervisionadas, sonecas confortáveis e fotos ao longo do dia enquanto você trabalha ou viaja.',
+    meta: 'A partir de R$ 80 por dia',
     icon: House,
     image: photos.daycare,
-    alt: 'Beagle and apricot poodle playing on a cream rug',
+    alt: 'Beagle e poodle brincando em um tapete claro',
   },
 ]
 
@@ -161,9 +161,9 @@ export function Services() {
       <Container>
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <Reveal className="max-w-2xl">
-            <Eyebrow tone="light">More than a store</Eyebrow>
+            <Eyebrow tone="light">Mais que uma loja</Eyebrow>
             <SectionTitle className="mt-4">
-              <span id="services-title">Care for every chapter of their life</span>
+              <span id="services-title">Cuidado em todas as fases da vida dele</span>
             </SectionTitle>
           </Reveal>
           <Reveal delay={0.15}>
@@ -171,7 +171,7 @@ export function Services() {
               href="#contact"
               className="group inline-flex items-center gap-2 rounded-full bg-orange px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-orange-hover"
             >
-              Book a visit
+              Agendar uma visita
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
             </a>
           </Reveal>
