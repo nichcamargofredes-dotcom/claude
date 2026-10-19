@@ -1,0 +1,29 @@
+name: Petshop preview assets
+
+# One-off: attaches the external hero images to a release so a preview can embed them.
+on:
+  push:
+    paths:
+      - .github/workflows/petshop-preview-assets.yml
+
+permissions:
+  contents: write
+
+jobs:
+  assets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download hero images
+        run: |
+          mkdir hero && cd hero
+          B=https://polo-pecan-73837341.figma.site/_assets/v11
+          for f in 0ae29d6d9628bede667f90d57bebe81b8f1ec2bf.svg e62173d41f91350a59628e8a9a55ae078a886fb9.png 3e5158dad63d392ade022e81890edc9f54d750bc.png 76be6ec3a93a703b15e9cc01e764a4e3f9d7d2c0.png 8d44b25186ef45a5789c74668fb781cea4e1ff49.png 96745c4e72ad5c5208e53a885df797fd82cd854a.png 81bd2e7a66b58f3d8f3ad78fd1ebf01af8dfdee1.png; do
+            curl -fsSL -o "$f" "$B/$f"
+          done
+          ls -la
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete petshop-preview-assets -y --cleanup-tag -R "$GITHUB_REPOSITORY" || true
+          gh release create petshop-preview-assets hero/* -R "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --prerelease --title "Petshop preview assets" --notes "Hero images for the site preview."
