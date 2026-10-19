@@ -11,4 +11,4 @@ HTML, CSS e JS puros, sem build. O hero usa three.js (em `vendor/`) para o "V" e
 - **Cena 3D:** função `gl` em `main.js` (posição do V, luzes, folhas).
 
 ## Projetos no portfólio
-CozyPaws, Áurea Odontologia, Ébano Barbearia & Lounge, MOVA+ Personal Trainer, CT Lucas Sousa e Dr. Lucas Mendes Quiropraxia. Áurea, Ébano, MOVA+ e CT aparecem como capas desenhadas com a paleta e as fontes de cada site, no computador (`.cover`) e no celular (`.mcover`); para trocar por capturas reais, coloque as imagens em `img/` e substitua esses blocos por um `<img>`, como nos cards da CozyPaws e da quiropraxia.
+CozyPaws, Áurea Odontologia, Ébano Barbearia & Lounge, MOVA+ Personal Trainer, Dr. Lucas Mendes Quiropraxia e CT Lucas Sousa. Cada card mostra o site no computador (`img/*-desktop.jpg`) e no celular. Nos celulares da Áurea, Ébano, MOVA+ e CT, a tela é montada em HTML (`.mcover`) sobre uma foto do hero (`img/*-mobile-bg.jpg`); para usar um print real do celular, troque esse bloco por um `<img>`, como nos cards da CozyPaws e da quiropraxia.

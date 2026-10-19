@@ -367,3 +367,16 @@ em{font-style:normal;color:var(--green-soft)}
 .mcover.cover-mova .c-stats span{font-size:.62em}
 .mcover.cover-mova::after{font-size:16em}
 .mcover.cover-ct .c-title{font-size:2.4em}
+
+/* celulares com a foto real do hero */
+.m-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.mcover:has(.m-photo)::after{content:"";position:absolute;inset:0;z-index:1;font-size:inherit}
+.mcover:has(.m-photo) .m-body{margin-top:auto;margin-bottom:1.8em}
+.mcover.cover-aurea:has(.m-photo)::after{background:linear-gradient(0deg,#faf8f5 0%,rgba(250,248,245,.85) 30%,rgba(250,248,245,0) 62%),linear-gradient(180deg,rgba(250,248,245,.7),rgba(250,248,245,0) 18%)}
+.mcover.cover-aurea .c-title{font-family:"Outfit",sans-serif;font-weight:300;font-size:2.3em}
+.mcover.cover-ebano:has(.m-photo)::after{background:linear-gradient(0deg,#0e0b09 0%,rgba(14,11,9,.8) 34%,rgba(14,11,9,0) 65%),linear-gradient(180deg,rgba(14,11,9,.8),rgba(14,11,9,0) 16%)}
+.mcover.cover-ebano .c-title{font-size:2.4em}
+.mcover.cover-ebano .c-btn{background:#c7a062;color:#0e0b09;border-color:#c7a062;border-radius:0;letter-spacing:.12em;text-transform:uppercase;font-size:.62em}
+.mcover.cover-mova:has(.m-photo)::after{color:transparent;background:linear-gradient(0deg,rgba(10,42,143,.95) 0%,rgba(11,62,196,0) 40%)}
+.mcover.cover-mova .c-text{font-family:"Inter",sans-serif;font-size:.78em;opacity:.9;margin-top:0}
+.mcover.cover-mova .c-btn{background:#2f6bff;color:#fff;font-family:"Inter",sans-serif;font-weight:600;font-size:.72em}
