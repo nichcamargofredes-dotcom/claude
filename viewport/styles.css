@@ -320,11 +320,16 @@ em{font-style:normal;color:var(--green-soft)}
   .hero-shade{background:linear-gradient(0deg,rgba(14,15,15,.95) 0%,rgba(14,15,15,.6) 45%,rgba(14,15,15,.1) 100%)}
   .hero-in{padding-top:46vh}
   .hero-fallback{right:50%;transform:translateX(50%);top:14%;width:60vw}
-  .work{height:auto!important}
-  .work-pin{position:static;height:auto;overflow:visible;padding-block:110px}
-  .work-meta{display:none}
-  .work-track{flex-direction:column;width:auto;padding-inline:var(--gl) var(--gr);gap:80px;transform:none!important;perspective:none}
-  .proj{width:100%;transform:none!important}
+  .work-pin{padding-top:72px;gap:22px}
+  .work-head{align-items:flex-end}
+  .work-head h2{font-size:clamp(1.7rem,7vw,2.4rem)}
+  .work-bar{width:56px}
+  .work-track{gap:36px;padding-left:var(--gl);padding-right:var(--gr)}
+  .proj{width:min(84vw,560px)}
+  .proj-link{gap:18px}
+  .proj-info h3{margin-bottom:8px}
+  .proj-info p:not(.proj-cat){font-size:.9rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .proj-cta{margin-top:14px}
   .process-grid,.about-grid,.contact-grid{grid-template-columns:minmax(0,1fr);gap:56px}
   .process-head{position:static}
   .manifesto,.services,.process,.about,.contact{padding-block:100px}

@@ -320,7 +320,6 @@ const work = $('#projetos'), track = $('#track'), cards = $$('.proj', track);
 const workI = $('#work-i'), workBar = $('#work-bar');
 let workDist = 0;
 function layoutWork() {
-  if (vw <= 900) { work.style.height = ''; workDist = 0; return; }
   // medida sem as transformações 3D, que aumentariam o scrollWidth
   const last = cards[cards.length - 1];
   workDist = Math.max(0, last.offsetLeft + last.offsetWidth + Math.min(120, vw * 0.06) - vw);
@@ -357,7 +356,6 @@ const steps = $('#steps'), stepsFill = $('#steps-fill'), stepItems = $$('li', st
 /* ---------------- revelação ao rolar ---------------- */
 {
   const els = $$('.sec-head, .svc, .about-copy, .card-stage, .contact-copy, .form, .foot-big, .work-head, .process-head');
-  if (vw <= 900) els.push(...cards);
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); }
   }), { rootMargin: '0px 0px -8% 0px' });
@@ -415,7 +413,8 @@ function loop(now) {
       const cr = c.getBoundingClientRect();
       const d = (cr.left + cr.width / 2 - vw / 2) / vw;
       if (Math.abs(d) < bestD) { bestD = Math.abs(d); best = i; }
-      if (!reduced) c.style.transform = `translateZ(${-Math.abs(d) * 260}px) rotateY(${clamp(-d * 30, -38, 38)}deg)`;
+      const k = vw <= 900 ? 0.55 : 1;
+      if (!reduced) c.style.transform = `translateZ(${-Math.abs(d) * 260 * k}px) rotateY(${clamp(-d * 30 * k, -38, 38)}deg)`;
       c.style.opacity = clamp(1.15 - Math.abs(d) * 0.9, 0.35, 1);
     });
     workI.textContent = best + 1;
@@ -454,7 +453,7 @@ const form = $('#form'), send = $('#send'), msg = $('#form-msg');
 function waLink() {
   const v = id => $(id).value.trim();
   const text = [
-    'Olá, Nicolas! Vim pelo site da Viewport.',
+    'Olá, Nicholas! Vim pelo site da Viewport.',
     v('#f-nome') && `Meu nome é ${v('#f-nome')}.`,
     v('#f-negocio') && `Negócio: ${v('#f-negocio')}.`,
     `Preciso de: ${v('#f-tipo')}.`,
