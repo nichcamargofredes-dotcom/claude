@@ -347,3 +347,23 @@ em{font-style:normal;color:var(--green-soft)}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .rv.pre{opacity:1;transform:none}
 }
+
+/* versão celular das capas */
+.phone{container-type:inline-size}
+.mcover{position:relative;width:100%;height:100%;border-radius:17px;overflow:hidden;display:flex;flex-direction:column;font-size:6.2cqw;line-height:1.15}
+.m-nav{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:1.6em 1.4em 0}
+.mcover .c-brand{font-size:1.25em}
+.m-burger{width:1.8em;height:1.8em;border-radius:50%;border:1px solid currentColor;opacity:.5;position:relative}
+.m-burger::before,.m-burger::after{content:"";position:absolute;left:28%;right:28%;height:1px;background:currentColor}
+.m-burger::before{top:40%}.m-burger::after{top:58%}
+.m-body{position:relative;z-index:2;padding:0 1.4em;margin-top:auto;margin-bottom:auto}
+.mcover .c-eyebrow{font-size:.62em;letter-spacing:.2em;margin-bottom:1em}
+.mcover .c-title{font-size:2.6em;line-height:1}
+.mcover .c-btn{display:inline-block;margin-top:1.4em;font-size:.8em;padding:.8em 1.3em}
+.mcover.cover-aurea .c-arch{width:70%;right:-10%;bottom:-14%}
+.mcover.cover-ebano .c-sofa{height:16%}
+.mcover.cover-mova .c-title{font-size:2.5em;line-height:.9}
+.mcover.cover-mova .c-stats{position:relative;right:auto;bottom:auto;display:flex;flex-wrap:wrap;gap:.4em;padding:0 1.4em 1.8em}
+.mcover.cover-mova .c-stats span{font-size:.62em}
+.mcover.cover-mova::after{font-size:16em}
+.mcover.cover-ct .c-title{font-size:2.4em}

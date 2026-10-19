@@ -321,7 +321,9 @@ const workI = $('#work-i'), workBar = $('#work-bar');
 let workDist = 0;
 function layoutWork() {
   if (vw <= 900) { work.style.height = ''; workDist = 0; return; }
-  workDist = Math.max(0, track.scrollWidth - vw);
+  // medida sem as transformações 3D, que aumentariam o scrollWidth
+  const last = cards[cards.length - 1];
+  workDist = Math.max(0, last.offsetLeft + last.offsetWidth + Math.min(120, vw * 0.06) - vw);
   work.style.height = `${vh + workDist}px`;
 }
 

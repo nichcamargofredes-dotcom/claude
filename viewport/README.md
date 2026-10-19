@@ -11,4 +11,4 @@ HTML, CSS e JS puros, sem build. O hero usa three.js (em `vendor/`) para o "V" e
 - **Cena 3D:** função `gl` em `main.js` (posição do V, luzes, folhas).
 
 ## Projetos no portfólio
-Navalha & Co., Áurea Odontologia, Ébano Barbearia & Lounge, MOVA+ Personal Trainer, CT Lucas Sousa, Dr. Lucas Mendes Quiropraxia e CozyPaws. Áurea, Ébano e MOVA+ aparecem como capas desenhadas com a paleta e as fontes de cada site; para trocar por capturas reais, coloque as imagens em `img/` e substitua o bloco `.cover` por um `<img>`.
+CozyPaws, Áurea Odontologia, Ébano Barbearia & Lounge, MOVA+ Personal Trainer, CT Lucas Sousa e Dr. Lucas Mendes Quiropraxia. Áurea, Ébano, MOVA+ e CT aparecem como capas desenhadas com a paleta e as fontes de cada site, no computador (`.cover`) e no celular (`.mcover`); para trocar por capturas reais, coloque as imagens em `img/` e substitua esses blocos por um `<img>`, como nos cards da CozyPaws e da quiropraxia.
