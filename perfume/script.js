@@ -87,6 +87,14 @@
     center: 0,
   }));
 
+  // No celular a compra fica logo depois do palco: ao chegar nela, o frasco solta do topo e sobe junto com a página
+  const buyPanel = document.getElementById('comprar');
+  const panelsWrap = hero.querySelector('.panels');
+  function placeBuy() {
+    if (mobile && buyPanel.parentElement === panelsWrap) hero.after(buyPanel);
+    else if (!mobile && buyPanel.parentElement !== panelsWrap) panelsWrap.appendChild(buyPanel);
+  }
+
   const off = document.createElement('canvas');
   const octx = off.getContext('2d');
 
@@ -97,6 +105,7 @@
     W = stage.clientWidth; H = stage.clientHeight;
     for (const c of [bg, fg, off]) { c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); }
     mobile = W < 861;
+    placeBuy();
     // Abertura: cobre a tela em telas largas; em telas estreitas o frasco ocupa ~50% da largura
     base = Math.max(W / VW, H / VH);
     base = Math.min(base, (W * (mobile ? 1.85 : 1.6)) / VW);

@@ -310,7 +310,8 @@ a { color: inherit; }
   .card--note { grid-template-columns: 4.75rem minmax(0, 1fr); gap: 18px; }
   .card__title { font-size: 2rem; }
   .card__title--xl { font-size: 2.6rem; }
-  /* Compra compacta: cabe inteira abaixo do frasco */
+  /* Compra compacta, logo abaixo do frasco (fora do palco fixo) */
+  main > #comprar { min-height: 0; padding-top: 4px; padding-bottom: 72px; background: var(--paper); }
   #comprar .card > p:not(.eyebrow):not(.fine) { display: none; }
   #comprar .card { gap: 12px; }
   .sizes { grid-template-columns: 1fr 1fr; }
