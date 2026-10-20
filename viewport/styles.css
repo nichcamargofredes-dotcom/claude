@@ -262,8 +262,8 @@ em{font-style:normal;color:var(--green-soft)}
 .card-logo span{font-size:clamp(1.8rem,4.6vw,2.9rem);font-weight:500;letter-spacing:-.05em;line-height:.8}
 .card-tag{margin-top:7%;font-size:clamp(.5rem,1.1vw,.66rem);letter-spacing:.34em;text-transform:uppercase;color:var(--gray)}
 .card-back{transform:rotateY(180deg);background:linear-gradient(140deg,#3b6249,var(--green) 50%,var(--green-deep));gap:6px}
-.card-name{font-size:clamp(1.25rem,2.7vw,1.8rem);font-weight:500;letter-spacing:-.035em;line-height:1.15}
-.card-role{font-size:clamp(.55rem,1.1vw,.68rem);letter-spacing:.32em;text-transform:uppercase;color:rgba(247,247,245,.7);margin-bottom:6px}
+.card-name{font-size:clamp(1.1rem,2.2vw,1.45rem);font-weight:500;letter-spacing:-.03em;line-height:1.2;text-wrap:balance}
+.card-role{font-size:clamp(.72rem,1.2vw,.85rem);color:rgba(247,247,245,.75)}
 .card-site{position:absolute;right:8%;bottom:10%;font-size:.75rem;letter-spacing:.32em;text-transform:uppercase;color:rgba(247,247,245,.7)}
 .card-hint{font-size:.62rem}
 .about-copy .label{margin-bottom:18px}
