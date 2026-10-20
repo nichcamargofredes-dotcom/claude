@@ -11,6 +11,6 @@ HTML, CSS e JS puros, sem build. O hero usa three.js (em `vendor/`) para o "V" e
 - **Cena 3D:** função `gl` em `main.js` (posição do V, luzes, folhas).
 
 ## Projetos no portfólio
-CozyPaws, Maison Vespéra, JBL Live Beam 3, Áurea Odontologia, Ébano Barbearia & Lounge, MOVA+ Personal Trainer, Dr. Lucas Mendes Quiropraxia e CT Lucas Sousa. Cada card mostra o site no computador e no celular. Nos cards da Vespéra e da JBL, a janela do navegador toca a gravação real da rolagem (`media/*-scroll.mp4` e `.webm`), só enquanto o card está na tela. Os celulares da Áurea, Ébano, MOVA+, CT e JBL são montados em HTML (`.mcover`) sobre imagens do próprio site.
+CozyPaws, Maison Vespéra, JBL Live Beam 3, Áurea Odontologia, Ébano Barbearia & Lounge, MOVA+ Personal Trainer, Dr. Lucas Mendes Quiropraxia e CT Lucas Sousa. Cada card mostra o site no computador e no celular. Nos cards da Vespéra e da JBL, a janela do navegador toca a gravação real da rolagem (`media/*-scroll.mp4` e `.webm`) enquanto a galeria está na tela. Se o navegador bloquear o vídeo (modo de economia de bateria do iPhone, por exemplo), o card troca para a versão em imagem animada (`media/*-scroll-anim.webp`). Os celulares da Áurea, Ébano, MOVA+, CT e JBL são montados em HTML (`.mcover`) sobre imagens do próprio site.
 
 Publicado em https://viewportsites.vercel.app

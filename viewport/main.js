@@ -450,13 +450,26 @@ requestAnimationFrame(loop);
 
 /* ---------------- vídeos das animações ---------------- */
 {
-  // nos cards, cada gravação só toca enquanto está na tela
   const cardVideos = $$('.frame-video');
-  const vio = new IntersectionObserver(es => es.forEach(e => {
-    const v = e.target;
-    if (e.isIntersecting && !reduced) { v.preload = 'auto'; v.play().catch(() => {}); } else v.pause();
-  }), { threshold: 0.35 });
-  cardVideos.forEach(v => vio.observe(v));
+  // sem autoplay (modo de economia de bateria, por exemplo), troca o vídeo pela versão em imagem animada
+  const fallback = v => {
+    const img = document.createElement('img');
+    img.className = v.className;
+    img.src = v.dataset.anim;
+    img.alt = v.getAttribute('aria-label') || '';
+    v.replaceWith(img);
+  };
+  const tryPlay = v => {
+    if (!v.isConnected) return;
+    v.muted = true;
+    v.preload = 'auto';
+    const pr = v.play();
+    if (pr) pr.catch(err => { if (err.name === 'NotAllowedError' || err.name === 'NotSupportedError') fallback(v); });
+  };
+  // todas as gravações tocam enquanto a galeria está na tela; no celular cada card já chega com a animação em andamento
+  new IntersectionObserver(([e]) => {
+    cardVideos.forEach(v => { if (e.isIntersecting && !reduced) tryPlay(v); else if (v.isConnected) v.pause(); });
+  }, { rootMargin: '25% 0px' }).observe(work);
 }
 
 /* ---------------- formulário para WhatsApp ---------------- */
