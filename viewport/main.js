@@ -457,36 +457,6 @@ requestAnimationFrame(loop);
     if (e.isIntersecting && !reduced) { v.preload = 'auto'; v.play().catch(() => {}); } else v.pause();
   }), { threshold: 0.35 });
   cardVideos.forEach(v => vio.observe(v));
-
-  const section = $('#por-dentro'), tabs = $$('.inside-tabs button'), vids = $$('.inside-video');
-  const notes = $$('.inside-notes'), url = $('#inside-url'), play = $('#inside-play'), bar = $('#inside-bar');
-  const urls = ['vespera-parfum.vercel.app', 'live-beam-3.vercel.app'];
-  let current = 0, inView = false, userPaused = reduced;
-  const active = () => vids[current];
-  const sync = () => {
-    vids.forEach((v, i) => { if (i !== current) v.pause(); });
-    if (inView && !userPaused) { active().preload = 'auto'; active().play().catch(() => {}); } else active().pause();
-    play.classList.toggle('paused', active().paused || userPaused || !inView);
-    play.setAttribute('aria-label', play.classList.contains('paused') ? 'Reproduzir vídeo' : 'Pausar vídeo');
-  };
-  tabs.forEach(t => t.addEventListener('click', () => {
-    current = +t.dataset.show;
-    tabs.forEach(b => { const on = b === t; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
-    vids.forEach((v, i) => v.classList.toggle('on', i === current));
-    notes.forEach(n => { const on = +n.dataset.for === current; n.hidden = !on; n.classList.toggle('on', on); });
-    url.textContent = urls[current];
-    active().currentTime = 0;
-    sync();
-  }));
-  play.addEventListener('click', () => { userPaused = !userPaused; sync(); });
-  vids.forEach(v => v.addEventListener('play', () => play.classList.remove('paused')));
-  new IntersectionObserver(([e]) => { inView = e.isIntersecting; sync(); }, { threshold: 0.25 }).observe(section);
-  const tickBar = () => {
-    const v = active();
-    if (v.duration) bar.style.transform = `scaleX(${v.currentTime / v.duration})`;
-    requestAnimationFrame(tickBar);
-  };
-  requestAnimationFrame(tickBar);
 }
 
 /* ---------------- formulário para WhatsApp ---------------- */
