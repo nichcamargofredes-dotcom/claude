@@ -10,7 +10,7 @@ e abra http://localhost:8000.
 
 ## Como funciona
 - O frasco fica fixo no fundo enquanto o site desce. O scroll controla os 192 quadros do vídeo (`media/frames/`), desenhados num `<canvas>`.
-- Cada painel de informação (`.panel--left` ou `.panel--right` em `index.html`) faz o frasco diminuir e ir para o lado oposto. No celular, o frasco sobe e o texto aparece embaixo.
+- Cada painel de informação (`.panel--left` ou `.panel--right` em `index.html`) faz o frasco diminuir e ir para o lado oposto. No celular, o frasco fica preso no topo (56% da tela) e o texto rola embaixo, sem caixas.
 - O primeiro quadro é a foto original (`media/hero.webp`), alinhada sobre o vídeo.
 - A palavra "Vespéra" fica na frente do frasco. As máscaras de `media/masks/` recortam o frasco e os ingredientes de cada quadro, caso queira voltar a colocar o texto atrás (basta trocar o `z-index` de `.hero__word` para 1).
 - As máscaras foram geradas com rembg (modelo isnet-general-use).

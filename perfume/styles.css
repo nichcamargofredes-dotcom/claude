@@ -286,14 +286,37 @@ a { color: inherit; }
   .nav { display: none; }
   .top__cta { margin-left: auto; }
   .hero__progress { display: none; }
-  /* No celular o frasco fica no meio da tela e os painéis sobem pela parte de baixo */
-  .panel { align-items: flex-end; padding-block: 0 max(20px, calc(env(safe-area-inset-bottom, 0px) + 16px)); padding-left: max(16px, var(--gutter)); padding-right: max(16px, var(--gutter-r)); }
-  .panel--intro { padding-block: 0; }
-  .card { width: 100%; padding: 22px; gap: 12px; }
-  .card--note { grid-template-columns: 5.5rem minmax(0, 1fr); gap: 16px; }
-  .card__title { font-size: 1.7rem; }
-  .card__title--xl { font-size: 2.4rem; }
-  .specs div { padding-block: 9px; }
+  /* No celular: o frasco fica preso no topo e o texto rola embaixo, direto no fundo da página */
+  .hero { background: var(--paper); }
+  .hero__stage { height: 56vh; height: 56svh; z-index: 5; }
+  .hero__stage::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -1px; z-index: 4;
+    height: 22%; background: linear-gradient(rgba(244, 239, 243, 0), var(--paper));
+    pointer-events: none;
+  }
+  .hero__word { font-size: 23vw; }
+  .panels { margin-top: 0; z-index: 1; }
+  .panel {
+    display: block; min-height: 70vh; min-height: 70svh;
+    padding: 28px max(24px, var(--gutter-r)) 56px max(24px, var(--gutter));
+  }
+  .panel--intro { min-height: 0; padding-block: 8px 40px; }
+  .hero__cap--intro { position: static; }
+  .card {
+    width: 100%; padding: 0; gap: 14px;
+    background: none; border: 0; box-shadow: none;
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
+  .card--note { grid-template-columns: 4.75rem minmax(0, 1fr); gap: 18px; }
+  .card__title { font-size: 2rem; }
+  .card__title--xl { font-size: 2.6rem; }
+  /* Compra compacta: cabe inteira abaixo do frasco */
+  #comprar .card > p:not(.eyebrow):not(.fine) { display: none; }
+  #comprar .card { gap: 12px; }
+  .sizes { grid-template-columns: 1fr 1fr; }
+  .sizes legend { margin-bottom: 8px; }
+  .size { flex-direction: column; align-items: flex-start; gap: 6px; padding: 12px 14px; }
+  .specs div { padding-block: 10px; }
   .btn { letter-spacing: .12em; padding: 16px 18px; }
 }
 @media (max-width: 480px) {

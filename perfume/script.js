@@ -99,7 +99,7 @@
     mobile = W < 861;
     // Abertura: cobre a tela em telas largas; em telas estreitas o frasco ocupa ~50% da largura
     base = Math.max(W / VW, H / VH);
-    base = Math.min(base, (W * 1.6) / VW);
+    base = Math.min(base, (W * (mobile ? 1.85 : 1.6)) / VW);
     base = Math.max(base, W / VW);
     for (const p of panels) {
       const r = p.el.getBoundingClientRect();
@@ -116,7 +116,7 @@
     const s0 = base * 1.035; // sobra nas bordas para a flutuação não mostrar o fim do quadro
     const x0 = W / 2, y0 = H / 2 + (P.y - VH / 2) * s0;
     let s1, x1, y1;
-    if (mobile) { s1 = (W * 1.1) / VW; x1 = W / 2; y1 = H * 0.26; }
+    if (mobile) { s1 = s0 * 0.9; x1 = W / 2; y1 = y0; } // no celular o frasco fica no topo; o texto rola embaixo
     else { s1 = s0 * 0.62; x1 = W / 2 + side * W * 0.21; y1 = H / 2; }
     // Flutuação contínua: o frasco nunca fica parado, mesmo sem rolar a página
     const t = performance.now() / 1000;
@@ -217,8 +217,8 @@
 
   // Ida e volta sem pausa: o vídeo avança até o meio do site e volta ao frasco fechado no painel de compra
   function frameAt(p) {
-    if (p < 0.5) return p / 0.5;
-    return 1 - clamp01((p - 0.5) / 0.44);
+    if (p < 0.46) return p / 0.46;
+    return 1 - clamp01((p - 0.46) / 0.4);
   }
 
   let scrollP = 0;
@@ -226,7 +226,7 @@
     scrollP = progress();
     target = frameAt(scrollP) * (FRAMES - 1);
     // Interpola o lado e o zoom entre os centros dos painéis
-    const c = window.scrollY + H / 2;
+    const c = window.scrollY + window.innerHeight * (mobile ? 0.75 : 0.5);
     let side = 0, zoom = 0;
     if (panels.length) {
       if (c <= panels[0].center) { side = panels[0].side; zoom = panels[0].side ? 1 : 0; }
