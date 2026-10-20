@@ -477,7 +477,7 @@ const form = $('#form'), send = $('#send'), msg = $('#form-msg');
 function waLink() {
   const v = id => $(id).value.trim();
   const text = [
-    'Olá, Nicholas! Vim pelo site da Viewport.',
+    'Olá, Viewport! Vim pelo site.',
     v('#f-nome') && `Meu nome é ${v('#f-nome')}.`,
     v('#f-negocio') && `Negócio: ${v('#f-negocio')}.`,
     `Preciso de: ${v('#f-tipo')}.`,
