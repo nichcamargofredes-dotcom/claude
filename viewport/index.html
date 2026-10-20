@@ -45,6 +45,7 @@
   </a>
   <nav class="links" id="links" aria-label="Principal">
     <a href="#projetos">Projetos</a>
+    <a href="#por-dentro">Animações</a>
     <a href="#servicos">Serviços</a>
     <a href="#processo">Processo</a>
     <a href="#sobre">Sobre</a>
@@ -112,7 +113,7 @@
           <h2>Trabalhos que já estão no ar.</h2>
         </div>
         <div class="work-meta">
-          <span class="work-count"><b id="work-i">1</b> / 6</span>
+          <span class="work-count"><b id="work-i">1</b> / 8</span>
           <span class="work-bar"><i id="work-bar"></i></span>
         </div>
       </div>
@@ -131,6 +132,45 @@
               <p class="proj-cat">Varejo · Pet shop</p>
               <h3>CozyPaws</h3>
               <p>Loja e serviços para pets, com vitrine de produtos, categorias por espécie e agendamento de banho e tosa, veterinário e creche.</p>
+              <span class="proj-cta">Ver site <span aria-hidden="true">↗</span></span>
+            </div>
+          </a>
+        </article>
+
+        <article class="proj">
+          <a class="proj-link" href="https://vespera-parfum.vercel.app" target="_blank" rel="noopener">
+            <div class="proj-media">
+              <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>vespera-parfum.vercel.app</span><b class="rec">Rolagem real</b></div>
+                <video class="frame-video" poster="img/vespera-poster.jpg" muted loop playsinline preload="none" aria-label="Gravação da rolagem do site Maison Vespéra"><source src="media/vespera-scroll.mp4" type="video/mp4"><source src="media/vespera-scroll.webm" type="video/webm"></video>
+              </div>
+              <div class="phone"><img src="img/vespera-mobile.jpg" alt="" width="585" height="1266" loading="lazy"></div>
+            </div>
+            <div class="proj-info">
+              <p class="proj-cat">Perfumaria · Lançamento</p>
+              <h3>Maison Vespéra</h3>
+              <p>Página de lançamento de um eau de parfum. A rolagem abre o frasco quadro a quadro, as notas de lima, jasmim e âmbar flutuam ao redor e o frasco troca de lado a cada painel.</p>
+              <span class="proj-cta">Ver site <span aria-hidden="true">↗</span></span>
+            </div>
+          </a>
+        </article>
+
+        <article class="proj">
+          <a class="proj-link" href="https://live-beam-3.vercel.app" target="_blank" rel="noopener">
+            <div class="proj-media">
+              <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>live-beam-3.vercel.app</span><b class="rec">Rolagem real</b></div>
+                <video class="frame-video" poster="img/jbl-poster.jpg" muted loop playsinline preload="none" aria-label="Gravação da rolagem do site JBL Live Beam 3"><source src="media/jbl-scroll.mp4" type="video/mp4"><source src="media/jbl-scroll.webm" type="video/webm"></video>
+              </div>
+              <div class="phone" aria-hidden="true"><div class="mcover cover-jbl">
+                <div class="m-nav"><span class="c-brand jbl-badge">JBL</span><i class="m-burger"></i></div>
+                <div class="m-body"><p class="c-eyebrow"><i></i>Novo · True Wireless</p><p class="c-title">LIVE BEAM 3</p><p class="c-text">O som que você conhece. O controle que você nunca teve.</p></div>
+                <img class="jbl-case" src="img/jbl-case.jpg" alt="" width="540" height="450" loading="lazy">
+                <div class="jbl-chips"><span><b>48h</b> bateria</span><span><b>ANC</b> adaptativo</span></div>
+              </div></div>
+            </div>
+            <div class="proj-info">
+              <p class="proj-cat">Tecnologia · Produto</p>
+              <h3>JBL Live Beam 3</h3>
+              <p>Página de produto para fones sem fio. O fone se desmonta camada por camada na rolagem e a tela do case mostra os atalhos de volume, papel de parede e idioma.</p>
               <span class="proj-cta">Ver site <span aria-hidden="true">↗</span></span>
             </div>
           </a>
@@ -246,6 +286,45 @@
             </div>
           </a>
         </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR DENTRO: gravações das animações -->
+  <section class="inside" id="por-dentro">
+    <div class="wrap">
+      <div class="inside-head">
+        <div>
+          <p class="label">Por dentro</p>
+          <h2>Animações que respondem à rolagem.</h2>
+        </div>
+        <p class="muted">Gravações reais de dois sites da Viewport. Cada movimento acompanha o dedo ou o mouse do visitante, quadro a quadro.</p>
+      </div>
+      <div class="inside-tabs" role="tablist" aria-label="Escolher site">
+        <button type="button" role="tab" class="on" aria-selected="true" data-show="0">Maison Vespéra</button>
+        <button type="button" role="tab" aria-selected="false" data-show="1">JBL Live Beam 3</button>
+      </div>
+      <div class="inside-grid">
+        <div class="inside-stage">
+          <div class="frame frame-lg"><div class="frame-bar"><i></i><i></i><i></i><span id="inside-url">vespera-parfum.vercel.app</span><b class="rec">Gravação real</b></div>
+            <div class="inside-videos">
+              <video class="inside-video on" poster="img/vespera-poster.jpg" muted loop playsinline preload="metadata" aria-label="Rolagem do site Maison Vespéra: o frasco se abre e as notas aparecem"><source src="media/vespera-scroll.mp4" type="video/mp4"><source src="media/vespera-scroll.webm" type="video/webm"></video>
+              <video class="inside-video" poster="img/jbl-poster.jpg" muted loop playsinline preload="none" aria-label="Rolagem do site JBL Live Beam 3: o fone se desmonta e o case mostra os atalhos"><source src="media/jbl-scroll.mp4" type="video/mp4"><source src="media/jbl-scroll.webm" type="video/webm"></video>
+            </div>
+            <button class="inside-play" id="inside-play" type="button" aria-label="Pausar vídeo"><span></span></button>
+          </div>
+          <div class="inside-time"><span class="inside-bar"><i id="inside-bar"></i></span></div>
+        </div>
+        <ol class="inside-notes on" data-for="0">
+          <li><b>192 quadros na rolagem</b><span>Um vídeo do frasco foi fatiado em quadros e desenhado num canvas. A rolagem escolhe o quadro, então o frasco abre no ritmo de quem lê.</span></li>
+          <li><b>Frasco que troca de lado</b><span>A cada painel de texto o frasco diminui e desliza para o lado oposto, sempre deixando a leitura livre.</span></li>
+          <li><b>Notas em órbita</b><span>Lima, jasmim e âmbar aparecem ao redor do frasco junto com a nota de topo, coração e fundo.</span></li>
+        </ol>
+        <ol class="inside-notes" data-for="1" hidden>
+          <li><b>Fone em camadas</b><span>Ao rolar, o fone se separa peça por peça para mostrar a engenharia por dentro.</span></li>
+          <li><b>Case interativo</b><span>A tela do case responde aos botões: volume, papel de parede, idioma e outros atalhos.</span></li>
+          <li><b>Números que entram em cena</b><span>Bateria, carga rápida e cancelamento de ruído surgem em cartões animados conforme a página desce.</span></li>
+        </ol>
       </div>
     </div>
   </section>
@@ -370,7 +449,7 @@
     </div>
     <div class="foot-row">
       <p class="label">Sua empresa vista de outro jeito.</p>
-      <nav aria-label="Rodapé"><a href="#projetos">Projetos</a><a href="#servicos">Serviços</a><a href="#processo">Processo</a><a href="#sobre">Sobre</a><a href="#contato">Contato</a></nav>
+      <nav aria-label="Rodapé"><a href="#projetos">Projetos</a><a href="#por-dentro">Animações</a><a href="#servicos">Serviços</a><a href="#processo">Processo</a><a href="#sobre">Sobre</a><a href="#contato">Contato</a></nav>
       <p class="legal">© <span id="ano">2026</span> Viewport · Nicholas Fredes</p>
     </div>
   </div>
