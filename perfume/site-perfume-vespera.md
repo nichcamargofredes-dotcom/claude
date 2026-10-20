@@ -17,6 +17,7 @@ Site minimalista para uma marca de perfume fictícia, **Vespéra** (Eau de Parfu
 - Fontes: Bodoni Moda + Jost. Paleta tirada da foto (lilás, rosa, âmbar, dourado, mármore).
 
 ## Links
+- Site no ar (Vercel): https://vespera-parfum.vercel.app (vespera.vercel.app já era de outro projeto)
 - Página publicada: https://claude.ai/artifact/DCX2c1WyMpWDZPkHoooMUZ
 - Código: repositório `nichcamargofredes-dotcom/claude`, pasta `perfume/`, branch `claude/ecstatic-davinci-xubzjl`
 
@@ -27,5 +28,4 @@ Site minimalista para uma marca de perfume fictícia, **Vespéra** (Eau de Parfu
 
 ## Próximos passos
 - Trocar nome, preços e textos pelos reais.
-- Publicar em hospedagem própria (Vercel ou Netlify) com a pasta `perfume/`.
 - Ligar o botão de compra a uma loja (Shopify, Nuvemshop).
