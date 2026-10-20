@@ -303,15 +303,15 @@ let bandX = 0, bandDir = -1, lastY = scrollY, velocity = 0;
 /* ---------------- manifesto palavra por palavra ---------------- */
 const manifesto = $('#manifesto');
 {
-  const greens = new Set(['mesma', 'qualidade', 'do', 'seu', 'atendimento:']);
-  const words = manifesto.textContent.trim().split(/\s+/);
-  let after = false;
-  manifesto.innerHTML = words.map(w => {
-    if (w === 'mesma') after = true;
-    const g = after && greens.has(w);
-    if (w === 'atendimento:') after = false;
-    return `<span class="w${g ? ' g' : ''}">${w}</span>`;
-  }).join(' ');
+  // o trecho dentro de <em> no HTML aparece em verde
+  const parts = [...manifesto.childNodes].flatMap(n =>
+    n.textContent.trim().split(/\s+/).filter(Boolean).map(w => ({ w, g: n.nodeName === 'EM' })));
+  // pontuação logo depois do <em> fica grudada na palavra anterior
+  for (let i = parts.length - 1; i > 0; i--) {
+    const m = parts[i].w.match(/^[,.;:!?]+/);
+    if (m) { parts[i - 1].tail = m[0]; parts[i].w = parts[i].w.slice(m[0].length); if (!parts[i].w) parts.splice(i, 1); }
+  }
+  manifesto.innerHTML = parts.map(({ w, g, tail = '' }) => `<span class="w${g ? ' g' : ''}">${w}</span>${tail}`).join(' ');
 }
 const mWords = $$('.w', manifesto);
 
