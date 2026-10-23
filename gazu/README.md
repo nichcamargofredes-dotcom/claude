@@ -13,7 +13,9 @@ Site estático (HTML, CSS e JS puros), sem etapa de build. Abra `index.html` no 
 - **Cards de Mais vendidos**: `index.html`, seção `#mais-vendidos`. O `data-id` de cada card aponta para o `id` da peça no catálogo.
 - **Cores e fontes**: variáveis no topo de `css/styles.css`.
 - **Foto do hero**: `img/hero-model.webp` (recorte com fundo transparente, ~840×1700) e `img/hero-model-sm.webp` para celular.
-- **Newsletter e sacola**: hoje funcionam só na interface (contador, aviso e validação). Conecte o `submit` do formulário `#news` e a função `addToCart` em `js/main.js` ao seu backend ou plataforma de e-commerce.
+- **Sacola**: gaveta lateral com miniatura 3D de cada peça, tamanho, quantidade, remoção, barra de frete grátis (limite `FREE` em `js/main.js`) e total em até 6x. Fica salva no navegador (`localStorage`). O botão "Finalizar compra" ainda não leva a um pagamento: ligue-o ao checkout da sua plataforma em `js/main.js` (`#bag-checkout`).
+- **Guia de medidas**: tabelas por tipo de peça (largura, comprimento e manga em cm) e medidas do corpo por tamanho, no objeto `GUIDE` e na lista `BODY` em `js/main.js`. Aberto pelo painel da peça, já mostra o tipo certo e permite escolher o tamanho direto na tabela.
+- **Newsletter**: funciona só na interface (validação e aviso). Conecte o `submit` do formulário `#news` ao seu serviço de e-mail.
 
 ## Antes de publicar no domínio
 - Troque `img/og-image.jpg` e `img/twitter-image.jpg` nas metatags `og:image` e `twitter:image` pelo endereço completo (por exemplo `https://gazu.com.br/img/og-image.jpg`) e acrescente `<meta property="og:url">` com a URL da loja. Facebook, WhatsApp e X só leem a imagem de prévia com endereço absoluto.

@@ -160,7 +160,7 @@
           </div>
 
           <p class="pdp__label">Cor <span id="pdp-color">Areia</span></p>
-          <p class="pdp__label" id="pdp-size-label">Tamanho <span class="pdp__guide">Guia de medidas</span></p>
+          <p class="pdp__label"><span id="pdp-size-label">Tamanho</span> <button type="button" class="pdp__guide" data-guide="pdp">Guia de medidas</button></p>
           <div class="pdp__sizes" role="radiogroup" aria-labelledby="pdp-size-label">
             <button type="button" role="radio" aria-checked="false">P</button>
             <button type="button" role="radio" aria-checked="false">M</button>
@@ -259,7 +259,7 @@
       </form>
       <nav class="foot__cols" aria-label="Rodapé">
         <div><h3>Loja</h3><a href="#arara">Masculino</a><a href="#arara">Feminino</a><a href="#arara">Infantil</a><a href="#mais-vendidos">Novidades</a></div>
-        <div><h3>Ajuda</h3><a href="#rodape">Rastrear pedido</a><a href="#rodape">Trocas e devoluções</a><a href="#rodape">Guia de medidas</a><a href="#rodape">Fale conosco</a></div>
+        <div><h3>Ajuda</h3><a href="#rodape">Rastrear pedido</a><a href="#rodape">Trocas e devoluções</a><button type="button" class="foot__link" data-guide="foot">Guia de medidas</button><a href="#rodape">Fale conosco</a></div>
         <div><h3>GAZU</h3><a href="#rodape">Nossa história</a><a href="#rodape">Sustentabilidade</a><a href="#rodape">Lojas</a><a href="#rodape">Trabalhe conosco</a></div>
         <div><h3>Siga</h3><a href="https://www.instagram.com/" rel="noopener">Instagram</a><a href="https://www.tiktok.com/" rel="noopener">TikTok</a><a href="https://www.pinterest.com/" rel="noopener">Pinterest</a></div>
       </nav>
@@ -280,6 +280,70 @@
     <button class="search__close" type="button">Fechar</button>
   </div>
   <ul class="search__list" id="search-list" aria-label="Resultados"></ul>
+</div>
+
+<div class="scrim" id="scrim"></div>
+
+<aside class="bag" id="bag" role="dialog" aria-modal="true" aria-labelledby="bag-title" inert>
+  <header class="bag__head">
+    <h2 id="bag-title">Sacola <span id="bag-count">(0)</span></h2>
+    <button class="bag__close" type="button" aria-label="Fechar sacola"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+  </header>
+  <div class="bag__ship">
+    <p id="bag-ship-text">Faltam R$ 299,00 para o frete grátis.</p>
+    <div class="bag__shipbar" aria-hidden="true"><i></i></div>
+  </div>
+  <ul class="bag__list" id="bag-list" aria-label="Peças na sacola"></ul>
+  <div class="bag__empty">
+    <p class="bag__empty-title">Sua sacola está vazia.</p>
+    <p>As peças que você adicionar na arara aparecem aqui.</p>
+    <button class="btn" type="button" id="bag-browse">Ver a arara</button>
+  </div>
+  <footer class="bag__foot">
+    <dl class="bag__sum">
+      <div><dt>Subtotal</dt><dd id="bag-sub">R$ 0,00</dd></div>
+      <div><dt>Frete</dt><dd id="bag-freight">A calcular</dd></div>
+      <div class="bag__total"><dt>Total</dt><dd id="bag-total">R$ 0,00</dd></div>
+    </dl>
+    <p class="bag__inst" id="bag-inst"></p>
+    <button class="btn btn--wide" type="button" id="bag-checkout">Finalizar compra</button>
+    <p class="bag__note" id="bag-note" role="status"></p>
+  </footer>
+</aside>
+
+<div class="guide" id="guide" role="dialog" aria-modal="true" aria-labelledby="guide-title" inert>
+  <div class="guide__box">
+    <header class="guide__head">
+      <div>
+        <h2 id="guide-title">Guia de medidas</h2>
+        <p class="guide__sub" id="guide-sub">Medidas da peça deitada, em centímetros.</p>
+      </div>
+      <button class="guide__close" type="button" aria-label="Fechar guia de medidas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    </header>
+    <div class="guide__cats" id="guide-cats" role="group" aria-label="Tipo de peça"></div>
+    <div class="guide__body">
+      <figure class="guide__fig">
+        <svg viewBox="0 0 240 262" aria-hidden="true" id="guide-svg"></svg>
+        <figcaption id="guide-how"></figcaption>
+      </figure>
+      <div class="guide__tables">
+        <h3>Medidas da peça <small>(cm)</small></h3>
+        <div class="guide__scroll"><table class="guide__table" id="guide-piece"></table></div>
+        <h3>Medidas do corpo</h3>
+        <div class="guide__scroll"><table class="guide__table" id="guide-body"></table></div>
+        <div class="guide__pick" id="guide-pick">
+          <p>Escolher tamanho para <b id="guide-item"></b></p>
+          <div class="guide__pickrow"></div>
+        </div>
+        <ul class="guide__tips">
+          <li>Compare com uma peça sua: deite a roupa numa superfície plana e meça de axila a axila (A) e do ombro até a barra (B).</li>
+          <li>Tórax: passe a fita na parte mais larga do peito, por baixo dos braços. Cintura: na altura do umbigo, sem apertar.</li>
+          <li>Entre dois tamanhos? A modelagem GAZU já é ampla: o menor veste regular e o maior fica mais solto.</li>
+          <li>As medidas podem variar até 2 cm por causa do acabamento artesanal.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>

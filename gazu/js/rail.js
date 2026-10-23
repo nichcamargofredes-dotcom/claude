@@ -48,9 +48,10 @@
     wood.scale(0.94, 1, 1);
     const hookPts = [[0, 0.002, 0], [0, 0.03, -0.006], [0, 0.062, -0.0145], [0, 0.096, -0.0148], [0, 0.1155, -0.0103], [0, 0.1198, 0], [0, 0.1155, 0.0103], [0, 0.104, 0.0146], [0, 0.093, 0.0138], [0, 0.087, 0.0112]];
     const hook = new T.TubeGeometry(new T.CatmullRomCurve3(hookPts.map(p => new T.Vector3(...p))), 48, 0.0026, 8, false);
-    const thread = new T.TubeGeometry(new T.CatmullRomCurve3([new T.Vector3(0, 0.058, -0.013), new T.Vector3(0.004, 0.066, 0.025), new T.Vector3(0.006, 0.052, 0.055)]), 16, 0.0007, 5, false);
-    const tag = new T.BoxGeometry(0.082, 0.045, 0.0009);
-    tag.translate(0.006, 0.03, 0.055);
+    const thread = new T.TubeGeometry(new T.CatmullRomCurve3([new T.Vector3(0, 0.074, -0.014), new T.Vector3(0.003, 0.086, 0.026), new T.Vector3(0.006, 0.073, 0.0615)]), 16, 0.0008, 5, false);
+    // etiqueta grande, legível de longe na arara
+    const tag = new T.BoxGeometry(0.136, 0.072, 0.0012);
+    tag.translate(0.006, 0.048, 0.062);
     return {
       wood, hook, thread, tag,
       woodMat: new T.MeshStandardMaterial({ color: '#8a5d3d', roughness: 0.48, metalness: 0 }),
@@ -60,13 +61,18 @@
     };
   }
   function tagTexture(price) {
-    const c = document.createElement('canvas'); c.width = 256; c.height = 140;
+    const W = 544, H = 288;
+    const c = document.createElement('canvas'); c.width = W; c.height = H;
     const g = c.getContext('2d');
-    g.fillStyle = '#f6f4ef'; g.fillRect(0, 0, 256, 140);
-    g.fillStyle = '#d9d5cd'; g.beginPath(); g.arc(128, 20, 8, 0, 7); g.fill();
-    g.fillStyle = '#111'; g.font = '500 56px "IBM Plex Mono", ui-monospace, monospace'; g.textAlign = 'center'; g.textBaseline = 'middle';
-    g.fillText(brl(price), 128, 86);
-    const t = new T.CanvasTexture(c); t.colorSpace = T.SRGBColorSpace; t.anisotropy = 4;
+    g.fillStyle = '#f7f5f0'; g.fillRect(0, 0, W, H);
+    g.strokeStyle = '#d6d2ca'; g.lineWidth = 6; g.strokeRect(10, 10, W - 20, H - 20);
+    g.fillStyle = '#cfcac1'; g.beginPath(); g.arc(W / 2, 44, 13, 0, 7); g.fill();
+    g.fillStyle = '#111'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    const label = brl(price);
+    let size = 132;
+    do { g.font = `500 ${size}px "IBM Plex Mono", ui-monospace, monospace`; size -= 4; } while (g.measureText(label).width > W - 56 && size > 60);
+    g.fillText(label, W / 2, H * 0.6);
+    const t = new T.CanvasTexture(c); t.colorSpace = T.SRGBColorSpace; t.anisotropy = 8;
     return t;
   }
   class ArcCurve extends T.Curve {
