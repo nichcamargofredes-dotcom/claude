@@ -95,6 +95,7 @@
       this.visible = false; this.time = 0; this.center = -1;
       this.camPos = new T.Vector3(); this.camLook = new T.Vector3(); this.camInit = false;
       this._v = new T.Vector3(); this._v2 = new T.Vector3(); this._ray = new T.Raycaster();
+      this.zoom = 1; this.zoomS = 1; this.focus = { x: 0, y: 0 };   // zoom do painel da peça
       this.last = performance.now();
       this.loop = this.loop.bind(this);
     }
@@ -190,6 +191,31 @@
         this.kick();
       });
       st.addEventListener('pointerleave', () => { this.mouse.inside = false; });
+      // painel da peça: roda do mouse (ou pinça) aproxima a câmera do ponto sob o cursor
+      st.addEventListener('wheel', e => {
+        if (this.detail < 0 || e.target !== this.canvas) return;
+        e.preventDefault();
+        pos(e);
+        const d = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY;
+        this.setZoom(this.zoom * Math.exp(-d * 0.0018), true);
+      }, { passive: false });
+      const touches = new Map();
+      st.addEventListener('pointerdown', e => { if (e.pointerType === 'touch') touches.set(e.pointerId, [e.clientX, e.clientY]); });
+      st.addEventListener('pointermove', e => {
+        if (!touches.has(e.pointerId) || this.detail < 0) return;
+        const before = [...touches.values()];
+        touches.set(e.pointerId, [e.clientX, e.clientY]);
+        if (touches.size !== 2) return;
+        const after = [...touches.values()];
+        const dist = p => Math.hypot(p[0][0] - p[1][0], p[0][1] - p[1][1]);
+        const b = this.canvas.getBoundingClientRect();
+        this.mouse.x = (after[0][0] + after[1][0]) / 2 - b.left; this.mouse.y = (after[0][1] + after[1][1]) / 2 - b.top;
+        this.drag = null;   // dois dedos: zoom, não giro
+        this.setZoom(this.zoom * dist(after) / Math.max(1, dist(before)), true);
+      });
+      const lift = e => touches.delete(e.pointerId);
+      st.addEventListener('pointerup', lift); st.addEventListener('pointercancel', lift);
+      st.addEventListener('dblclick', e => { if (this.detail >= 0 && e.target === this.canvas) this.setZoom(this.zoom > 1.05 ? 1 : 2.2, true); });
       st.addEventListener('pointerdown', e => {
         if (e.target !== this.canvas) return;
         pos(e);
@@ -224,14 +250,35 @@
       return best;
     }
 
+    setZoom(z, atCursor) {
+      const prev = this.zoom;
+      this.zoom = clamp(z, 1, 2.8);
+      if (atCursor && this.zoom > prev + 1e-3 && this.detail >= 0) {
+        // ponto do plano da peça sob o cursor, relativo ao centro da peça
+        const ndc = new T.Vector2(this.mouse.x / this.w * 2 - 1, -(this.mouse.y / this.h) * 2 + 1);
+        this._ray.setFromCamera(ndc, this.camera);
+        const r = this._ray.ray, t = (R - r.origin.z) / (r.direction.z || -1e-6);
+        if (t > 0) {
+          const it = this.items[this.detail], yc = -it.gar.len * 0.46 + 0.02;
+          const fx = r.origin.x + r.direction.x * t - it.slot.position.x, fy = r.origin.y + r.direction.y * t - yc;
+          const k = 1 - prev / this.zoom;   // mistura com o foco atual para o zoom seguir o cursor sem pular
+          this.focus.x = clamp(this.focus.x + (fx - this.focus.x) * Math.min(1, k * 2.5 + 0.15), -it.gar.halfW, it.gar.halfW);
+          this.focus.y = clamp(this.focus.y + (fy - this.focus.y) * Math.min(1, k * 2.5 + 0.15), -it.gar.len * 0.6, it.gar.len * 0.6);
+        }
+      }
+      if (this.opts.onZoom) this.opts.onZoom(this.zoom);
+      this.kick();
+    }
     open(i) {
+      this.zoom = 1; this.focus.x = 0; this.focus.y = 0;
+      if (this.opts.onZoom) this.opts.onZoom(1);
       this.detail = i; this.side = 0; this.spin = 0; this.active = -1;
       if (this.opts.onOpen) this.opts.onOpen(this.items[i]);
       this.kick();
     }
     close() {
       const was = this.detail;
-      this.detail = -1; this.spin = 0;
+      this.detail = -1; this.spin = 0; this.zoom = 1;
       if (this.opts.onClose) this.opts.onClose(was);
       this.kick();
     }
@@ -345,12 +392,14 @@
       // câmera
       const lookT = this._v.set(0, centerY, R), posT = this._v2;
       if (this.detail >= 0) {
-        const dd = this.mobile ? 3.3 : 2.8;
+        this.zoomS = damp(this.zoomS, this.zoom, 9, dt);
+        const z = this.zoomS, zk = 1 - 1 / z;
+        const dd = (this.mobile ? 3.3 : 2.8) / z;
         const hv = 2 * dd * tanH, wv = hv * aspect;
         const it = its[this.detail], yc = -it.gar.len * 0.46 + 0.02;
         const sx = this.mobile ? 0.5 : 0.36, sy = this.mobile ? 0.33 : 0.5;
-        lookT.set((0.5 - sx) * wv, yc - (0.5 - sy) * hv, R);
-        posT.set(lookT.x, lookT.y + 0.05, R + dd);
+        lookT.set((0.5 - sx) * wv + this.focus.x * zk, yc + this.focus.y * zk - (0.5 - sy) * hv, R);
+        posT.set(lookT.x, lookT.y + 0.05 / z, R + dd);
       } else {
         posT.set(0, centerY - 0.55, R + dist);
       }
