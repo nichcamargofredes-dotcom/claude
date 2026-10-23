@@ -95,7 +95,7 @@
       this.visible = false; this.time = 0; this.center = -1;
       this.camPos = new T.Vector3(); this.camLook = new T.Vector3(); this.camInit = false;
       this._v = new T.Vector3(); this._v2 = new T.Vector3(); this._ray = new T.Raycaster();
-      this.zoom = 1; this.zoomS = 1; this.focus = { x: 0, y: 0 };   // zoom do painel da peça
+      this.zoom = 1; this.zoomS = 1; this.pan = { x: 0, y: 0 }; this.panS = { x: 0, y: 0 };   // zoom e deslocamento da câmera no painel da peça
       this.last = performance.now();
       this.loop = this.loop.bind(this);
     }
@@ -188,6 +188,14 @@
       st.addEventListener('pointermove', e => {
         pos(e); this.mouse.inside = e.pointerType !== 'touch';
         if (this.drag) { const dx = e.clientX - this.drag.x; this.spin = this.drag.spin + dx * 0.012; this.drag.moved = this.drag.moved || Math.abs(dx) > 5; }
+        if (this.panDrag) {
+          // botão direito: a peça acompanha o cursor
+          const v = this.detailView(this.zoom), dx = e.clientX - this.panDrag.x, dy = e.clientY - this.panDrag.y;
+          this.pan.x = this.panDrag.px - dx * v.wv / this.w;
+          this.pan.y = this.panDrag.py + dy * v.hv / this.h;
+          this.clampPan();
+          this.panDrag.moved = this.panDrag.moved || Math.hypot(dx, dy) > 4;
+        }
         this.kick();
       });
       st.addEventListener('pointerleave', () => { this.mouse.inside = false; });
@@ -215,14 +223,27 @@
       });
       const lift = e => touches.delete(e.pointerId);
       st.addEventListener('pointerup', lift); st.addEventListener('pointercancel', lift);
-      st.addEventListener('dblclick', e => { if (this.detail >= 0 && e.target === this.canvas) this.setZoom(this.zoom > 1.05 ? 1 : 2.2, true); });
+      st.addEventListener('dblclick', e => {
+        if (this.detail < 0 || e.target !== this.canvas) return;
+        pos(e);
+        if (this.zoom > 1.05 || Math.hypot(this.pan.x, this.pan.y) > 0.01) { this.zoom = 1; this.pan.x = 0; this.pan.y = 0; this.kick(); }
+        else this.setZoom(2.2, true);
+      });
+      this.canvas.addEventListener('contextmenu', e => { if (this.detail >= 0) e.preventDefault(); });
       st.addEventListener('pointerdown', e => {
         if (e.target !== this.canvas) return;
         pos(e);
+        if (this.detail >= 0 && e.button === 2) {
+          this.panDrag = { x: e.clientX, y: e.clientY, px: this.pan.x, py: this.pan.y, moved: false };
+          this.canvas.setPointerCapture(e.pointerId); return;
+        }
+        if (e.button !== 0) return;
         this.down = { x: e.clientX, y: e.clientY, t: performance.now() };
         if (this.detail >= 0) { this.drag = { x: e.clientX, spin: this.spin, moved: false }; this.canvas.setPointerCapture(e.pointerId); }
       });
       st.addEventListener('pointerup', e => {
+        if (this.panDrag) { this.panDrag = null; return; }
+        if (e.button !== 0) return;
         if (e.target !== this.canvas) { this.drag = null; return; }
         const d = this.down; this.down = null;
         const wasDrag = this.drag && this.drag.moved; this.drag = null;
@@ -250,27 +271,37 @@
       return best;
     }
 
+    // enquadramento do painel em cada zoom: altura/largura visíveis no plano da peça e o centro sem deslocamento
+    detailView(z) {
+      const tanH = Math.tan(this.camera.fov * Math.PI / 360), aspect = this.w / this.h;
+      const d = (this.mobile ? 3.3 : 2.8) / z, hv = 2 * d * tanH, wv = hv * aspect;
+      const it = this.items[this.detail], yc = it ? -it.gar.len * 0.46 + 0.02 : 0;
+      const sx = this.mobile ? 0.5 : 0.36, sy = this.mobile ? 0.33 : 0.5;
+      return { d, hv, wv, bx: (0.5 - sx) * wv, by: yc - (0.5 - sy) * hv };
+    }
+    clampPan() {
+      const it = this.items[this.detail]; if (!it) return;
+      this.pan.x = clamp(this.pan.x, -it.gar.halfW * 1.3, it.gar.halfW * 1.3);
+      this.pan.y = clamp(this.pan.y, -it.gar.len * 0.9, it.gar.len * 0.6);
+    }
+    // zoom no ponto sob o cursor: o ponto da peça que está sob o mouse continua sob o mouse
     setZoom(z, atCursor) {
-      const prev = this.zoom;
-      this.zoom = clamp(z, 1, 2.8);
-      if (atCursor && this.zoom > prev + 1e-3 && this.detail >= 0) {
-        // ponto do plano da peça sob o cursor, relativo ao centro da peça
-        const ndc = new T.Vector2(this.mouse.x / this.w * 2 - 1, -(this.mouse.y / this.h) * 2 + 1);
-        this._ray.setFromCamera(ndc, this.camera);
-        const r = this._ray.ray, t = (R - r.origin.z) / (r.direction.z || -1e-6);
-        if (t > 0) {
-          const it = this.items[this.detail], yc = -it.gar.len * 0.46 + 0.02;
-          const fx = r.origin.x + r.direction.x * t - it.slot.position.x, fy = r.origin.y + r.direction.y * t - yc;
-          const k = 1 - prev / this.zoom;   // mistura com o foco atual para o zoom seguir o cursor sem pular
-          this.focus.x = clamp(this.focus.x + (fx - this.focus.x) * Math.min(1, k * 2.5 + 0.15), -it.gar.halfW, it.gar.halfW);
-          this.focus.y = clamp(this.focus.y + (fy - this.focus.y) * Math.min(1, k * 2.5 + 0.15), -it.gar.len * 0.6, it.gar.len * 0.6);
-        }
+      const z1 = this.zoom, z2 = clamp(z, 1, 2.8);
+      if (this.detail >= 0 && atCursor) {
+        const a = this.detailView(z1), b = this.detailView(z2);
+        const nx = this.mouse.x / this.w * 2 - 1, ny = 1 - this.mouse.y / this.h * 2;
+        const px = a.bx + this.pan.x + nx * a.wv / 2, py = a.by + this.pan.y + ny * a.hv / 2;
+        this.pan.x = px - nx * b.wv / 2 - b.bx;
+        this.pan.y = py - ny * b.hv / 2 - b.by;
+        if (z2 <= 1.001) { this.pan.x *= 0.5; this.pan.y *= 0.5; }   // ao voltar ao 1x, a peça recentra aos poucos
       }
+      this.zoom = z2;
+      this.clampPan();
       if (this.opts.onZoom) this.opts.onZoom(this.zoom);
       this.kick();
     }
     open(i) {
-      this.zoom = 1; this.focus.x = 0; this.focus.y = 0;
+      this.zoom = 1; this.pan.x = this.pan.y = 0;
       if (this.opts.onZoom) this.opts.onZoom(1);
       this.detail = i; this.side = 0; this.spin = 0; this.active = -1;
       if (this.opts.onOpen) this.opts.onOpen(this.items[i]);
@@ -392,19 +423,17 @@
       // câmera
       const lookT = this._v.set(0, centerY, R), posT = this._v2;
       if (this.detail >= 0) {
-        this.zoomS = damp(this.zoomS, this.zoom, 9, dt);
-        const z = this.zoomS, zk = 1 - 1 / z;
-        const dd = (this.mobile ? 3.3 : 2.8) / z;
-        const hv = 2 * dd * tanH, wv = hv * aspect;
-        const it = its[this.detail], yc = -it.gar.len * 0.46 + 0.02;
-        const sx = this.mobile ? 0.5 : 0.36, sy = this.mobile ? 0.33 : 0.5;
-        lookT.set((0.5 - sx) * wv + this.focus.x * zk, yc + this.focus.y * zk - (0.5 - sy) * hv, R);
-        posT.set(lookT.x, lookT.y + 0.05 / z, R + dd);
+        this.zoomS = damp(this.zoomS, this.zoom, 12, dt);
+        this.panS.x = damp(this.panS.x, this.pan.x, 12, dt); this.panS.y = damp(this.panS.y, this.pan.y, 12, dt);
+        const v = this.detailView(this.zoomS);
+        lookT.set(v.bx + this.panS.x, v.by + this.panS.y, R);
+        posT.set(lookT.x, lookT.y, R + v.d);
       } else {
         posT.set(0, centerY - 0.55, R + dist);
       }
       if (!this.camInit) { this.camPos.copy(posT); this.camLook.copy(lookT); this.camInit = true; }
-      const ck = this.detail >= 0 ? 3.2 : 4.2;
+      // no painel a câmera já vem suavizada pelo zoom/pan; fora dele, transição normal
+      const ck = this.detail >= 0 ? (this.zoom > 1.001 || this.panDrag || Math.hypot(this.pan.x, this.pan.y) > 1e-3 ? 40 : 3.2) : 4.2;
       this.camPos.x = damp(this.camPos.x, posT.x, ck, dt); this.camPos.y = damp(this.camPos.y, posT.y, ck, dt); this.camPos.z = damp(this.camPos.z, posT.z, ck, dt);
       this.camLook.x = damp(this.camLook.x, lookT.x, ck, dt); this.camLook.y = damp(this.camLook.y, lookT.y, ck, dt); this.camLook.z = damp(this.camLook.z, lookT.z, ck, dt);
       cam.position.copy(this.camPos); cam.lookAt(this.camLook);
@@ -413,7 +442,7 @@
       // hover
       this.hovered = this.detail >= 0 ? -1 : this.pick(false);
       if (this.opts.onHover && this.hovered !== this._lastHover) { this._lastHover = this.hovered; this.opts.onHover(this.hovered >= 0 ? its[this.hovered] : null); }
-      this.stage.style.cursor = this.detail >= 0 ? (this.drag ? 'grabbing' : 'grab') : this.hovered >= 0 ? 'pointer' : '';
+      this.stage.style.cursor = this.detail >= 0 ? (this.panDrag ? 'move' : this.drag ? 'grabbing' : 'grab') : this.hovered >= 0 ? 'pointer' : '';
 
       let busy = false, center = -1, cd = Infinity;
       const camLocal = this._v;
