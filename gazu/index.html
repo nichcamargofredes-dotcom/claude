@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GAZU</title>
+<meta name="description" content="GAZU: streetwear premium em algodão encorpado. Nova coleção 2026 com moletons, camisetas, overshirts e o trench Atlas.">
+<meta name="theme-color" content="#E0DFDB">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230F0F0E'/%3E%3Ctext x='32' y='45' font-family='Arial' font-weight='700' font-size='38' text-anchor='middle' fill='%23F1F0EC'%3EG%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" type="image/webp" href="img/hero-model.webp" imagesrcset="img/hero-model-sm.webp 474w, img/hero-model.webp 839w" imagesizes="(max-width: 760px) 72vw, 32vw">
+<link rel="stylesheet" href="css/styles.css">
+<script>document.documentElement.classList.add('js');setTimeout(function(){document.documentElement.classList.add('is-ready')},2600);</script>
+</head>
+<body>
+
+<a class="skip" href="#arara">Pular para a arara</a>
+
+<div class="topbar">
+  <div class="topbar__in">
+    <p>Frete grátis em compras acima de R$&nbsp;299</p>
+    <ul>
+      <li><a href="#rodape">Baixe o app</a></li>
+      <li><a href="#rodape">Rastrear pedido</a></li>
+      <li><a href="#rodape">Ajuda</a></li>
+    </ul>
+  </div>
+</div>
+
+<header class="hdr" id="topo">
+  <nav class="hdr__nav" aria-label="Categorias">
+    <a href="#arara">Masculino</a>
+    <a href="#arara">Feminino</a>
+    <a href="#arara">Infantil</a>
+    <a href="#mais-vendidos">Beleza</a>
+  </nav>
+  <a class="hdr__logo" href="#topo" aria-label="GAZU, início">GAZU</a>
+  <div class="hdr__tools">
+    <button class="hdr__tool" type="button" id="btn-search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+      <span>Buscar</span>
+    </button>
+    <a class="hdr__tool" href="#rodape">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c.8-4 3.8-6.2 7.5-6.2s6.7 2.2 7.5 6.2"/></svg>
+      <span>Entrar</span>
+    </a>
+    <a class="hdr__tool" href="#mais-vendidos">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.4-7.5-10.1A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.8c0 5.7-7.5 10.1-7.5 10.1Z"/></svg>
+      <span>Favoritos <b class="fav-count" hidden>(0)</b></span>
+    </a>
+    <button class="hdr__tool" type="button" id="btn-cart">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12.5H6L5 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+      <span>Sacola (<b class="cart-count">0</b>)</span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO ---------------------------------------------------------------->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__stage">
+      <p class="hero__tag"><span>Moda</span> <span>que se move</span> <span>com você.</span></p>
+
+      <h1 class="hero__word" id="hero-title" aria-label="GAZU">
+        <span class="hero__l" aria-hidden="true"><span>G</span></span><span class="hero__l" aria-hidden="true"><span>A</span></span><span class="hero__l" aria-hidden="true"><span>Z</span></span><span class="hero__l" aria-hidden="true"><span>U</span></span>
+      </h1>
+
+      <figure class="hero__model">
+        <img src="img/hero-model.webp" srcset="img/hero-model-sm.webp 474w, img/hero-model.webp 839w" sizes="(max-width: 760px) 72vw, 32vw" width="839" height="1700" alt="Modelo caminhando com sobretudo cinza, calça larga preta, tênis claro e boné">
+      </figure>
+
+      <div class="hero__cta">
+        <a class="btn" href="#arara" data-scroll>Comprar agora</a>
+        <a class="link" href="#mais-vendidos" data-scroll>Ver novidades</a>
+      </div>
+
+      <p class="hero__season"><span>Nova</span> <span>coleção</span> <span>2026</span></p>
+    </div>
+  </section>
+
+  <!-- ARARA --------------------------------------------------------------->
+  <section class="rail" id="arara" aria-labelledby="rail-title">
+    <div class="rail__track">
+      <div class="rail__stage">
+        <canvas class="rail__canvas" aria-hidden="true"></canvas>
+
+        <div class="rail__head">
+          <p class="eyebrow">Nova coleção <i aria-hidden="true"></i> Streetwear premium</p>
+          <h2 id="rail-title">Camadas que <em>caem bem.</em></h2>
+          <p class="rail__hint"><span class="only-fine">Role para percorrer · passe o mouse para virar a peça · clique para ver os detalhes</span><span class="only-touch">Role para percorrer · toque para virar a peça · toque de novo para os detalhes</span></p>
+        </div>
+
+        <p class="rail__peek" aria-hidden="true"><b></b><span></span></p>
+
+        <div class="rail__foot">
+          <p class="rail__count"><span class="rail__cur">01</span> / <span class="rail__tot">12</span></p>
+          <div class="rail__bar" aria-hidden="true"><i></i></div>
+        </div>
+
+        <p class="rail__loading" role="status">Pendurando as peças…</p>
+
+        <ul class="rail__list" aria-label="Peças da arara"></ul>
+
+        <aside class="pdp" id="pdp" aria-labelledby="pdp-name" aria-hidden="true" inert>
+          <button class="pdp__close" type="button" aria-label="Fechar detalhes da peça">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+          </button>
+          <p class="pdp__index"><span id="pdp-index">01</span> / <span id="pdp-total">12</span></p>
+          <h3 class="pdp__name" id="pdp-name">Moletom Orbit</h3>
+          <p class="pdp__price"><span id="pdp-price">R$ 389,00</span> <small id="pdp-inst">ou 6x de R$ 64,83 sem juros</small></p>
+
+          <div class="pdp__view" role="group" aria-label="Lado da peça">
+            <button type="button" class="is-on" data-side="0" aria-pressed="true">Frente</button>
+            <button type="button" data-side="1" aria-pressed="false">Costas</button>
+          </div>
+
+          <p class="pdp__label">Cor <span id="pdp-color">Areia</span></p>
+          <p class="pdp__label" id="pdp-size-label">Tamanho <span class="pdp__guide">Guia de medidas</span></p>
+          <div class="pdp__sizes" role="radiogroup" aria-labelledby="pdp-size-label">
+            <button type="button" role="radio" aria-checked="false">P</button>
+            <button type="button" role="radio" aria-checked="false">M</button>
+            <button type="button" role="radio" aria-checked="false">G</button>
+            <button type="button" role="radio" aria-checked="false">GG</button>
+          </div>
+          <p class="pdp__warn" id="pdp-warn" role="alert"></p>
+          <button class="btn btn--wide pdp__add" type="button" id="pdp-add">Adicionar à sacola</button>
+
+          <p class="pdp__desc" id="pdp-desc"></p>
+          <ul class="pdp__specs" id="pdp-specs"></ul>
+          <p class="pdp__ship">Frete grátis acima de R$ 299. Primeira troca grátis em até 15 dias.</p>
+          <p class="pdp__drag">Arraste a peça para girar</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAIXA --------------------------------------------------------------->
+  <section class="band" aria-label="Vantagens">
+    <div class="band__row">
+      <p>Frete grátis acima de R$ 299</p><p>6x sem juros</p><p>Troca grátis em 15 dias</p><p>Algodão orgânico</p><p>Envio em 24 h úteis</p>
+      <p aria-hidden="true">Frete grátis acima de R$ 299</p><p aria-hidden="true">6x sem juros</p><p aria-hidden="true">Troca grátis em 15 dias</p><p aria-hidden="true">Algodão orgânico</p><p aria-hidden="true">Envio em 24 h úteis</p>
+    </div>
+  </section>
+
+  <!-- MAIS VENDIDOS ------------------------------------------------------->
+  <section class="best" id="mais-vendidos" aria-labelledby="best-title">
+    <div class="wrap">
+      <div class="best__head">
+        <h2 id="best-title" data-reveal>Mais vendidos</h2>
+        <a class="link" href="#arara" data-scroll>Ver a arara inteira</a>
+      </div>
+      <ul class="best__grid" id="best-grid">
+        <li class="card" data-id="reign" data-reveal>
+          <button class="card__fav" type="button" aria-label="Favoritar Camiseta Reign" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.4-7.5-10.1A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.8c0 5.7-7.5 10.1-7.5 10.1Z"/></svg></button>
+          <a class="card__link" href="#arara">
+            <span class="card__media" style="--c:#1b1b1c"><span class="card__badge">Novo</span></span>
+            <span class="card__info"><span class="card__name">Camiseta Reign</span><span class="card__color">Preto</span><span class="card__price">R$ 199 <small>3x de R$ 66,33</small></span></span>
+          </a>
+        </li>
+        <li class="card" data-id="varsity" data-reveal>
+          <button class="card__fav" type="button" aria-label="Favoritar Moletom Varsity" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.4-7.5-10.1A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.8c0 5.7-7.5 10.1-7.5 10.1Z"/></svg></button>
+          <a class="card__link" href="#arara">
+            <span class="card__media" style="--c:#20392b"></span>
+            <span class="card__info"><span class="card__name">Moletom Varsity</span><span class="card__color">Verde floresta</span><span class="card__price">R$ 419 <small>6x de R$ 69,83</small></span></span>
+          </a>
+        </li>
+        <li class="card" data-id="atlas" data-reveal>
+          <button class="card__fav" type="button" aria-label="Favoritar Trench Atlas" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.4-7.5-10.1A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.8c0 5.7-7.5 10.1-7.5 10.1Z"/></svg></button>
+          <a class="card__link" href="#arara">
+            <span class="card__media" style="--c:#7d766a"><span class="card__badge">Campanha</span></span>
+            <span class="card__info"><span class="card__name">Trench Atlas</span><span class="card__color">Taupe</span><span class="card__price">R$ 789 <small>6x de R$ 131,50</small></span></span>
+          </a>
+        </li>
+        <li class="card" data-id="oversized" data-reveal>
+          <button class="card__fav" type="button" aria-label="Favoritar Camiseta Oversized" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5s-7.5-4.4-7.5-10.1A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.8c0 5.7-7.5 10.1-7.5 10.1Z"/></svg></button>
+          <a class="card__link" href="#arara">
+            <span class="card__media" style="--c:#ebe7de"></span>
+            <span class="card__info"><span class="card__name">Camiseta Oversized</span><span class="card__color">Off-white</span><span class="card__price">R$ 179 <small>3x de R$ 59,67</small></span></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- MANIFESTO ----------------------------------------------------------->
+  <section class="manifesto" aria-labelledby="manifesto-title">
+    <div class="wrap">
+      <h2 class="eyebrow" id="manifesto-title">Feito para durar</h2>
+      <p class="manifesto__text" data-words>Peças pensadas para durar mais que uma estação. Tecido encorpado, modelagem ampla e acabamento que você sente na mão. Roupa que acompanha o seu ritmo.</p>
+      <dl class="stats">
+        <div data-reveal><dt>420 g/m²</dt><dd>Moletom felpado de algodão orgânico</dd></div>
+        <div data-reveal><dt>15 dias</dt><dd>Para trocar sem custo, direto pelo app</dd></div>
+        <div data-reveal><dt>6x</dt><dd>Sem juros no cartão, em todo o site</dd></div>
+        <div data-reveal><dt>24 h</dt><dd>Para o pedido sair do estoque em dias úteis</dd></div>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<!-- RODAPÉ ---------------------------------------------------------------->
+<footer class="foot" id="rodape">
+  <div class="wrap">
+    <div class="foot__top">
+      <form class="news" id="news" novalidate>
+        <h2 class="news__title">Receba os lançamentos antes de todo mundo.</h2>
+        <div class="news__row">
+          <label class="sr-only" for="news-email">Seu e-mail</label>
+          <input id="news-email" name="email" type="email" placeholder="seu@email.com" autocomplete="email" required>
+          <button class="btn btn--light" type="submit">Assinar</button>
+        </div>
+        <p class="news__msg" id="news-msg" role="status"></p>
+      </form>
+      <nav class="foot__cols" aria-label="Rodapé">
+        <div><h3>Loja</h3><a href="#arara">Masculino</a><a href="#arara">Feminino</a><a href="#arara">Infantil</a><a href="#mais-vendidos">Novidades</a></div>
+        <div><h3>Ajuda</h3><a href="#rodape">Rastrear pedido</a><a href="#rodape">Trocas e devoluções</a><a href="#rodape">Guia de medidas</a><a href="#rodape">Fale conosco</a></div>
+        <div><h3>GAZU</h3><a href="#rodape">Nossa história</a><a href="#rodape">Sustentabilidade</a><a href="#rodape">Lojas</a><a href="#rodape">Trabalhe conosco</a></div>
+        <div><h3>Siga</h3><a href="https://www.instagram.com/" rel="noopener">Instagram</a><a href="https://www.tiktok.com/" rel="noopener">TikTok</a><a href="https://www.pinterest.com/" rel="noopener">Pinterest</a></div>
+      </nav>
+    </div>
+    <p class="foot__word" aria-hidden="true">GAZU</p>
+    <div class="foot__base">
+      <p>© 2026 GAZU. Todos os direitos reservados.</p>
+      <p>Pix, cartão em até 6x e boleto</p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script src="vendor/three.min.js"></script>
+<script src="vendor/delaunator.min.js"></script>
+<script src="js/garments.js"></script>
+<script src="js/rail.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
