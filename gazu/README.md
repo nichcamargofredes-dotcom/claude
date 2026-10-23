@@ -6,7 +6,7 @@ Site estático (HTML, CSS e JS puros), sem etapa de build. Abra `index.html` no 
 - **Hero**: o da referência. Letreiro GAZU atrás do modelo, que entra caminhando; ao rolar, as letras se abrem e o modelo segue andando. No desktop, o hero acompanha o mouse com um leve parallax.
 - **Arara 3D** (`#arara`): trilho em arco com 12 peças penduradas de lado. A rolagem desliza os cabides; passar o mouse vira a peça de frente (o tecido torce, balança e afunda onde o cursor toca) e as vizinhas abrem espaço. O clique abre o painel da peça com frente/costas, tamanhos e "Adicionar à sacola"; no painel dá para arrastar a peça para girar. No celular: toque vira a peça e o segundo toque abre os detalhes.
 - **Mais vendidos**: as fotos dos cards são geradas na hora a partir das mesmas peças 3D (frente e, no hover, costas).
-- **Manifesto**, faixa de vantagens e rodapé com newsletter.
+- Faixa de vantagens e rodapé com newsletter. As vantagens (frete, troca, parcelamento, envio) também aparecem compactas no painel da peça, abaixo do botão de compra.
 
 ## Personalizar
 - **Peças, preços e textos da arara**: array `CATALOG` em `js/garments.js` (nome, tipo, cor, preço, estampa, descrição e composição). Tipos disponíveis: `hoodie` (com `zip: true` vira moletom com zíper), `crew` (com `lite: true` vira manga longa), `tee` (com `oversized: true`), `shirt`, `coat` e `bomber`.
