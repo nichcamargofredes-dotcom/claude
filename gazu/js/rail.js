@@ -149,7 +149,9 @@
       const P = this.parts;
       for (let i = 0; i < catalog.length; i++) {
         const spec = catalog[i];
-        const gar = window.GAZU_GARMENTS.build({ ...spec, seed: 1.7 + i * 2.3 }, q);
+        let shape = spec;   // se o modelo do Blender não carregar, a peça vira uma camiseta procedural no lugar
+        try { await window.GAZU_GARMENTS.preload(spec); } catch (e) { console.warn(e); shape = { ...spec, type: 'tee', oversized: true }; }
+        const gar = window.GAZU_GARMENTS.build({ ...shape, seed: 1.7 + i * 2.3 }, q);
         const slot = new T.Group(), swing = new T.Group(), hang = new T.Group(), yawG = new T.Group();
         swing.position.y = RAIL_Y; hang.position.y = -RAIL_Y;
         slot.add(swing); swing.add(hang); hang.add(yawG);
@@ -159,6 +161,7 @@
         tag.castShadow = true;
         hang.add(hook, thread, tag);
         const wood = new T.Mesh(P.wood, P.woodMat); wood.castShadow = true;
+        if (shape.type === 'model') { wood.position.y = -0.032; wood.scale.set(0.9, 1, 0.8); }   // ombros do modelo do Blender são mais baixos
         yawG.add(wood, gar.group);
         this.scene.add(slot);
         const it = {

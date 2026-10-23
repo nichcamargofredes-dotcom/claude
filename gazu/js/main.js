@@ -358,7 +358,7 @@
     ['Cintura', ['74–80', '80–86', '86–92', '92–100'], 'cm'],
     ['Altura', ['1,65–1,72', '1,70–1,78', '1,75–1,83', '1,80–1,88'], 'm'],
   ];
-  const guideKey = spec => spec.type === 'tee' ? (spec.oversized ? 'oversized' : 'tee') : spec.type === 'crew' ? (spec.lite ? 'longsleeve' : 'crew') : spec.type;
+  const guideKey = spec => spec.guide ? spec.guide : spec.type === 'tee' ? (spec.oversized ? 'oversized' : 'tee') : spec.type === 'crew' ? (spec.lite ? 'longsleeve' : 'crew') : spec.type;
   const guide = $('#guide');
   let gKey = 'tee', gFromPdp = false;
   const SHAPES = {
@@ -413,7 +413,7 @@
   const search = $('#search'), sInput = $('#search-input'), sList = $('#search-list');
   const fold = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
   const KIND = { hoodie: 'moletom capuz', crew: 'moletom careca', tee: 'camiseta', shirt: 'camisa overshirt jaqueta', coat: 'casaco trench sobretudo', bomber: 'jaqueta bomber' };
-  const kindOf = spec => spec.type === 'crew' && spec.lite ? 'camiseta manga longa' : KIND[spec.type] || '';
+  const kindOf = spec => spec.kind || (spec.type === 'crew' && spec.lite ? 'camiseta manga longa' : KIND[spec.type] || '');
   function renderSearch() {
     const q = fold(sInput.value.trim());
     const hits = CATALOG.map((spec, i) => ({ spec, i })).filter(({ spec }) => !q || fold(`${spec.name} ${spec.colorName} ${kindOf(spec)}`).includes(q));

@@ -948,6 +948,9 @@ vec3 clothDeform(vec3 p) {
       print: PRINTS.reign('#efeae4', '#d8a9b2'), backPrint: BACKS.neck('#d8a9b2', 'GAZU · EST. 2019'),
       desc: 'Malha penteada encorpada com estampa gótica na frente e gola canelada em rosé.',
       specs: ['Malha 240 g/m²', '100% algodão penteado', 'Modelagem regular'] },
+    { id: 'chama', name: 'Camiseta Chama', type: 'model', model: 'chama', guide: 'oversized', kind: 'camiseta', price: 219, colorName: 'Preto', base: '#161617', fabric: 'jersey',
+      desc: 'Camiseta oversized com o rosto em chamas azuis em silk de alta definição e a assinatura “Authentic Brazilian Streetwear” logo abaixo.',
+      specs: ['Malha 240 g/m²', '100% algodão penteado', 'Modelagem oversized, ombro caído'] },
     { id: 'careca', name: 'Moletom Careca', type: 'crew', price: 329, colorName: 'Cinza mescla', base: '#9b9a97', heather: 0.5, fabric: 'fleece',
       print: PRINTS.center('#7f7e7b'),
       desc: 'O careca de todo dia, com gola canelada larga, barra e punhos firmes e bordado tom sobre tom.',
@@ -993,8 +996,63 @@ vec3 clothDeform(vec3 p) {
 
   /* --------------------------------------------------------- montagem 3D */
 
+  /* Peças modeladas no Blender: js/models/<nome>.js traz a malha quantizada e a textura assada. */
+  const MODEL_TEX = {};
+  function preload(spec) {
+    if (spec.type !== 'model') return Promise.resolve();
+    const load = () => new Promise((res, rej) => {
+      if (window.GAZU_MODELS && window.GAZU_MODELS[spec.model]) return res();
+      const sc = document.createElement('script');
+      sc.src = 'js/models/' + spec.model + '.js'; sc.onload = res; sc.onerror = () => rej(new Error('modelo ' + spec.model + ' não carregou'));
+      document.head.appendChild(sc);
+    });
+    return load().then(() => MODEL_TEX[spec.model] || new Promise((res, rej) => {
+      const img = new Image();
+      img.onload = () => { const c = canvas(img.naturalWidth, img.naturalHeight); c.getContext('2d').drawImage(img, 0, 0); MODEL_TEX[spec.model] = c; res(c); };
+      img.onerror = rej; img.src = window.GAZU_MODELS[spec.model].tex;
+    }));
+  }
+  function modelGeometry(buf, meta, part, withUv) {
+    const R = meta.R, p = meta[part];
+    const qp = new Int16Array(buf, p.pos, p.n * 3), qn = new Int8Array(buf, p.nor, p.n * 3);
+    const pos = new Float32Array(p.n * 3), nor = new Float32Array(p.n * 3);
+    for (let i = 0; i < p.n * 3; i++) { pos[i] = qp[i] / 32767 * R; nor[i] = qn[i] / 127; }
+    const g = new T.BufferGeometry();
+    g.setAttribute('position', new T.BufferAttribute(pos, 3));
+    g.setAttribute('normal', new T.BufferAttribute(nor, 3));
+    if (withUv) {
+      const qu = new Uint16Array(buf, p.uv, p.n * 2), uv = new Float32Array(p.n * 2);
+      for (let i = 0; i < uv.length; i++) uv[i] = qu[i] / 65535;
+      g.setAttribute('uv', new T.BufferAttribute(uv, 2));
+    }
+    g.setIndex(new T.BufferAttribute(new Uint16Array(buf, p.idx, p.i).slice(), 1));
+    return g;
+  }
+  function buildModel(spec, q) {
+    const M = window.GAZU_MODELS[spec.model], meta = M.meta;
+    const bin = atob(M.bin), buf = new ArrayBuffer(bin.length), u8 = new Uint8Array(buf);
+    for (let i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+    const map = new T.CanvasTexture(MODEL_TEX[spec.model]);
+    map.colorSpace = T.SRGBColorSpace; map.anisotropy = q.aniso || 4;
+    const fab = FABRIC[spec.fabric] || FABRIC.jersey;
+    const nm = nmap('jersey').clone(); nm.needsUpdate = true; nm.repeat.set(1.2 / fab.tile * 0.5, 0.8 / fab.tile);
+    const U = makeUniforms(meta.len, spec.seed || 3);
+    const cloth = patchCloth(new T.MeshPhysicalMaterial({
+      map, normalMap: nm, normalScale: new T.Vector2(fab.ns, fab.ns), roughness: fab.roughness, metalness: 0,
+      sheen: fab.sheen, sheenRoughness: fab.sheenRoughness, sheenColor: new T.Color('#5a5a5c'), side: T.DoubleSide,
+    }), U);
+    const ink = patchCloth(new T.MeshStandardMaterial({ color: '#e9e8e4', roughness: 0.62 }), U);
+    const depthMat = patchCloth(new T.MeshDepthMaterial({ depthPacking: T.RGBADepthPacking }), U, true);
+    const group = new T.Group();
+    const shirt = new T.Mesh(modelGeometry(buf, meta, 'shirt', true), cloth);
+    const text = new T.Mesh(modelGeometry(buf, meta, 'text', false), ink);
+    for (const m of [shirt, text]) { m.customDepthMaterial = depthMat; m.castShadow = true; group.add(m); }
+    return { group, uniforms: U, len: meta.len, halfW: meta.halfW, thick: meta.depth, textures: [map], materials: [cloth, ink] };
+  }
+
   function build(spec, q) {
     q = q || {};
+    if (spec.type === 'model') return buildModel(spec, q);
     const step = q.step || 0.012;
     const model = TYPES[spec.type]({ ...spec, seed: spec.seed || Math.random() * 6 });
     let fb = { x0: Infinity, x1: -Infinity, y0: Infinity, y1: -Infinity };
@@ -1053,5 +1111,5 @@ vec3 clothDeform(vec3 p) {
     return { group, uniforms: U, len: model.len, halfW, thick: model.T0, textures: [mapF, mapB], materials: mats };
   }
 
-  window.GAZU_GARMENTS = { CATALOG, build, hexA };
+  window.GAZU_GARMENTS = { CATALOG, build, preload, hexA };
 })();
