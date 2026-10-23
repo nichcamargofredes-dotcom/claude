@@ -63,13 +63,13 @@
   }
 
   /* ----------------------------------------------------- hero */
-  const letters = $$('.hero__l > span'), wraps = $$('.hero__l'), model = $('.hero__model');
+  const letters = $$('.hero__l > span'), wraps = $$('.hero__l'), model = $('.hero__model'), walk = $('.hero__walk');
   const intro = [$$('.hero__tag span'), $$('.hero__season span'), $('.hero__cta'), $$('.hdr > *')];
   if (!reduced) {
     const tl = gsap.timeline({ delay: 0.1 });
     tl.fromTo(letters, { y: 0, yPercent: 105 }, { y: 0, yPercent: 0, duration: 1.35, ease: 'expo.out', stagger: 0.085 }, 0)
-      .fromTo(model, { opacity: 0, x: -70, filter: 'blur(12px)' }, { opacity: 1, x: 0, filter: 'blur(0px)', duration: 1.7, ease: 'power3.out', clearProps: 'filter' }, 0.3)
-      .fromTo(intro.flat(), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.045 }, 0.65);
+      .fromTo(walk, { opacity: 0, x: -70 }, { opacity: 1, x: 0, duration: 1.7, ease: 'power3.out' }, 0.3)
+      .fromTo(intro.flat(), { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.045, clearProps: 'transform' }, 0.65);
     root.classList.add('is-ready');
 
     // ao rolar: letreiro se abre, o modelo segue caminhando
@@ -149,8 +149,8 @@
       const it = peekItem || (rail.active >= 0 ? rail.items[rail.active] : null);
       if (!it) return;
       const y = Math.min(stage.clientHeight - 120, it.sBot + 16);
-      peek.style.left = Math.max(90, Math.min(stage.clientWidth - 90, it.sx)) + 'px';
-      peek.style.top = y + 'px';
+      peek.style.setProperty('--px', Math.max(90, Math.min(stage.clientWidth - 90, it.sx)).toFixed(1) + 'px');
+      peek.style.setProperty('--py', y.toFixed(1) + 'px');
     });
   }
   ScrollTrigger.create({
@@ -168,6 +168,7 @@
     goScroll(trackY(rail.progressFor(i)), { duration: quick ? 0.8 : 1.6, onComplete: then });
   }
   function goToItem(i) {
+    if (pdpOpen) { if (rail) rail.close(); else closePdp(); }
     if (rail && rail.ready) jumpTo(i, false, () => rail.open(i));
     else { goScroll(railSec, { onComplete: () => rail ? null : openPdp({ i, spec: CATALOG[i] }) }); }
   }
@@ -231,8 +232,9 @@
     addBtn.classList.add('is-done'); addBtn.textContent = 'Na sacola';
   });
   document.addEventListener('keydown', e => {
-    if (!pdpOpen) return;
-    if (e.key === 'Escape') { rail ? rail.close() : closePdp(); }
+    if (e.key === 'Escape' && closeOverlay()) { e.preventDefault(); return; }
+    if (e.key === 'Tab') trapFocus(e);
+    if (!pdpOpen || overlayOpen()) return;
     if (rail && (e.key === 'ArrowRight' || e.key === 'ArrowLeft') && !/input|textarea/i.test(e.target.tagName)) {
       const n = rail.items.length, i = (current.i + (e.key === 'ArrowRight' ? 1 : -1) + n) % n;
       rail.open(i);
@@ -247,7 +249,84 @@
     toast(`${spec.name} (${sz}) foi para a sacola.`);
   }
   $('#btn-cart').addEventListener('click', () => toast(cart ? `Sua sacola tem ${cart} ${cart > 1 ? 'peças' : 'peça'}.` : 'Sua sacola está vazia. Escolha uma peça na arara.'));
-  $('#btn-search').addEventListener('click', () => { goScroll(railSec); toast('Percorra a arara rolando a página.'); });
+
+  /* ------------------------------------------------------- busca */
+  const search = $('#search'), sInput = $('#search-input'), sList = $('#search-list');
+  const fold = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  const KIND = { hoodie: 'moletom capuz', crew: 'moletom careca', tee: 'camiseta', shirt: 'camisa overshirt jaqueta', coat: 'casaco trench sobretudo', bomber: 'jaqueta bomber' };
+  const kindOf = spec => spec.type === 'crew' && spec.lite ? 'camiseta manga longa' : KIND[spec.type] || '';
+  function renderSearch() {
+    const q = fold(sInput.value.trim());
+    const hits = CATALOG.map((spec, i) => ({ spec, i })).filter(({ spec }) => !q || fold(`${spec.name} ${spec.colorName} ${kindOf(spec)}`).includes(q));
+    sList.textContent = '';
+    if (!hits.length) {
+      const li = document.createElement('li'); li.className = 'search__empty';
+      li.textContent = `Nenhuma peça com “${sInput.value.trim()}”. Tente moletom, camiseta ou trench.`;
+      sList.appendChild(li); return;
+    }
+    for (const { spec, i } of hits) {
+      const li = document.createElement('li'), b = document.createElement('button');
+      b.type = 'button'; b.dataset.i = i;
+      b.innerHTML = '<i></i><span class="search__name"><b></b><small></small></span><span class="search__price"></span>';
+      $('i', b).style.background = spec.base;
+      $('b', b).textContent = spec.name; $('small', b).textContent = spec.colorName; $('.search__price', b).textContent = brl(spec.price);
+      li.appendChild(b); sList.appendChild(li);
+    }
+  }
+  $('#btn-search').addEventListener('click', () => { closeMenu(); openOverlay(search, sInput); renderSearch(); });
+  $('.search__close').addEventListener('click', () => closeOverlay());
+  sInput.addEventListener('input', renderSearch);
+  sInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); const b = $('button', sList); if (b) b.click(); } });
+  sList.addEventListener('click', e => {
+    const b = e.target.closest('button[data-i]'); if (!b) return;
+    closeOverlay(true); goToItem(+b.dataset.i);   // sem devolver o foco ao botão de busca
+  });
+
+  /* ---------------------------------------------- menu (tablet e celular) */
+  const menu = $('#menu'), menuBtn = $('#btn-menu');
+  function closeMenu() { if (overlay === menu) closeOverlay(); }
+  menuBtn.addEventListener('click', () => { if (overlay === menu) closeOverlay(); else { openOverlay(menu, $('a', menu)); menuBtn.setAttribute('aria-expanded', 'true'); } });
+  // captura: fecha o menu (e religa a rolagem) antes do link rolar até a seção
+  menu.addEventListener('click', e => { if (e.target.closest('a')) closeOverlay(true); }, true);
+
+  /* ------------------------------ painéis sobrepostos (busca e menu) */
+  let overlay = null, overlayFrom = null;
+  const overlayOpen = () => !!overlay;
+  function openOverlay(el, focusEl) {
+    if (overlay) closeOverlay(true);
+    overlay = el; overlayFrom = document.activeElement;
+    el.removeAttribute('inert'); el.classList.add('is-open');
+    // o resto da página fica fora do alcance do teclado e do leitor de tela
+    $$('body > *').forEach(n => { if (n !== el && !n.matches('script, .toast, .hdr')) n.setAttribute('inert', ''); });
+    if (el === menu) $$('.hdr > *').forEach(n => { if (n !== $('.hdr__left')) n.setAttribute('inert', ''); });
+    if (lenis) lenis.stop();
+    setTimeout(() => focusEl && focusEl.focus({ preventScroll: true }), 60);
+  }
+  function closeOverlay(silent) {
+    if (!overlay) {
+      if (pdpOpen) { if (rail) rail.close(); else closePdp(); return true; }
+      return false;
+    }
+    const el = overlay; overlay = null;
+    el.classList.remove('is-open'); el.setAttribute('inert', '');
+    $$('body > [inert], .hdr > [inert]').forEach(n => { if (n !== el && n !== search && n !== menu) n.removeAttribute('inert'); });
+    menuBtn.setAttribute('aria-expanded', 'false');
+    if (lenis && !pdpOpen) lenis.start();
+    if (!silent && overlayFrom && overlayFrom.focus) overlayFrom.focus({ preventScroll: true });
+    return true;
+  }
+  function trapFocus(e) {
+    const box = overlay === menu ? $('.hdr__left') : overlay;
+    if (!box) return;
+    const f = $$('a[href], button:not([disabled]), input', box).filter(x => x.offsetParent !== null);
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+  document.addEventListener('pointerdown', e => {
+    if (overlay && !overlay.contains(e.target) && !e.target.closest('#btn-search, #btn-menu')) closeOverlay(true);
+  });
   $$('.card__fav').forEach(b => b.addEventListener('click', () => {
     const on = b.getAttribute('aria-pressed') !== 'true';
     b.setAttribute('aria-pressed', String(on));
@@ -282,15 +361,31 @@
 
   /* ---------------------------------------------- animações de rolagem */
   if (!reduced) {
-    $$('[data-reveal]').forEach(el => gsap.from(el, { y: 46, opacity: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true } }));
+    gsap.set('[data-reveal]', { y: 46, opacity: 0 });
+    ScrollTrigger.batch('[data-reveal]', {
+      start: 'top 90%', once: true, interval: 0.12,
+      onEnter: els => gsap.to(els, { y: 0, opacity: 1, duration: 1.1, ease: 'power3.out', stagger: 0.09, overwrite: true }),
+    });
     const text = $('[data-words]');
     if (text) {
       text.innerHTML = text.textContent.trim().split(/\s+/).map(w => `<span class="w">${w}</span>`).join(' ');
       gsap.fromTo($$('.w', text), { opacity: 0.13 }, { opacity: 1, ease: 'none', stagger: 0.1, scrollTrigger: { trigger: text, start: 'top 78%', end: 'bottom 42%', scrub: true } });
     }
     gsap.from('.foot__word', { yPercent: 45, ease: 'none', scrollTrigger: { trigger: '.foot__word', start: 'top bottom', end: 'bottom bottom', scrub: true } });
-    gsap.from('.best__grid .card__media', { clipPath: 'inset(12% 8% 12% 8%)', ease: 'power2.out', duration: 1.4, stagger: 0.08, scrollTrigger: { trigger: '.best__grid', start: 'top 85%', once: true } });
   }
+
+  /* ------------------------------------------- dados estruturados */
+  const ld = document.createElement('script');
+  ld.type = 'application/ld+json';
+  ld.textContent = JSON.stringify({
+    '@context': 'https://schema.org', '@type': 'ItemList', name: 'Nova coleção 2026', numberOfItems: CATALOG.length,
+    itemListElement: CATALOG.map((s, k) => ({
+      '@type': 'ListItem', position: k + 1,
+      item: { '@type': 'Product', name: s.name, color: s.colorName, description: s.desc, sku: 'GAZU-' + s.id.toUpperCase(), brand: { '@type': 'Brand', name: 'GAZU' },
+        offers: { '@type': 'Offer', price: s.price.toFixed(2), priceCurrency: 'BRL', availability: 'https://schema.org/InStock' } },
+    })),
+  });
+  document.head.appendChild(ld);
 
   /* --------------------------------------------------- newsletter */
   $('#news').addEventListener('submit', e => {
@@ -302,4 +397,5 @@
   });
 
   window.addEventListener('load', () => ScrollTrigger.refresh());
+  if (document.fonts) document.fonts.ready.then(() => ScrollTrigger.refresh());
 })();

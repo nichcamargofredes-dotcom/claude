@@ -15,6 +15,10 @@ Site estático (HTML, CSS e JS puros), sem etapa de build. Abra `index.html` no 
 - **Foto do hero**: `img/hero-model.webp` (recorte com fundo transparente, ~840×1700) e `img/hero-model-sm.webp` para celular.
 - **Newsletter e sacola**: hoje funcionam só na interface (contador, aviso e validação). Conecte o `submit` do formulário `#news` e a função `addToCart` em `js/main.js` ao seu backend ou plataforma de e-commerce.
 
+## Antes de publicar no domínio
+- Troque `img/og-image.jpg` e `img/twitter-image.jpg` nas metatags `og:image` e `twitter:image` pelo endereço completo (por exemplo `https://gazu.com.br/img/og-image.jpg`) e acrescente `<meta property="og:url">` com a URL da loja. Facebook, WhatsApp e X só leem a imagem de prévia com endereço absoluto.
+- Os dados estruturados dos produtos (schema.org `ItemList` com preço em BRL) são gerados em `js/main.js` a partir do `CATALOG`, então preço e descrição ficam num lugar só.
+
 ## Tecnologia
 - `vendor/three.min.js`: three.js r170 (só as classes usadas). As roupas são modeladas a partir de silhuetas 2D, com malha de frente e costas costuradas na borda, texturas pintadas em canvas e um shader de tecido.
 - `vendor/gsap.min.js` + `ScrollTrigger.min.js`: animações de entrada e de rolagem.

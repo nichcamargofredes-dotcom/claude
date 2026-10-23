@@ -6,7 +6,38 @@
 <title>GAZU</title>
 <meta name="description" content="GAZU: streetwear premium em algodão encorpado. Nova coleção 2026 com moletons, camisetas, overshirts e o trench Atlas.">
 <meta name="theme-color" content="#E0DFDB">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230F0F0E'/%3E%3Ctext x='32' y='45' font-family='Arial' font-weight='700' font-size='38' text-anchor='middle' fill='%23F1F0EC'%3EG%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="img/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="img/icons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="96x96" href="img/icons/favicon-96x96.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/icons/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GAZU">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="GAZU · Nova coleção 2026">
+<meta property="og:description" content="Moletons, camisetas, overshirts e o trench Atlas. Frete grátis acima de R$ 299 e 6x sem juros.">
+<meta property="og:image" content="img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Modelo de sobretudo caminhando em frente ao letreiro GAZU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GAZU · Nova coleção 2026">
+<meta name="twitter:description" content="Moletons, camisetas, overshirts e o trench Atlas. Frete grátis acima de R$ 299 e 6x sem juros.">
+<meta name="twitter:image" content="img/twitter-image.jpg">
+<meta name="twitter:image:alt" content="Modelo de sobretudo caminhando em frente ao letreiro GAZU">
+<!-- Os produtos (ItemList) entram via js/main.js, a partir do mesmo catálogo da arara. -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "ClothingStore",
+ "name": "GAZU",
+ "description": "Streetwear premium em algodão encorpado: moletons, camisetas, overshirts e casacos.",
+ "slogan": "Moda que se move com você.",
+ "currenciesAccepted": "BRL",
+ "paymentAccepted": "Pix, cartão de crédito, boleto"
+}
+</script>
 <link rel="preload" href="fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" type="image/webp" href="img/hero-model.webp" imagesrcset="img/hero-model-sm.webp 474w, img/hero-model.webp 839w" imagesizes="(max-width: 760px) 72vw, 32vw">
 <link rel="stylesheet" href="css/styles.css">
@@ -28,12 +59,25 @@
 </div>
 
 <header class="hdr" id="topo">
-  <nav class="hdr__nav" aria-label="Categorias">
-    <a href="#arara">Masculino</a>
-    <a href="#arara">Feminino</a>
-    <a href="#arara">Infantil</a>
-    <a href="#mais-vendidos">Beleza</a>
-  </nav>
+  <div class="hdr__left">
+    <button class="hdr__tool hdr__menu" type="button" id="btn-menu" aria-expanded="false" aria-controls="menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+      <span>Menu</span>
+    </button>
+    <nav class="hdr__nav" aria-label="Categorias">
+      <a href="#arara">Masculino</a>
+      <a href="#arara">Feminino</a>
+      <a href="#arara">Infantil</a>
+      <a href="#mais-vendidos">Beleza</a>
+    </nav>
+    <nav class="menu" id="menu" aria-label="Categorias" inert>
+      <a href="#arara">Masculino</a>
+      <a href="#arara">Feminino</a>
+      <a href="#arara">Infantil</a>
+      <a href="#mais-vendidos">Beleza</a>
+      <a href="#mais-vendidos">Mais vendidos</a>
+    </nav>
+  </div>
   <a class="hdr__logo" href="#topo" aria-label="GAZU, início">GAZU</a>
   <div class="hdr__tools">
     <button class="hdr__tool" type="button" id="btn-search">
@@ -66,9 +110,9 @@
         <span class="hero__l" aria-hidden="true"><span>G</span></span><span class="hero__l" aria-hidden="true"><span>A</span></span><span class="hero__l" aria-hidden="true"><span>Z</span></span><span class="hero__l" aria-hidden="true"><span>U</span></span>
       </h1>
 
-      <figure class="hero__model">
+      <figure class="hero__model"><span class="hero__walk">
         <img src="img/hero-model.webp" srcset="img/hero-model-sm.webp 474w, img/hero-model.webp 839w" sizes="(max-width: 760px) 72vw, 32vw" width="839" height="1700" alt="Modelo caminhando com sobretudo cinza, calça larga preta, tênis claro e boné">
-      </figure>
+      </span></figure>
 
       <div class="hero__cta">
         <a class="btn" href="#arara" data-scroll>Comprar agora</a>
@@ -187,7 +231,7 @@
   <section class="manifesto" aria-labelledby="manifesto-title">
     <div class="wrap">
       <h2 class="eyebrow" id="manifesto-title">Feito para durar</h2>
-      <p class="manifesto__text" data-words>Peças pensadas para durar mais que uma estação. Tecido encorpado, modelagem ampla e acabamento que você sente na mão. Roupa que acompanha o seu ritmo.</p>
+      <p class="manifesto__text" data-words>Peças pensadas para durar mais que uma estação. O moletom tem 420 g/m² de algodão orgânico, a modelagem é ampla e o acabamento você sente na mão.</p>
       <dl class="stats">
         <div data-reveal><dt>420 g/m²</dt><dd>Moletom felpado de algodão orgânico</dd></div>
         <div data-reveal><dt>15 dias</dt><dd>Para trocar sem custo, direto pelo app</dd></div>
@@ -210,6 +254,7 @@
           <input id="news-email" name="email" type="email" placeholder="seu@email.com" autocomplete="email" required>
           <button class="btn btn--light" type="submit">Assinar</button>
         </div>
+        <p class="news__note">Um e-mail por lançamento. Você cancela quando quiser.</p>
         <p class="news__msg" id="news-msg" role="status"></p>
       </form>
       <nav class="foot__cols" aria-label="Rodapé">
@@ -226,6 +271,16 @@
     </div>
   </div>
 </footer>
+
+<div class="search" id="search" role="dialog" aria-modal="true" aria-label="Buscar peças" inert>
+  <div class="search__row">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+    <label class="sr-only" for="search-input">Buscar peças</label>
+    <input id="search-input" type="search" placeholder="Moletom, camiseta, trench…" autocomplete="off" spellcheck="false">
+    <button class="search__close" type="button">Fechar</button>
+  </div>
+  <ul class="search__list" id="search-list" aria-label="Resultados"></ul>
+</div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
