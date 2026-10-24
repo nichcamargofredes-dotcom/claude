@@ -877,6 +877,227 @@ vec3 clothDeform(vec3 p) {
     };
   };
 
+  /* ------------------------------------------------- moldes femininos */
+
+  // alça fina entre dois pontos (polígono estreito)
+  function strap(a, b, w) {
+    const dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy), nx = -dy / l * w / 2, ny = dx / l * w / 2;
+    return [[a[0] + nx, a[1] + ny, 0], [b[0] + nx, b[1] + ny, 0], [b[0] - nx, b[1] - ny, 0], [a[0] - nx, a[1] - ny, 0]];
+  }
+  const onTop = (T0, k) => (y, m) => T0 * (k || 1.38) * m + 0.0015;
+  function bodyPaint(P, poly, c) {
+    texture(P, c.base, c);
+    edgeShade(P, fillet(poly), 0.035, 0.2);
+  }
+  function stripes(P, poly, c) { // listras horizontais finas (tricoline)
+    const g = P.g; g.save(); P.trace(poly).clip();
+    g.fillStyle = c.stripe;
+    for (let y = 0.02; y > -0.7; y -= c.pitch) g.fillRect(0, P.Y(y), P.W, Math.max(1, P.S(c.line)));
+    g.restore();
+  }
+  function softShade(P, poly, x0, y0, x1, y1, dark, light) { // brilho/sombra diagonal (cetim)
+    const g = P.g; g.save(); P.trace(poly).clip();
+    const gr = g.createLinearGradient(P.X(x0), P.Y(y0), P.X(x1), P.Y(y1));
+    gr.addColorStop(0, 'rgba(255,255,255,0)'); gr.addColorStop(0.45, dark ? 'rgba(0,0,0,.22)' : `rgba(255,255,255,${light || 0.14})`); gr.addColorStop(1, 'rgba(255,255,255,0)');
+    g.fillStyle = gr; g.fillRect(0, 0, P.W, P.H); g.restore();
+  }
+  function diagFolds(len, amp, seed, ang) {
+    const ca = Math.cos(ang), sa = Math.sin(ang), nz = vnoise(seed);
+    return (x, y) => {
+      const h = Math.min(Math.max(-y / len, 0), 1);
+      const t = x * ca + y * sa;
+      return amp * (0.3 + h) * (0.6 * Math.sin(t * 52 + seed) + 0.4 * Math.sin(t * 91 + seed * 2)) + 0.002 * nz(x * 26, y * 20);
+    };
+  }
+
+  // Polo cropped acinturada, gola esportiva e decote em V
+  TYPES.polo = function (s) {
+    const len = 0.48, hw = 0.2, T0 = s.thick || 0.016;
+    const body = mirror([[0, 0.012, 0], [0.068, 0.014, 0.012], [0.168, -0.038, 0.02], [0.262, -0.132, 0.008], [0.212, -0.204, 0.008], [0.192, -0.176, 0.018], [0.172, -0.32, 0.09], [0.192, -0.462, 0.02], [0.12, -0.474, 0.03], [0, -0.478, 0]]);
+    const collarR = [[0.008, 0.004, 0.004], [0.07, 0.02, 0.01], [0.118, -0.018, 0.008], [0.046, -0.118, 0.004], [0.004, -0.05, 0.006]];
+    return {
+      len, T0, hw,
+      parts: [
+        { poly: waveHem(fillet(body), len, 0.004, s.seed), z0: 0, thick: T0, round: 0.024, bulge: (x, y) => T0 * 0.6 * Math.exp(-((Math.abs(x) - 0.09) ** 2) / 0.004 - ((y + 0.17) ** 2) / 0.006), folds: folds(len, 0.008, s.seed, 0.1) },
+        { poly: fillet(collarR), z0: onTop(T0, 1.5), thick: T0 * 0.25, round: 0.008, back: 0.4 },
+        { poly: fillet(flipX(collarR)), z0: onTop(T0, 1.5), thick: T0 * 0.25, round: 0.008, back: 0.4 },
+      ],
+      tubes: [],
+      paint(P, side, c) {
+        bodyPaint(P, body, c);
+        const g = P.g;
+        if (side === 'front') {
+          g.save(); g.fillStyle = hexA(c.base, c.dark ? -0.12 : -0.08); P.trace([[-0.03, 0.006], [0.03, 0.006], [0, -0.16]]).fill(); g.restore();
+          seam(P, [[-0.004, -0.05], [0, -0.165], [0.004, -0.05]], false, { w: 0.002 });
+          star(P, 0.1, -0.165, 0.011, c.logo); // bordado no peito
+          for (const m of [1, -1]) {
+            const cp = fillet(m > 0 ? collarR : flipX(collarR));
+            shade(P, cp, 'rgba(0,0,0,.8)', 0.012, 0.45);
+            g.save(); P.trace(cp).clip(); texture(P, hexA(c.base, 0.02), c); g.restore();
+            seam(P, cp, true, { w: 0.0018 });
+            for (let k = 0; k < 7; k++) seam(P, [[m * (0.17 + k * 0.01), -0.27 - k * 0.03], [m * (0.13 + k * 0.008), -0.29 - k * 0.032]], false, { stitch: false, dark: 'rgba(0,0,0,.18)', w: 0.003 });   // franzido lateral
+          }
+        } else {
+          g.save(); g.fillStyle = hexA(c.base, 0.02); P.trace([[-0.07, 0.014], [0.07, 0.014], [0.075, -0.012], [-0.075, -0.012]]).fill(); g.restore();
+          seam(P, [[-0.075, -0.012], [0.075, -0.012]], false);
+        }
+        for (const m of [1, -1]) seam(P, [[m * 0.25, -0.145], [m * 0.205, -0.19]], false);
+        seam(P, [[-0.188, -0.448], [-0.12, -0.458], [0, -0.462], [0.12, -0.458], [0.188, -0.448]], false);
+      },
+    };
+  };
+
+  // Regata listrada com laço e peplum
+  TYPES.bowcami = function (s) {
+    const len = 0.5, T0 = s.thick || 0.016, hw = 0.165;
+    const body = mirror([[0, -0.1, 0], [0.035, -0.074, 0.03], [0.085, -0.058, 0.03], [0.158, -0.098, 0.02], [0.165, -0.135, 0.02], [0.152, -0.262, 0.04], [0.162, -0.285, 0], [0.25, -0.44, 0.04], [0.272, -0.488, 0.02], [0.15, -0.5, 0.04], [0, -0.494, 0]]);
+    const bow = mirror([[0, -0.118, 0], [0.02, -0.112, 0.004], [0.1, -0.07, 0.03], [0.138, -0.118, 0.03], [0.1, -0.17, 0.03], [0.022, -0.152, 0.004], [0.052, -0.4, 0.01], [0.014, -0.42, 0.006], [0, -0.2, 0]]);
+    const sR = strap([0.078, -0.064], [0.132, -0.022], 0.009);
+    return {
+      len, T0, hw,
+      parts: [
+        { poly: waveHem(fillet(body), len, 0.012, s.seed), z0: 0, thick: T0, round: 0.022, bulge: (x, y) => T0 * 0.8 * Math.exp(-((Math.abs(x) - 0.075) ** 2) / 0.003 - ((y + 0.11) ** 2) / 0.004), folds: (x, y) => folds(len, 0.006, s.seed, 0.09)(x, y) + (y < -0.29 ? 0.012 * Math.sin(x * 70 + s.seed) * Math.min(1, (-0.29 - y) / 0.1) : 0) },
+        { poly: fillet(bow), z0: onTop(T0, 1.9), thick: T0 * 0.75, round: 0.02, back: 0.5, folds: folds(len, 0.004, s.seed + 3, 0.05) },
+        { poly: sR, z0: 0, thick: 0.0025, round: 0.003 },
+        { poly: flipX(sR), z0: 0, thick: 0.0025, round: 0.003 },
+      ],
+      tubes: [],
+      paint(P, side, c) {
+        bodyPaint(P, body, c); stripes(P, fillet(body), c);
+        const g = P.g;
+        seam(P, [[-0.155, -0.278], [0, -0.272], [0.155, -0.278]], false, { dark: 'rgba(40,60,100,.3)' });
+        for (let k = -6; k <= 6; k++) seam(P, [[k * 0.035, -0.29], [k * 0.05, -0.47]], false, { stitch: false, dark: 'rgba(30,50,90,.12)', w: 0.006 });   // pregas do peplum
+        g.save(); g.fillStyle = c.base; for (const p of [sR, flipX(sR)]) P.trace(p).fill(); g.restore();
+        if (side === 'front') {
+          shade(P, fillet(bow), 'rgba(20,30,60,.7)', 0.014, 0.4);
+          g.save(); P.trace(fillet(bow)).clip(); texture(P, c.base, c); stripes(P, fillet(bow), c); g.restore();
+          seam(P, fillet(bow), true, { w: 0.0016, dark: 'rgba(30,50,90,.25)' });
+          for (let k = -2; k <= 2; k++) seam(P, [[0, -0.135], [k * 0.05 + 0.002, -0.08 - Math.abs(k) * 0.02]], false, { stitch: false, dark: 'rgba(20,40,80,.16)', w: 0.004 });
+          g.save(); g.beginPath(); g.ellipse(P.X(0), P.Y(-0.135), P.S(0.02), P.S(0.026), 0, 0, 7); g.clip();
+          g.fillStyle = hexA(c.base, -0.07); g.fillRect(0, 0, P.W, P.H);
+          g.fillStyle = c.stripe; for (let x = -0.03; x < 0.03; x += c.pitch) g.fillRect(P.X(x), 0, Math.max(1, P.S(c.line)), P.H);
+          g.restore(); shade(P, [[-0.02, -0.11], [0.02, -0.11], [0.02, -0.16], [-0.02, -0.16]], 'rgba(20,30,60,.5)', 0.006, 0.3);
+        }
+      },
+    };
+  };
+
+  // Corpete com bojo e alças finas
+  TYPES.bustier = function (s) {
+    const len = 0.47, hw = 0.155, T0 = s.thick || 0.018;
+    const body = mirror([[0, -0.118, 0], [0.02, -0.086, 0.01], [0.075, -0.048, 0.035], [0.135, -0.074, 0.03], [0.155, -0.13, 0.02], [0.148, -0.3, 0.06], [0.158, -0.462, 0.012], [0, -0.47, 0]]);
+    const sR = strap([0.088, -0.05], [0.136, -0.022], 0.007);
+    const cup = (x, y) => Math.exp(-((Math.abs(x) - 0.075) ** 2) / 0.0022 - ((y + 0.1) ** 2) / 0.0028);
+    return {
+      len, T0, hw,
+      parts: [
+        { poly: fillet(body), z0: 0, thick: T0, round: 0.02, bulge: (x, y) => 0.018 * cup(x, y), folds: folds(len, 0.003, s.seed, 0.12) },
+        { poly: sR, z0: 0, thick: 0.002, round: 0.0025 },
+        { poly: flipX(sR), z0: 0, thick: 0.002, round: 0.0025 },
+      ],
+      tubes: [],
+      paint(P, side, c) {
+        bodyPaint(P, body, c);
+        const g = P.g;
+        g.save(); g.fillStyle = c.base; for (const p of [sR, flipX(sR)]) P.trace(p).fill(); g.restore();
+        if (side === 'front') {
+          for (const m of [1, -1]) {
+            const arc = []; for (let a = 0; a <= 1.001; a += 0.1) arc.push([m * (0.012 + 0.135 * a), -0.118 - 0.06 * Math.sin(a * Math.PI) + 0.044 * a]);
+            seam(P, arc, false, { dark: 'rgba(255,255,255,.08)', thread: 'rgba(255,255,255,.07)' });
+            g.save(); P.trace([[m * 0.02, -0.088], [m * 0.075, -0.05], [m * 0.135, -0.076], [m * 0.14, -0.13], [m * 0.08, -0.17], [m * 0.01, -0.12]]).clip();
+            const gr = g.createRadialGradient(P.X(m * 0.07), P.Y(-0.09), 0, P.X(m * 0.07), P.Y(-0.09), P.S(0.07));
+            gr.addColorStop(0, 'rgba(255,255,255,.1)'); gr.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = gr; g.fillRect(0, 0, P.W, P.H); g.restore();
+            seam(P, [[m * 0.075, -0.17], [m * 0.07, -0.46]], false, { dark: 'rgba(255,255,255,.06)', thread: 'rgba(255,255,255,.05)' });
+          }
+        } else {
+          zipper(P, 0, -0.085, -0.44, '#2a2a2a');
+        }
+        seam(P, [[-0.158, -0.45], [0.158, -0.45]], false, { dark: 'rgba(255,255,255,.07)', thread: 'rgba(255,255,255,.06)' });
+      },
+    };
+  };
+
+  // Blusa drapeada de um ombro só, em cetim, com alça de corrente
+  TYPES.drape = function (s) {
+    const len = 0.52, hw = 0.2, T0 = s.thick || 0.017;
+    const body = [[-0.16, -0.02, 0.02], [-0.095, -0.012, 0.02], [-0.045, -0.05, 0.03], [0.05, -0.125, 0.03], [0.135, -0.18, 0.02], [0.168, -0.225, 0.02], [0.162, -0.36, 0.05], [0.178, -0.494, 0.02], [0.02, -0.512, 0.04], [-0.165, -0.498, 0.03], [-0.192, -0.36, 0.05], [-0.178, -0.2, 0.03], [-0.198, -0.12, 0.03], [-0.19, -0.05, 0.02]];
+    // cascata: segue o decote e cai em ondas
+    const ruffle = [[-0.158, -0.03, 0.02], [-0.095, -0.022, 0.02], [-0.045, -0.06, 0.02], [0.05, -0.135, 0.02], [0.135, -0.19, 0.02], [0.162, -0.232, 0.01]];
+    for (let k = 0; k <= 14; k++) {
+      const t = 1 - k / 14, x = -0.182 + t * 0.334, yTop = -0.03 - (x + 0.16) / 0.33 * 0.2;
+      ruffle.push([x, yTop - 0.075 - 0.025 * Math.sin(t * Math.PI) - (k % 2 ? 0.012 : 0), 0.006]);
+    }
+    const along = (x, y) => { const t = (x + 0.16) / 0.33; return y - (-0.03 - t * 0.2); };   // distância vertical até o decote diagonal
+    return {
+      len, T0, hw,
+      parts: [
+        { poly: fillet(body), z0: 0, thick: T0, round: 0.028, folds: diagFolds(len, 0.007, s.seed, -0.7), bulge: (x, y) => T0 * 0.45 * Math.exp(-((x + 0.02) ** 2) / 0.012 - ((y + 0.22) ** 2) / 0.01) },
+        { poly: fillet(ruffle), z0: onTop(T0, 1.45), thick: T0 * 0.55, round: 0.022, back: 0.5,
+          folds: (x, y) => 0.006 * Math.sin((x * 0.55 - y) * 120 + s.seed) * (0.6 + 0.4 * Math.cos(x * 30)) },
+      ],
+      tubes: [{ pts: [[0.142, -0.19, 0.002], [0.146, -0.11, 0.008], [0.14, -0.03, 0.004]], r: 0.0022, chain: true }],
+      paint(P, side, c) {
+        bodyPaint(P, body, c);
+        for (let k = 0; k < 3; k++) softShade(P, fillet(body), -0.3 + k * 0.14, -0.08 - k * 0.06, 0.12 + k * 0.1, -0.42 - k * 0.03, k === 1, 0.07);
+        if (side === 'front') {
+          const rf = fillet(ruffle), g = P.g;
+          shade(P, rf, 'rgba(30,0,8,.85)', 0.022, 0.55);
+          g.save(); P.trace(rf).clip(); texture(P, hexA(c.base, 0.025), c);
+          // pregas da cascata, perpendiculares ao decote
+          g.lineCap = 'round';
+          for (let k = 0; k < 15; k++) {
+            const x0 = -0.165 + k * 0.023, y0 = -0.03 - (x0 + 0.16) / 0.33 * 0.2;
+            g.strokeStyle = k % 2 ? 'rgba(25,0,6,.2)' : 'rgba(255,200,210,.06)';
+            g.lineWidth = P.S(k % 2 ? 0.006 : 0.009);
+            g.beginPath(); g.moveTo(P.X(x0), P.Y(y0 - 0.004)); g.quadraticCurveTo(P.X(x0 + 0.02), P.Y(y0 - 0.05), P.X(x0 + 0.034), P.Y(y0 - 0.1)); g.stroke();
+          }
+          g.restore();
+        }
+        seam(P, [[-0.165, -0.488], [0.02, -0.5], [0.178, -0.484]], false, { dark: 'rgba(20,0,6,.25)' });
+        void along;
+      },
+    };
+  };
+
+  // Tomara-que-caia com peplum e botões encapados
+  TYPES.strapless = function (s) {
+    const len = 0.44, hw = 0.17, T0 = s.thick || 0.018;
+    const body = mirror([[0, -0.04, 0], [0.165, -0.044, 0.012], [0.163, -0.24, 0.03], [0.172, -0.258, 0], [0.236, -0.42, 0.03], [0.13, -0.44, 0.02], [0, -0.44, 0]]);
+    const loop = strap([0.11, -0.046], [0.128, -0.02], 0.008);   // alcinhas internas para pendurar
+    return {
+      len, T0, hw,
+      parts: [
+        { poly: fillet(body), z0: 0, thick: T0, round: 0.024, bulge: (x, y) => T0 * 0.6 * Math.exp(-((Math.abs(x) - 0.08) ** 2) / 0.004 - ((y + 0.1) ** 2) / 0.006), folds: (x, y) => folds(len, 0.003, s.seed, 0.12)(x, y) + (y < -0.26 ? 0.01 * Math.sin(x * 55 + s.seed) * Math.min(1, (-0.26 - y) / 0.1) : 0) },
+        { poly: loop, z0: -T0 * 0.4, thick: 0.002, round: 0.0025 },
+        { poly: flipX(loop), z0: -T0 * 0.4, thick: 0.002, round: 0.0025 },
+      ],
+      tubes: [],
+      paint(P, side, c) {
+        bodyPaint(P, body, c);
+        const g = P.g;
+        g.save(); g.fillStyle = hexA(c.base, -0.05); for (const p of [loop, flipX(loop)]) P.trace(p).fill(); g.restore();
+        seam(P, [[-0.163, -0.252], [0.163, -0.252]], false);
+        seam(P, [[-0.165, -0.05], [0.165, -0.05]], false);
+        if (side === 'front') {
+          for (const m of [1, -1]) seam(P, [[m * 0.085, -0.05], [m * 0.075, -0.14]], false, { stitch: false, dark: 'rgba(0,0,0,.2)', w: 0.003 });
+          seam(P, [[0.052, -0.044], [0.052, -0.252]], false, { dark: 'rgba(0,0,0,.35)', w: 0.004 });
+          const over = [[0.052, -0.252], [0.236, -0.42], [0.13, -0.44], [-0.04, -0.44], [0.0, -0.33]];
+          shade(P, over, 'rgba(0,0,0,.7)', 0.012, 0.35);
+          g.save(); P.trace(over).clip(); texture(P, hexA(c.base, 0.015), c); g.restore();
+          seam(P, [[0.052, -0.252], [0.0, -0.33], [-0.04, -0.44]], false, { dark: 'rgba(0,0,0,.35)', w: 0.004 });
+          for (const y of [-0.075, -0.13, -0.185, -0.235]) {
+            const [cx, cy] = P.at(0.07, y), R = P.S(0.0085);
+            g.save(); g.shadowColor = 'rgba(0,0,0,.4)'; g.shadowBlur = R * 0.7; g.shadowOffsetY = R * 0.3;
+            g.fillStyle = hexA(c.base, 0.04); g.beginPath(); g.arc(cx, cy, R, 0, 7); g.fill();
+            g.shadowColor = 'transparent'; g.fillStyle = 'rgba(255,255,255,.14)'; g.beginPath(); g.arc(cx - R * 0.25, cy - R * 0.3, R * 0.5, 0, 7); g.fill(); g.restore();
+          }
+        } else {
+          zipper(P, 0, -0.05, -0.25, hexA(c.base, -0.1));
+        }
+      },
+    };
+  };
+
   /* ------------------------------------------------------------ estampas */
 
   const FONT = '"Archivo Variable", "Arial Black", Arial, sans-serif';
@@ -989,12 +1210,37 @@ vec3 clothDeform(vec3 p) {
       specs: ['Malha 240 g/m²', '100% algodão penteado', 'Modelagem regular'] },
   ];
 
+  const CATALOG_F = [
+    { id: 'polo-marinho', name: 'Polo Cropped', type: 'polo', price: 159, colorName: 'Azul-marinho', base: '#1c2641', fabric: 'knit', logo: '#e9e6df', dark: true, hanger: 0.78,
+      desc: 'Polo cropped acinturada em malha canelada fina, gola esportiva com decote em V e franzido nas laterais. Bordado de estrela no peito.',
+      specs: ['Malha canelada 200 g/m²', '95% algodão, 5% elastano', 'Modelagem ajustada'] },
+    { id: 'polo-branca', name: 'Polo Cropped', type: 'polo', price: 159, colorName: 'Branco', base: '#f1efe9', fabric: 'knit', logo: '#14161d', hanger: 0.78,
+      desc: 'A mesma polo cropped acinturada, em branco, com o bordado de estrela em contraste.',
+      specs: ['Malha canelada 200 g/m²', '95% algodão, 5% elastano', 'Modelagem ajustada'] },
+    { id: 'laco', name: 'Regata Laço', type: 'bowcami', price: 199, colorName: 'Listras azul e branco', base: '#f5f6f9', stripe: '#8ea4c8', pitch: 0.011, line: 0.0032, fabric: 'poplin', hanger: 0.82,
+      desc: 'Regata de tricoline listrada com laço amarrado no busto, alças finas reguláveis e barra peplum franzida.',
+      specs: ['Tricoline 100% algodão', 'Alças reguláveis', 'Barra peplum'] },
+    { id: 'corpete', name: 'Corpete Noir', type: 'bustier', price: 179, colorName: 'Preto', base: '#151516', fabric: 'crepe', hanger: 0.82,
+      desc: 'Corpete com bojo estruturado, decote coração e alças finas. Zíper invisível nas costas.',
+      specs: ['Crepe acetinado com elastano', 'Bojo removível', 'Zíper invisível'] },
+    { id: 'drapeada', name: 'Blusa Drapeada', type: 'drape', price: 249, colorName: 'Vinho', base: '#5a1421', fabric: 'satin', metal: '#d8b56a', hanger: 0.82,
+      desc: 'Blusa de um ombro só em cetim fluido, com drapeado em cascata e alça de corrente dourada no outro ombro.',
+      specs: ['Cetim de viscose', 'Alça de corrente dourada', 'Caimento fluido'] },
+    { id: 'royal', name: 'Top Tomara que Caia', type: 'strapless', price: 229, colorName: 'Azul royal', base: '#1f45b5', fabric: 'crepe', hanger: 0.82,
+      desc: 'Top tomara que caia em crepe estruturado, com botões encapados, barra peplum transpassada e zíper nas costas.',
+      specs: ['Crepe com elastano', 'Botões encapados', 'Barbatanas internas'] },
+  ];
+
   const FABRIC = {
     fleece: { roughness: 0.94, sheen: 1, sheenRoughness: 0.75, ns: 0.3, tile: 0.045 },
     jersey: { roughness: 0.9, sheen: 0.7, sheenRoughness: 0.55, ns: 0.4, tile: 0.035 },
     twill: { roughness: 0.82, sheen: 0.35, sheenRoughness: 0.45, ns: 0.35, tile: 0.03 },
     waffle: { roughness: 0.92, sheen: 0.6, sheenRoughness: 0.6, ns: 0.9, tile: 0.06 },
     nylon: { roughness: 0.42, sheen: 0.25, sheenRoughness: 0.3, ns: 0.25, tile: 0.08 },
+    satin: { roughness: 0.4, sheen: 0.35, sheenRoughness: 0.3, ns: 0.15, tile: 0.08, map: 'nylon', sheenMix: 0.25 },
+    crepe: { roughness: 0.86, sheen: 0.45, sheenRoughness: 0.55, ns: 0.3, tile: 0.03, map: 'twill' },
+    poplin: { roughness: 0.82, sheen: 0.3, sheenRoughness: 0.5, ns: 0.25, tile: 0.03, map: 'twill' },
+    knit: { roughness: 0.9, sheen: 0.6, sheenRoughness: 0.55, ns: 0.4, tile: 0.03, map: 'jersey' },
   };
 
   /* --------------------------------------------------------- montagem 3D */
@@ -1053,6 +1299,42 @@ vec3 clothDeform(vec3 p) {
     return { group, uniforms: U, len: meta.len, halfW: meta.halfW, thick: meta.depth, textures: [map], materials: [cloth, ink] };
   }
 
+  // corrente de elos alternados, já nas coordenadas da peça (o shader de tecido move tudo junto)
+  function chainGeo(path, r) {
+    const L = path.getLength(), n = Math.max(6, Math.round(L / (r * 3.4)));
+    const A = r * 1.8, B = r * 1.25, rt = r * 0.38, SU = 12, SV = 6;
+    const pos = [], nor = [], idx = [], m = new T.Matrix4();
+    const tg = new T.Vector3(), up = new T.Vector3(), bi = new T.Vector3(), v = new T.Vector3(), w = new T.Vector3();
+    for (let k = 0; k < n; k++) {
+      const t = (k + 0.5) / n, p = path.getPointAt(t);
+      path.getTangentAt(t, tg).normalize();
+      up.set(0, 0, 1); bi.crossVectors(tg, up).normalize(); up.crossVectors(bi, tg).normalize();
+      if (k % 2) m.makeBasis(tg, up, bi); else m.makeBasis(tg, bi, up);
+      m.setPosition(p);
+      const base = pos.length / 3;
+      for (let i = 0; i <= SU; i++) {
+        const u = i / SU * Math.PI * 2, cu = Math.cos(u), su = Math.sin(u);
+        const nx = B * cu, ny = A * su, nl = Math.hypot(nx, ny);
+        for (let j = 0; j <= SV; j++) {
+          const a = j / SV * Math.PI * 2, ca = Math.cos(a), sa = Math.sin(a);
+          w.set(nx / nl * ca, ny / nl * ca, sa);
+          v.set(A * cu + rt * w.x, B * su + rt * w.y, rt * w.z).applyMatrix4(m);
+          pos.push(v.x, v.y, v.z);
+          w.transformDirection(m); nor.push(w.x, w.y, w.z);
+        }
+      }
+      for (let i = 0; i < SU; i++) for (let j = 0; j < SV; j++) {
+        const a = base + i * (SV + 1) + j, b2 = a + SV + 1;
+        idx.push(a, b2, a + 1, b2, b2 + 1, a + 1);
+      }
+    }
+    const g = new T.BufferGeometry();
+    g.setAttribute('position', new T.BufferAttribute(new Float32Array(pos), 3));
+    g.setAttribute('normal', new T.BufferAttribute(new Float32Array(nor), 3));
+    g.setIndex(idx);
+    return g;
+  }
+
   function build(spec, q) {
     q = q || {};
     if (spec.type === 'model') return buildModel(spec, q);
@@ -1071,12 +1353,12 @@ vec3 clothDeform(vec3 p) {
     for (const m of [mapF, mapB]) { m.colorSpace = T.SRGBColorSpace; m.anisotropy = q.aniso || 4; }
 
     const fab = FABRIC[spec.fabric] || FABRIC.jersey;
-    const nm = nmap(spec.fabric === 'fleece' ? 'fleece' : spec.fabric === 'waffle' ? 'waffle' : spec.fabric === 'twill' ? 'twill' : spec.fabric === 'nylon' ? 'nylon' : 'jersey').clone();
+    const nm = nmap((FABRIC[spec.fabric] || {}).map || (spec.fabric === 'fleece' ? 'fleece' : spec.fabric === 'waffle' ? 'waffle' : spec.fabric === 'twill' ? 'twill' : spec.fabric === 'nylon' ? 'nylon' : 'jersey')).clone();
     nm.needsUpdate = true;
     nm.repeat.set((frame.x1 - frame.x0) / fab.tile, (frame.y1 - frame.y0) / fab.tile);
 
     const U = makeUniforms(model.len, spec.seed || Math.random() * 10);
-    const sheenColor = new T.Color(spec.base).lerp(new T.Color('#ffffff'), 0.55);
+    const sheenColor = new T.Color(spec.base).lerp(new T.Color('#ffffff'), fab.sheenMix == null ? 0.55 : fab.sheenMix);
     const mk = map => patchCloth(new T.MeshPhysicalMaterial({
       map, normalMap: nm, normalScale: new T.Vector2(fab.ns, fab.ns), roughness: fab.roughness, metalness: 0,
       sheen: fab.sheen, sheenRoughness: fab.sheenRoughness, sheenColor,
@@ -1100,9 +1382,11 @@ vec3 clothDeform(vec3 p) {
         const zf = (x, y) => { const h = Math.min(Math.max(-y / model.len, 0), 1); return model.T0 * taper(y) * (1 + 0.35 * Math.max(0, 1 - (x / model.hw) ** 2)) + curve * h * h; };
         t.pts = t.pts.map(p => [p[0], p[1], zf(p[0], p[1]) + p[2]]);
         const path = new T.CatmullRomCurve3(t.pts.map(p => new T.Vector3(p[0], p[1], p[2])));
-        const tube = new T.Mesh(new T.TubeGeometry(path, 20, t.r, 8, false), sMat);
+        if (t.chain) { const ch = new T.Mesh(chainGeo(path, t.r), aMat); ch.customDepthMaterial = depthMat; ch.castShadow = true; group.add(ch); continue; }
+        const tube = new T.Mesh(new T.TubeGeometry(path, 20, t.r, 8, false), t.metal ? aMat : sMat);
         tube.customDepthMaterial = depthMat; tube.castShadow = true;
         group.add(tube);
+        if (t.metal) continue;
         const end = t.pts[t.pts.length - 1];
         const ag = new T.Mesh(new T.CylinderGeometry(t.r * 1.15, t.r * 1.15, 0.022, 10), aMat);
         ag.position.set(end[0], end[1] - 0.011, end[2]);
@@ -1114,5 +1398,5 @@ vec3 clothDeform(vec3 p) {
     return { group, uniforms: U, len: model.len, halfW, thick: model.T0, textures: [mapF, mapB], materials: mats };
   }
 
-  window.GAZU_GARMENTS = { CATALOG, build, preload, hexA };
+  window.GAZU_GARMENTS = { CATALOG, CATALOG_F, build, preload, hexA };
 })();

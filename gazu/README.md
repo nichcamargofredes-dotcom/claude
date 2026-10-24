@@ -3,18 +3,18 @@
 Site estático (HTML, CSS e JS puros), sem etapa de build. Abra `index.html` no navegador ou sirva a pasta com qualquer servidor estático (`npx serve gazu`, `python3 -m http.server`).
 
 ## O que tem na página
-- **Hero**: o da referência. Letreiro GAZU atrás do modelo, que entra caminhando; ao rolar, as letras se abrem e o modelo segue andando. No desktop, o hero acompanha o mouse com um leve parallax.
-- **Arara 3D** (`#arara`): trilho em arco com 14 peças penduradas de lado. A rolagem desliza os cabides; passar o mouse vira a peça de frente (o tecido torce, balança e afunda onde o cursor toca) e as vizinhas abrem espaço. O clique abre o painel da peça com frente/costas, tamanhos e "Adicionar à sacola"; no painel dá para arrastar a peça para girar e usar a roda do mouse (ou dois dedos no celular) para dar zoom exatamente no ponto sob o cursor; segurar o botão direito e arrastar move a peça junto com o mouse; dois cliques voltam ao normal. No celular: toque vira a peça e o segundo toque abre os detalhes.
+- **Hero**: o da referência. Letreiro GAZU atrás do modelo, que entra caminhando; ao rolar, as letras se abrem e o modelo segue andando. No desktop, o hero acompanha o mouse com um leve parallax. Os botões **Masculino** e **Feminino** levam direto a cada arara (o menu do topo também).
+- **Araras 3D**: a masculina (`#arara`, 14 peças) vem primeiro e a feminina (`#arara-feminina`, 6 blusas) logo depois, na mesma rolagem. Trilho em arco com as peças penduradas de lado. A rolagem desliza os cabides; passar o mouse vira a peça de frente (o tecido torce, balança e afunda onde o cursor toca) e as vizinhas abrem espaço. O clique abre o painel da peça com frente/costas, tamanhos e "Adicionar à sacola"; no painel dá para arrastar a peça para girar e usar a roda do mouse (ou dois dedos no celular) para dar zoom exatamente no ponto sob o cursor; segurar o botão direito e arrastar move a peça junto com o mouse; dois cliques voltam ao normal. No celular: toque vira a peça e o segundo toque abre os detalhes.
 - **Mais vendidos**: as fotos dos cards são geradas na hora a partir das mesmas peças 3D (frente e, no hover, costas).
 - Faixa de vantagens e rodapé com newsletter. As vantagens (frete, troca, parcelamento, envio) também aparecem compactas no painel da peça, abaixo do botão de compra.
 
 ## Personalizar
-- **Peças, preços e textos da arara**: array `CATALOG` em `js/garments.js` (nome, tipo, cor, preço, estampa, descrição e composição). Tipos disponíveis: `model` (peça modelada no Blender, ver abaixo), `hoodie` (com `zip: true` vira moletom com zíper), `crew` (com `lite: true` vira manga longa), `tee` (com `oversized: true`), `shirt`, `coat` e `bomber`.
+- **Peças, preços e textos das araras**: arrays `CATALOG` (masculino) e `CATALOG_F` (feminino) em `js/garments.js` (nome, tipo, cor, preço, estampa, descrição e composição). Tipos masculinos: `model` (peça modelada no Blender, ver abaixo), `hoodie` (com `zip: true` vira moletom com zíper), `crew` (com `lite: true` vira manga longa), `tee` (com `oversized: true`), `shirt`, `coat` e `bomber`. Tipos femininos: `polo` (polo cropped), `bowcami` (regata listrada com laço e peplum), `bustier` (corpete com bojo), `drape` (blusa de um ombro com alça de corrente) e `strapless` (tomara que caia com peplum). `hanger` ajusta a largura do cabide (as blusas usam um cabide mais estreito).
 - **Cards de Mais vendidos**: `index.html`, seção `#mais-vendidos`. O `data-id` de cada card aponta para o `id` da peça no catálogo.
 - **Cores e fontes**: variáveis no topo de `css/styles.css`.
 - **Foto do hero**: `img/hero-model.webp` (recorte com fundo transparente, ~840×1700) e `img/hero-model-sm.webp` para celular.
 - **Sacola**: gaveta lateral com miniatura 3D de cada peça, tamanho, quantidade, remoção, barra de frete grátis (limite `FREE` em `js/main.js`) e total em até 6x. Fica salva no navegador (`localStorage`). O botão "Finalizar compra" ainda não leva a um pagamento: ligue-o ao checkout da sua plataforma em `js/main.js` (`#bag-checkout`).
-- **Guia de medidas**: tabelas por tipo de peça (largura, comprimento e manga em cm) e medidas do corpo por tamanho, no objeto `GUIDE` e na lista `BODY` em `js/main.js`. Aberto pelo painel da peça, já mostra o tipo certo e permite escolher o tamanho direto na tabela.
+- **Guia de medidas**: abas Masculino e Feminino, com tabelas por tipo de peça (largura, comprimento e manga ou cintura, em cm) e medidas do corpo por tamanho (tórax, cintura e altura no masculino; busto, cintura, quadril e numeração no feminino), no objeto `GUIDE` e nas listas `BODY` e `BODY_F` em `js/main.js`. Aberto pelo painel da peça, já mostra o tipo certo e permite escolher o tamanho direto na tabela.
 - **Painéis com rolagem**: o painel da peça, a sacola, o guia de medidas, a busca e o menu rolam com a roda do mouse enquanto a página fica parada (atributo `data-lenis-prevent`).
 - **Newsletter**: funciona só na interface (validação e aviso). Conecte o `submit` do formulário `#news` ao seu serviço de e-mail.
 
@@ -24,7 +24,7 @@ Para trazer outra peça do Blender, exporte do mesmo jeito: malha em metros, fre
 
 ## Antes de publicar no domínio
 - Troque `img/og-image.jpg` e `img/twitter-image.jpg` nas metatags `og:image` e `twitter:image` pelo endereço completo (por exemplo `https://gazu.com.br/img/og-image.jpg`) e acrescente `<meta property="og:url">` com a URL da loja. Facebook, WhatsApp e X só leem a imagem de prévia com endereço absoluto.
-- Os dados estruturados dos produtos (schema.org `ItemList` com preço em BRL) são gerados em `js/main.js` a partir do `CATALOG`, então preço e descrição ficam num lugar só.
+- Os dados estruturados dos produtos (schema.org `ItemList` com preço em BRL) são gerados em `js/main.js` a partir dos dois catálogos, então preço e descrição ficam num lugar só.
 
 ## Tecnologia
 - `vendor/three.min.js`: three.js r170 (só as classes usadas). As roupas são modeladas a partir de silhuetas 2D, com malha de frente e costas costuradas na borda, texturas pintadas em canvas e um shader de tecido.

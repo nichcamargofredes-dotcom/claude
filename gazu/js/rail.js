@@ -163,6 +163,7 @@
         hang.add(hook, thread, tag);
         const wood = new T.Mesh(P.wood, P.woodMat); wood.castShadow = true;
         if (shape.type === 'model') { wood.position.y = -0.032; wood.scale.set(0.9, 1, 0.8); }   // ombros do modelo do Blender são mais baixos
+        else if (spec.hanger) wood.scale.x = spec.hanger;   // cabide estreito para as blusas femininas
         yawG.add(wood, gar.group);
         this.scene.add(slot);
         const it = {
@@ -413,7 +414,9 @@
       const half = Wv / 2, margin = this.mobile ? 0.2 : 0.42;
       const last = n ? (n - 1) * SP : 0;
       let s0 = half - margin, s1 = last - (half - margin);
-      if (s1 < s0) s0 = s1 = last / 2;
+      // arara curta (cabe na tela): ainda desliza de lado com a rolagem, atravessando o centro
+      const travel = Math.min(last, Wv * 0.55);
+      if (s1 - s0 < travel) { s0 = last / 2 - travel / 2; s1 = last / 2 + travel / 2; }
       this.range = [s0, s1];
       let sT = s0 + (s1 - s0) * this.progress;
       if (this.detail >= 0) sT = its[this.detail].L0;

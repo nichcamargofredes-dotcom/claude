@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>GAZU</title>
-<meta name="description" content="GAZU: streetwear premium em algodão encorpado. Nova coleção 2026 com moletons, camisetas, overshirts e o trench Atlas.">
+<meta name="description" content="GAZU: moda masculina e feminina. Nova coleção 2026 com moletons, camisetas, o trench Atlas, polos cropped, corpetes e blusas.">
 <meta name="theme-color" content="#E0DFDB">
 <link rel="icon" href="img/icons/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32x32.png">
@@ -16,14 +16,14 @@
 <meta property="og:site_name" content="GAZU">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="GAZU · Nova coleção 2026">
-<meta property="og:description" content="Moletons, camisetas, overshirts e o trench Atlas. Frete grátis acima de R$ 299 e 6x sem juros.">
+<meta property="og:description" content="Masculino e feminino: moletons, camisetas, trench, polos cropped e blusas. Frete grátis acima de R$ 299 e 6x sem juros.">
 <meta property="og:image" content="img/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Modelo de sobretudo caminhando em frente ao letreiro GAZU">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="GAZU · Nova coleção 2026">
-<meta name="twitter:description" content="Moletons, camisetas, overshirts e o trench Atlas. Frete grátis acima de R$ 299 e 6x sem juros.">
+<meta name="twitter:description" content="Masculino e feminino: moletons, camisetas, trench, polos cropped e blusas. Frete grátis acima de R$ 299 e 6x sem juros.">
 <meta name="twitter:image" content="img/twitter-image.jpg">
 <meta name="twitter:image:alt" content="Modelo de sobretudo caminhando em frente ao letreiro GAZU">
 <!-- Os produtos (ItemList) entram via js/main.js, a partir do mesmo catálogo da arara. -->
@@ -66,13 +66,13 @@
     </button>
     <nav class="hdr__nav" aria-label="Categorias">
       <a href="#arara">Masculino</a>
-      <a href="#arara">Feminino</a>
+      <a href="#arara-feminina">Feminino</a>
       <a href="#arara">Infantil</a>
       <a href="#mais-vendidos">Beleza</a>
     </nav>
     <nav class="menu" id="menu" data-lenis-prevent aria-label="Categorias" inert>
       <a href="#arara">Masculino</a>
-      <a href="#arara">Feminino</a>
+      <a href="#arara-feminina">Feminino</a>
       <a href="#arara">Infantil</a>
       <a href="#mais-vendidos">Beleza</a>
       <a href="#mais-vendidos">Mais vendidos</a>
@@ -115,8 +115,9 @@
       </span></figure>
 
       <div class="hero__cta">
-        <a class="btn" href="#arara" data-scroll>Comprar agora</a>
-        <a class="link" href="#mais-vendidos" data-scroll>Ver novidades</a>
+        <span class="hero__pick">Comprar</span>
+        <a class="btn" href="#arara" data-scroll>Masculino</a>
+        <a class="btn btn--line" href="#arara-feminina" data-scroll>Feminino</a>
       </div>
 
       <p class="hero__season"><span>Nova</span> <span>coleção</span> <span>2026</span></p>
@@ -130,7 +131,7 @@
         <canvas class="rail__canvas" aria-hidden="true"></canvas>
 
         <div class="rail__head">
-          <p class="eyebrow">Nova coleção <i aria-hidden="true"></i> Streetwear premium</p>
+          <p class="eyebrow">Masculino <i aria-hidden="true"></i> Streetwear premium</p>
           <h2 id="rail-title">Camadas que <em>caem bem.</em></h2>
           <p class="rail__hint"><span class="only-fine">Role para percorrer · passe o mouse para virar a peça · clique para ver os detalhes</span><span class="only-touch">Role para percorrer · toque para virar a peça · toque de novo para os detalhes</span></p>
         </div>
@@ -144,45 +145,72 @@
 
         <p class="rail__loading" role="status">Pendurando as peças…</p>
 
-        <ul class="rail__list" aria-label="Peças da arara"></ul>
+        <ul class="rail__list" aria-label="Peças da arara masculina"></ul>
 
-        <aside class="pdp" id="pdp" data-lenis-prevent aria-labelledby="pdp-name" aria-hidden="true" inert>
-          <button class="pdp__close" type="button" aria-label="Fechar detalhes da peça">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
-          </button>
-          <p class="pdp__index"><span id="pdp-index">01</span> / <span id="pdp-total">12</span></p>
-          <h3 class="pdp__name" id="pdp-name">Moletom Orbit</h3>
-          <p class="pdp__price"><span id="pdp-price">R$ 389,00</span> <small id="pdp-inst">ou 6x de R$ 64,83 sem juros</small></p>
-
-          <div class="pdp__view" role="group" aria-label="Lado da peça">
-            <button type="button" class="is-on" data-side="0" aria-pressed="true">Frente</button>
-            <button type="button" data-side="1" aria-pressed="false">Costas</button>
-          </div>
-
-          <p class="pdp__label">Cor <span id="pdp-color">Areia</span></p>
-          <p class="pdp__label"><span id="pdp-size-label">Tamanho</span> <button type="button" class="pdp__guide" data-guide="pdp">Guia de medidas</button></p>
-          <div class="pdp__sizes" role="radiogroup" aria-labelledby="pdp-size-label">
-            <button type="button" role="radio" aria-checked="false">P</button>
-            <button type="button" role="radio" aria-checked="false">M</button>
-            <button type="button" role="radio" aria-checked="false">G</button>
-            <button type="button" role="radio" aria-checked="false">GG</button>
-          </div>
-          <p class="pdp__warn" id="pdp-warn" role="alert"></p>
-          <button class="btn btn--wide pdp__add" type="button" id="pdp-add">Adicionar à sacola</button>
-
-          <p class="pdp__desc" id="pdp-desc"></p>
-          <ul class="pdp__specs" id="pdp-specs"></ul>
-          <ul class="pdp__perks" aria-label="Vantagens">
-            <li><b>Frete grátis</b> acima de R$ 299</li>
-            <li><b>Troca grátis</b> em até 15 dias</li>
-            <li><b>6x sem juros</b> no cartão</li>
-            <li><b>Envio em 24 h</b> úteis</li>
-          </ul>
-          <p class="pdp__drag"><span class="only-fine">Arraste para girar · role o mouse para dar zoom onde o cursor está · botão direito arrasta a peça · dois cliques voltam</span><span class="only-touch">Arraste para girar · use dois dedos para dar zoom</span></p>
-        </aside>
       </div>
     </div>
   </section>
+
+  <!-- ARARA FEMININA ------------------------------------------------------>
+  <section class="rail rail--f" id="arara-feminina" aria-labelledby="rail-f-title">
+    <div class="rail__track">
+      <div class="rail__stage">
+        <canvas class="rail__canvas" aria-hidden="true"></canvas>
+
+        <div class="rail__head">
+          <p class="eyebrow">Feminino <i aria-hidden="true"></i> Nova coleção</p>
+          <h2 id="rail-f-title">Leves, marcantes, <em>suas.</em></h2>
+          <p class="rail__hint"><span class="only-fine">Role para percorrer · passe o mouse para virar a peça · clique para ver os detalhes</span><span class="only-touch">Role para percorrer · toque para virar a peça · toque de novo para os detalhes</span></p>
+        </div>
+
+        <p class="rail__peek" aria-hidden="true"><b></b><span></span></p>
+
+        <div class="rail__foot">
+          <p class="rail__count"><span class="rail__cur">01</span> / <span class="rail__tot">06</span></p>
+          <div class="rail__bar" aria-hidden="true"><i></i></div>
+        </div>
+
+        <p class="rail__loading" role="status">Pendurando as peças…</p>
+
+        <ul class="rail__list" aria-label="Peças da arara feminina"></ul>
+      </div>
+    </div>
+  </section>
+
+  <aside class="pdp" id="pdp" data-lenis-prevent aria-labelledby="pdp-name" aria-hidden="true" inert>
+    <button class="pdp__close" type="button" aria-label="Fechar detalhes da peça">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+    </button>
+    <p class="pdp__index"><span id="pdp-index">01</span> / <span id="pdp-total">12</span></p>
+    <h3 class="pdp__name" id="pdp-name">Moletom Orbit</h3>
+    <p class="pdp__price"><span id="pdp-price">R$ 389,00</span> <small id="pdp-inst">ou 6x de R$ 64,83 sem juros</small></p>
+
+    <div class="pdp__view" role="group" aria-label="Lado da peça">
+      <button type="button" class="is-on" data-side="0" aria-pressed="true">Frente</button>
+      <button type="button" data-side="1" aria-pressed="false">Costas</button>
+    </div>
+
+    <p class="pdp__label">Cor <span id="pdp-color">Areia</span></p>
+    <p class="pdp__label"><span id="pdp-size-label">Tamanho</span> <button type="button" class="pdp__guide" data-guide="pdp">Guia de medidas</button></p>
+    <div class="pdp__sizes" role="radiogroup" aria-labelledby="pdp-size-label">
+      <button type="button" role="radio" aria-checked="false">P</button>
+      <button type="button" role="radio" aria-checked="false">M</button>
+      <button type="button" role="radio" aria-checked="false">G</button>
+      <button type="button" role="radio" aria-checked="false">GG</button>
+    </div>
+    <p class="pdp__warn" id="pdp-warn" role="alert"></p>
+    <button class="btn btn--wide pdp__add" type="button" id="pdp-add">Adicionar à sacola</button>
+
+    <p class="pdp__desc" id="pdp-desc"></p>
+    <ul class="pdp__specs" id="pdp-specs"></ul>
+    <ul class="pdp__perks" aria-label="Vantagens">
+      <li><b>Frete grátis</b> acima de R$ 299</li>
+      <li><b>Troca grátis</b> em até 15 dias</li>
+      <li><b>6x sem juros</b> no cartão</li>
+      <li><b>Envio em 24 h</b> úteis</li>
+    </ul>
+    <p class="pdp__drag"><span class="only-fine">Arraste para girar · role o mouse para dar zoom onde o cursor está · botão direito arrasta a peça · dois cliques voltam</span><span class="only-touch">Arraste para girar · use dois dedos para dar zoom</span></p>
+  </aside>
 
   <!-- FAIXA --------------------------------------------------------------->
   <section class="band" aria-label="Vantagens">
@@ -277,7 +305,7 @@
         <p class="news__msg" id="news-msg" role="status"></p>
       </form>
       <nav class="foot__cols" aria-label="Rodapé">
-        <div><h3>Loja</h3><a href="#arara">Masculino</a><a href="#arara">Feminino</a><a href="#arara">Infantil</a><a href="#mais-vendidos">Novidades</a></div>
+        <div><h3>Loja</h3><a href="#arara">Masculino</a><a href="#arara-feminina">Feminino</a><a href="#arara">Infantil</a><a href="#mais-vendidos">Novidades</a></div>
         <div><h3>Ajuda</h3><a href="#rodape">Rastrear pedido</a><a href="#rodape">Trocas e devoluções</a><button type="button" class="foot__link" data-guide="foot">Guia de medidas</button><a href="#rodape">Fale conosco</a></div>
         <div><h3>GAZU</h3><a href="#rodape">Nossa história</a><a href="#rodape">Sustentabilidade</a><a href="#rodape">Lojas</a><a href="#rodape">Trabalhe conosco</a></div>
         <div><h3>Siga</h3><a href="https://www.instagram.com/" rel="noopener">Instagram</a><a href="https://www.tiktok.com/" rel="noopener">TikTok</a><a href="https://www.pinterest.com/" rel="noopener">Pinterest</a></div>
@@ -339,6 +367,10 @@
       </div>
       <button class="guide__close" type="button" aria-label="Fechar guia de medidas"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
     </header>
+    <div class="guide__gender" id="guide-gender" role="group" aria-label="Seção">
+      <button type="button" data-g="m" aria-pressed="true">Masculino</button>
+      <button type="button" data-g="f" aria-pressed="false">Feminino</button>
+    </div>
     <div class="guide__cats" id="guide-cats" role="group" aria-label="Tipo de peça"></div>
     <div class="guide__body">
       <figure class="guide__fig">
@@ -356,7 +388,7 @@
         </div>
         <ul class="guide__tips">
           <li>Compare com uma peça sua: deite a roupa numa superfície plana e meça de axila a axila (A) e do ombro até a barra (B).</li>
-          <li>Tórax: passe a fita na parte mais larga do peito, por baixo dos braços. Cintura: na altura do umbigo, sem apertar.</li>
+          <li id="guide-tip">Tórax: passe a fita na parte mais larga do peito, por baixo dos braços. Cintura: na altura do umbigo, sem apertar.</li>
           <li>Entre dois tamanhos? A modelagem GAZU já é ampla: o menor veste regular e o maior fica mais solto.</li>
           <li>As medidas podem variar até 2 cm por causa do acabamento artesanal.</li>
         </ul>
