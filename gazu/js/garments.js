@@ -951,6 +951,9 @@ vec3 clothDeform(vec3 p) {
     { id: 'chama', name: 'Camiseta Chama', type: 'model', model: 'chama', guide: 'oversized', kind: 'camiseta', price: 219, colorName: 'Preto', base: '#161617', fabric: 'jersey',
       desc: 'Camiseta oversized com o rosto em chamas azuis em silk de alta definição e a assinatura “Authentic Brazilian Streetwear” logo abaixo.',
       specs: ['Malha 240 g/m²', '100% algodão penteado', 'Modelagem oversized, ombro caído'] },
+    { id: 'calm', name: 'Camiseta Calm Over Chaos', type: 'model', model: 'calm', guide: 'tee', kind: 'camiseta', price: 189, colorName: 'Chumbo mescla', base: '#4a4947', fabric: 'jersey',
+      desc: 'Malha mescla cinza-chumbo com a estampa Studio Collective grande nas costas e a versão pequena no peito. Gola canelada e caimento reto.',
+      specs: ['Malha mescla 220 g/m²', '100% algodão', 'Silk off-white à base d’água'] },
     { id: 'careca', name: 'Moletom Careca', type: 'crew', price: 329, colorName: 'Cinza mescla', base: '#9b9a97', heather: 0.5, fabric: 'fleece',
       print: PRINTS.center('#7f7e7b'),
       desc: 'O careca de todo dia, com gola canelada larga, barra e punhos firmes e bordado tom sobre tom.',
@@ -1039,7 +1042,7 @@ vec3 clothDeform(vec3 p) {
     const U = makeUniforms(meta.len, spec.seed || 3);
     const cloth = patchCloth(new T.MeshPhysicalMaterial({
       map, normalMap: nm, normalScale: new T.Vector2(fab.ns, fab.ns), roughness: fab.roughness, metalness: 0,
-      sheen: fab.sheen, sheenRoughness: fab.sheenRoughness, sheenColor: new T.Color('#5a5a5c'), side: T.DoubleSide,
+      sheen: fab.sheen, sheenRoughness: fab.sheenRoughness, sheenColor: new T.Color(spec.base).lerp(new T.Color('#ffffff'), 0.35), side: T.DoubleSide,
     }), U);
     const ink = patchCloth(new T.MeshStandardMaterial({ color: '#e9e8e4', roughness: 0.62 }), U);
     const depthMat = patchCloth(new T.MeshDepthMaterial({ depthPacking: T.RGBADepthPacking }), U, true);
