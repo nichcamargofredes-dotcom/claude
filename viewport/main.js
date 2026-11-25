@@ -417,7 +417,9 @@ function loop(now) {
       if (!reduced) c.style.transform = `translateZ(${-Math.abs(d) * 260 * k}px) rotateY(${clamp(-d * 30 * k, -38, 38)}deg)`;
       c.style.opacity = clamp(1.15 - Math.abs(d) * 0.9, 0.35, 1);
     });
-    workI.textContent = best + 1;
+    // duas fileiras: o par da coluna central aparece junto (ex.: 3–4)
+    const pair = best + 1 < cards.length && cards[best + 1].offsetLeft === cards[best].offsetLeft;
+    workI.textContent = pair ? `${best + 1}–${best + 2}` : best + 1;
   }
 
   {
