@@ -11,6 +11,9 @@ const lerp = (a, b, t) => a + (b - a) * t;
 const root = document.documentElement;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
+// textos do script no idioma da página (pt-BR ou en)
+const EN = root.lang.startsWith('en');
+const t = (pt, en) => EN ? en : pt;
 
 let vw = innerWidth, vh = innerHeight;
 const mouse = { x: 0, y: 0, nx: 0, ny: 0 };
@@ -267,7 +270,7 @@ const nav = $('#nav'), links = $('#links'), burger = $('#burger');
 burger.addEventListener('click', () => {
   const open = links.classList.toggle('open');
   burger.setAttribute('aria-expanded', open);
-  burger.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+  burger.setAttribute('aria-label', open ? t('Fechar menu', 'Close menu') : t('Abrir menu', 'Open menu'));
   document.body.style.overflow = open ? 'hidden' : '';
 });
 links.addEventListener('click', e => {
@@ -479,10 +482,10 @@ const form = $('#form'), send = $('#send'), msg = $('#form-msg');
 function waLink() {
   const v = id => $(id).value.trim();
   const text = [
-    'Olá, Viewport! Vim pelo site.',
-    v('#f-nome') && `Meu nome é ${v('#f-nome')}.`,
-    v('#f-negocio') && `Negócio: ${v('#f-negocio')}.`,
-    `Preciso de: ${v('#f-tipo')}.`,
+    t('Olá, Viewport! Vim pelo site.', 'Hi, Viewport! I found you through your website.'),
+    v('#f-nome') && t(`Meu nome é ${v('#f-nome')}.`, `My name is ${v('#f-nome')}.`),
+    v('#f-negocio') && t(`Negócio: ${v('#f-negocio')}.`, `Business: ${v('#f-negocio')}.`),
+    t(`Preciso de: ${v('#f-tipo')}.`, `I need: ${v('#f-tipo')}.`),
     v('#f-msg')
   ].filter(Boolean).join('\n');
   return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
@@ -495,7 +498,7 @@ send.addEventListener('click', e => {
   ['#f-nome', '#f-negocio'].forEach(id => $(id).classList.toggle('err', missing.includes(id)));
   if (missing.length) {
     e.preventDefault();
-    msg.textContent = 'Preencha seu nome e o nome do negócio para enviar.';
+    msg.textContent = t('Preencha seu nome e o nome do negócio para enviar.', 'Please fill in your name and business name to send.');
     $(missing[0]).focus();
   } else {
     msg.textContent = '';

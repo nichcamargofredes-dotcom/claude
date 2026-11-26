@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Viewport</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Viewport, a web design studio by Nicholas Fredes and Matheus Cremasco. Your business, seen differently.">
+<meta name="theme-color" content="#0E0F0F">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="alternate" hreflang="pt-BR" href="../">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@200;300;400&family=Playfair+Display:ital,wght@0,500;1,500&family=Syne:wght@600;700&family=Archivo:wdth,wght@125,800;125,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<script type="importmap">{ "imports": { "three": "../vendor/three.module.min.js" } }</script>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="lg-green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7d9a7c"/><stop offset=".55" stop-color="#2E4D3A"/><stop offset="1" stop-color="#1b3024"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- abertura -->
+<div class="loader" id="loader" aria-hidden="true">
+  <svg class="loader-v" viewBox="0 0 170 130">
+    <polygon class="lv-l" points="0,0 46,0 100,92 78,110" fill="url(#lg-green)"/>
+    <polygon class="lv-r" points="122,0 168,0 80,130 58,130" fill="#F7F7F5"/>
+  </svg>
+  <p class="loader-tag">Your business, seen differently.</p>
+  <span class="loader-count"><b id="loader-n">0</b>%</span>
+</div>
+
+<div class="cursor" id="cursor" aria-hidden="true"><span>Open</span></div>
+
+<header class="nav" id="nav">
+  <a href="#inicio" class="logo" aria-label="Viewport, home">
+    <svg class="logo-v" viewBox="0 0 170 130" aria-hidden="true">
+      <polygon points="0,0 46,0 100,92 78,110" fill="url(#lg-green)"/>
+      <polygon class="logo-v-r" points="122,0 168,0 80,130 58,130"/>
+    </svg><span class="logo-word">iewport</span>
+  </a>
+  <nav class="links" id="links" aria-label="Main">
+    <a href="#projetos">Work</a>
+    <a href="#servicos">Services</a>
+    <a href="#processo">Process</a>
+    <a href="#sobre">About</a>
+    <a href="../" class="lang" lang="pt-BR" hreflang="pt-BR" aria-label="Ver em português">PT</a>
+    <a href="#contato" class="links-cta">Get in touch</a>
+  </nav>
+  <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="links"><span></span><span></span></button>
+</header>
+
+<main>
+  <!-- HERO 3D -->
+  <section class="hero" id="inicio">
+    <canvas class="hero-gl" id="gl" aria-hidden="true"></canvas>
+    <div class="hero-fallback" aria-hidden="true">
+      <svg viewBox="0 0 170 130"><polygon points="0,0 46,0 100,92 78,110" fill="url(#lg-green)"/><polygon points="122,0 168,0 80,130 58,130" fill="#111212"/></svg>
+    </div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-in">
+      <p class="label hero-eyebrow"><span class="pulse"></span>Web design studio · Brazil</p>
+      <h1 class="hero-title">
+        <span class="ln"><span>Your business,</span></span>
+        <span class="ln"><span>seen</span></span>
+        <span class="ln"><span><em>differently.</em></span></span>
+      </h1>
+      <p class="hero-lead">We design and build custom websites for businesses that want to be remembered. Motion, speed and a look that doesn’t resemble anyone else’s.</p>
+      <div class="hero-actions">
+        <a href="#projetos" class="btn btn-light magnet">See our work <span class="arr" aria-hidden="true">→</span></a>
+        <a href="#contato" class="btn btn-ghost magnet">Get a quote</a>
+      </div>
+    </div>
+    <div class="hero-foot">
+      <span class="label">Scroll to explore</span>
+      <span class="scroll-line" aria-hidden="true"><i></i></span>
+      <span class="label hero-loc">Campinas · Brazil</span>
+    </div>
+  </section>
+
+  <!-- FAIXA -->
+  <div class="band" aria-label="What Viewport does">
+    <div class="band-track" id="band">
+      <span>Business websites</span><i aria-hidden="true"></i>
+      <span>E-commerce</span><i aria-hidden="true"></i>
+      <span>Landing pages</span><i aria-hidden="true"></i>
+      <span>Custom projects</span><i aria-hidden="true"></i>
+      <span aria-hidden="true">Business websites</span><i aria-hidden="true"></i>
+      <span aria-hidden="true">E-commerce</span><i aria-hidden="true"></i>
+      <span aria-hidden="true">Landing pages</span><i aria-hidden="true"></i>
+      <span aria-hidden="true">Custom projects</span><i aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto">
+    <div class="wrap">
+      <p class="label">Manifesto</p>
+      <p class="manifesto-text" id="manifesto">Your website is your company’s first impression. It’s where you need to show <em>the quality of your work</em>, and Viewport makes sure it does exactly that.</p>
+    </div>
+  </section>
+
+  <!-- PROJETOS (galeria horizontal em 3D) -->
+  <section class="work" id="projetos">
+    <div class="work-pin">
+      <div class="work-head wrap">
+        <div>
+          <p class="label">Work</p>
+          <h2>Some of our work.</h2>
+          <p class="work-note">We’re a Brazilian studio, so these projects for Brazilian clients are in Portuguese. Your site will be built in English.</p>
+        </div>
+        <div class="work-meta">
+          <span class="work-count"><b id="work-i">1</b> / 9</span>
+          <span class="work-bar"><i id="work-bar"></i></span>
+        </div>
+      </div>
+
+      <div class="work-track" id="track">
+
+        <article class="proj">
+          <a class="proj-link" href="https://abupetshop.vercel.app" target="_blank" rel="noopener">
+            <div class="proj-media">
+              <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>abupetshop.vercel.app</span></div>
+                <img src="../img/pets-desktop.jpg" alt="CozyPaws pet shop homepage" width="1440" height="900" loading="lazy">
+              </div>
+              <div class="phone"><img src="../img/pets-mobile.jpg" alt="" width="585" height="1266" loading="lazy"></div>
+            </div>
+            <div class="proj-info">
+              <p class="proj-cat">Retail · Pet shop</p>
+              <h3>CozyPaws</h3>
+              <p>Pet store and services, with a product showcase, categories by species and booking for grooming, vet visits and daycare.</p>
+              <span class="proj-cta">View site <span aria-hidden="true">↗</span></span>
+            </div>
+          </a>
+        </article>
+
+        <article class="proj">
+          <a class="proj-link" href="https://vespera-parfum.vercel.app" target="_blank" rel="noopener">
+            <div class="proj-media">
+              <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>vespera-parfum.vercel.app</span><b class="rec">Real scroll</b></div>
+                <video class="frame-video" poster="../img/vespera-poster.jpg" data-anim="../media/vespera-scroll-anim.webp" muted autoplay loop playsinline preload="none" aria-label="Scroll recording of the Maison Vespéra site"><source src="../media/vespera-scroll.mp4" type="video/mp4"><source src="../media/vespera-scroll.webm" type="video/webm"></video>
+              </div>
+              <div class="phone"><img src="../img/vespera-mobile.jpg" alt="" width="585" height="1266" loading="lazy"></div>
+            </div>
+            <div class="proj-info">
+              <p class="proj-cat">Fragrance · Product launch</p>
+              <h3>Maison Vespéra</h3>
+              <p>Launch page for an eau de parfum. Scrolling opens the bottle frame by frame, the lime, jasmine and amber notes float around it, and the bottle switches sides on every panel.</p>
+              <span class="proj-cta">View site <span aria-hidden="true">↗</span></span>
+            </div>
+          </a>
+        </article>
+
+        <article class="proj">
+          <a class="proj-link" href="https://gazu-eight.vercel.app" target="_blank" rel="noopener">
+            <div class="proj-media">
+              <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>gazu-eight.vercel.app</span><b class="rec">Real scroll</b></div>
+                <video class="frame-video" poster="../img/gazu-poster.jpg" data-anim="../media/gazu-scroll-anim.webp" muted autoplay loop playsinline preload="none" aria-label="Scroll recording of the Gazu store site"><source src="../media/gazu-scroll.mp4" type="video/mp4"><source src="../media/gazu-scroll.webm" type="video/webm"></video>
+              </div>
+              <div class="phone"><img src="../img/gazu-mobile.jpg" alt="" width="585" height="1266" loading="lazy"></div>
+            </div>
+            <div class="proj-info">
+              <p class="proj-cat">Fashion · E-commerce</p>
+              <h3>Gazu</h3>
+              <p>Premium streetwear store. The pieces hang on a clothing rail that moves as you scroll, and each one opens full screen with price, sizes and a buy button.</p>
+              <span class="proj-cta">View site <span aria-hidden="true">↗</span></span>
+            </div>
+          </a>
+        </article>
+
+        <article class="proj">
+          <a class="proj-link" href="https://live-beam-3.vercel.app" target="_blank" rel="noopener">
+            <div class="proj-media">
+              <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>live-beam-3.vercel.app</span><b class="rec">Real scroll</b></div>
+                <video class="frame-video" poster="../img/jbl-poster.jpg" data-anim="../media/jbl-scroll-anim.webp" muted autoplay loop playsinline preload="none" aria-label="Scroll recording of the JBL Live Beam 3 site"><source src="../media/jbl-scroll.mp4" type="video/mp4"><source src="../media/jbl-scroll.webm" type="video/webm"></video>
+              </div>
+              <div class="phone" aria-hidden="true"><div class="mcover cover-jbl">
+                <div class="m-nav"><span class="c-brand jbl-badge">JBL</span><i class="m-burger"></i></div>
+                <div class="m-body"><p class="c-eyebrow"><i></i>Novo · True Wireless</p><p class="c-title">LIVE BEAM 3</p><p class="c-text">O som que você conhece. O controle que você nunca teve.</p></div>
+                <img class="jbl-case" src="../img/jbl-case.jpg" alt="" width="540" height="450" loading="lazy">
+                <div class="jbl-chips"><span><b>48h</b> bateria</span><span><b>ANC</b> adaptativo</span></div>
+              </div></div>
+            </div>
+            <div class="proj-info">
+              <p class="proj-cat">Tech · Product page</p>
+              <h3>JBL Live Beam 3</h3>
+              <p>Product page for wireless earbuds. The earbud comes apart layer by layer as you scroll, and the case screen shows the volume, wallpaper and language shortcuts.</p>
+              <span class="proj-cta">View site <span aria-hidden="true">↗</span></span>
+            </div>
+          </a>
+        </article>
+
+        <article class="proj">
+          <a class="proj-link" href="https://aureaodonto.vercel.app" target="_blank" rel="noopener">
+            <div class="proj-media">
+              <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>aureaodonto.vercel.app</span></div>
+                <img src="../img/aurea-desktop.jpg" alt="Áurea Odontologia homepage" width="1440" height="900" loading="lazy">
+              </div>
+              <div class="phone" aria-hidden="true"><div class="mcover cover-aurea">
+                <img class="m-photo" src="../img/aurea-mobile-bg.jpg" alt="" width="585" height="1266" loading="lazy">
+                <div class="m-nav"><span class="c-brand"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4c-3.2-2-8.6-1.6-10.4 2.4-1.6 3.6.4 7.6 1.4 11 .9 3.2 1.1 9.6 3.6 9.6 2.6 0 2.2-6.8 5.4-6.8s2.8 6.8 5.4 6.8c2.5 0 2.7-6.4 3.6-9.6 1-3.4 3-7.4 1.4-11C24.6 2.4 19.2 2 16 4Z"/></svg>Aurea</span><i class="m-burger"></i></div>
+                <div class="m-body"><p class="c-title">Desenhamos <em>sorrisos naturais</em> e confiantes</p><span class="c-btn">Agendar</span></div>
+              </div></div>
+            </div>
+            <div class="proj-info">
+              <p class="proj-cat">Health · Dental clinic</p>
+              <h3>Áurea Odontologia</h3>
+              <p>Cosmetic dentistry, implants and clear aligners. An animated intro, light and gold tones, the clinic’s numbers and its director front and center.</p>
+              <span class="proj-cta">View site <span aria-hidden="true">↗</span></span>
+            </div>
+          </a>
+        </article>
+
+        <article class="proj">
+          <a class="proj-link" href="https://ebanobarbearia.vercel.app" target="_blank" rel="noopener">
+            <div class="proj-media">
+              <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>ebanobarbearia.vercel.app</span></div>
+                <img src="../img/ebano-desktop.jpg" alt="Ébano Barbershop &amp; Lounge homepage" width="1440" height="900" loading="lazy">
+              </div>
+              <div class="phone" aria-hidden="true"><div class="mcover cover-ebano">
+                <img class="m-photo" src="../img/ebano-mobile-bg.jpg" alt="" width="585" height="1266" loading="lazy">
+                <div class="m-nav"><span class="c-brand"><svg viewBox="0 0 44 60" aria-hidden="true"><rect x="2" y="2" width="40" height="56" rx="20"/><circle cx="15.5" cy="41" r="5"/><circle cx="28.5" cy="41" r="5"/><path d="M18.6 37.2 29.5 13M25.4 37.2 14.5 13"/></svg>Ébano</span><i class="m-burger"></i></div>
+                <div class="m-body"><p class="c-title">Mais que um simples corte</p><span class="c-btn">Agendar horário</span></div>
+              </div></div>
+            </div>
+            <div class="proj-info">
+              <p class="proj-cat">Barbershop · Lounge</p>
+              <h3>Ébano</h3>
+              <p>A premium barbershop, specialty coffee and a modern lounge in one place. A dark site with gold details and booking up front.</p>
+              <span class="proj-cta">View site <span aria-hidden="true">↗</span></span>
+            </div>
+          </a>
+        </article>
+
+        <article class="proj">
+          <a class="proj-link" href="https://cleitonpersonal.vercel.app" target="_blank" rel="noopener">
+            <div class="proj-media">
+              <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>cleitonpersonal.vercel.app</span></div>
+                <img src="../img/mova-desktop.jpg" alt="MOVA+ homepage, personal trainer Lucas Moreira" width="1440" height="900" loading="lazy">
+              </div>
+              <div class="phone" aria-hidden="true"><div class="mcover cover-mova">
+                <img class="m-photo" src="../img/mova-mobile-bg.jpg" alt="" width="585" height="1266" loading="lazy">
+                <div class="m-nav"><span class="c-brand">MOVA+</span><i class="m-burger"></i></div>
+                <div class="m-body"><p class="c-text">Treino personalizado e resultados que você mede semana a semana.</p><span class="c-btn">Comece sua jornada ↗</span></div>
+              </div></div>
+            </div>
+            <div class="proj-info">
+              <p class="proj-cat">Fitness · Personal trainer</p>
+              <h3>MOVA+</h3>
+              <p>Site for personal trainer Lucas Moreira, with a giant animated headline, training programs, client results and open slots for new clients.</p>
+              <span class="proj-cta">View site <span aria-hidden="true">↗</span></span>
+            </div>
+          </a>
+        </article>
+
+
+        <article class="proj">
+          <a class="proj-link" href="https://quiroquiropraxia.vercel.app" target="_blank" rel="noopener">
+            <div class="proj-media">
+              <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>quiroquiropraxia.vercel.app</span></div>
+                <img src="../img/quiro-desktop.jpg" alt="Dr. Lucas Mendes chiropractic homepage" width="1440" height="900" loading="lazy">
+              </div>
+              <div class="phone"><img src="../img/quiro-mobile.jpg" alt="" width="585" height="1266" loading="lazy"></div>
+            </div>
+            <div class="proj-info">
+              <p class="proj-cat">Health · Chiropractic</p>
+              <h3>Dr. Lucas Mendes</h3>
+              <p>A calm, editorial look. The spine straightens as you scroll, showing the before and after of treatment.</p>
+              <span class="proj-cta">View site <span aria-hidden="true">↗</span></span>
+            </div>
+          </a>
+        </article>
+
+
+
+        <article class="proj">
+          <a class="proj-link" href="https://ctlucassousa.vercel.app" target="_blank" rel="noopener">
+            <div class="proj-media">
+              <div class="frame"><div class="frame-bar"><i></i><i></i><i></i><span>ctlucassousa.vercel.app</span></div>
+                <div class="cover cover-ct">
+                  <img src="../img/ct-futevolei.jpg" alt="Footvolley match on the sand" width="1600" height="907" loading="lazy">
+                  <div class="c-nav"><span class="c-brand">CT Lucas Sousa</span><span class="c-links"><i></i><i></i><i></i><i></i></span><span class="c-btn">Aula experimental</span></div>
+                  <div class="c-body">
+                    <p class="c-eyebrow">Valinhos · SP</p>
+                    <p class="c-title">Futevôlei<br>de verdade.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="phone" aria-hidden="true"><div class="mcover cover-ct">
+                <img src="../img/ct-futevolei.jpg" alt="" width="1600" height="907" loading="lazy">
+                <div class="m-nav"><span class="c-brand">CT Lucas Sousa</span><i class="m-burger"></i></div>
+                <div class="m-body"><p class="c-eyebrow">Valinhos · SP</p><p class="c-title">Futevôlei de verdade.</p><span class="c-btn">Aula experimental</span></div>
+              </div></div>
+            </div>
+            <div class="proj-info">
+              <p class="proj-cat">Sports · Training center</p>
+              <h3>CT Lucas Sousa</h3>
+              <p>Footvolley training center in Valinhos, Brazil. Photo galleries, classes, coaches and a free trial class in a few taps.</p>
+              <span class="proj-cta">View site <span aria-hidden="true">↗</span></span>
+            </div>
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="services" id="servicos">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Services</p>
+        <h2>What Viewport does for you.</h2>
+      </div>
+      <div class="svc-grid">
+        <article class="svc tilt">
+          <span class="glow" aria-hidden="true"></span>
+          <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="4" y="7" width="32" height="22" rx="2"/><path d="M14 35h12M20 29v6"/></svg>
+          <h3>Business websites</h3>
+          <p>Your business’s home online: services, photos, testimonials, map and contact, with an identity that’s all yours.</p>
+        </article>
+        <article class="svc tilt">
+          <span class="glow" aria-hidden="true"></span>
+          <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 14h24l-2 22H10z"/><path d="M14 14v-3a6 6 0 0 1 12 0v3"/></svg>
+          <h3>E-commerce</h3>
+          <p>A store or product showcase with prices, ordering through WhatsApp or online payments, and easy to update.</p>
+        </article>
+        <article class="svc tilt">
+          <span class="glow" aria-hidden="true"></span>
+          <svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 34h30"/><path d="M8 28l9-9 6 5 11-12"/><path d="M27 12h7v7"/></svg>
+          <h3>Landing pages</h3>
+          <p>One page focused on a single offer or campaign, built to turn visitors into leads and sales.</p>
+        </article>
+        <article class="svc tilt">
+          <span class="glow" aria-hidden="true"></span>
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="5"/><path d="M20 4v5M20 31v5M4 20h5M31 20h5M8.7 8.7l3.5 3.5M27.8 27.8l3.5 3.5M8.7 31.3l3.5-3.5M27.8 12.2l3.5-3.5"/></svg>
+          <h3>Custom projects</h3>
+          <p>3D animation, client areas, booking and whatever else your business needs to stand out.</p>
+        </article>
+      </div>
+      <div class="price">
+        <div class="price-main">
+          <span class="label">Investment</span>
+          <p>Starting at <b class="price-min">US$ 80</b> <span class="price-max">up to US$ 2,000</span></p>
+        </div>
+        <p class="price-note">The price depends on the size and features of the project. You get a fixed quote before we start.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESSO -->
+  <section class="process" id="processo">
+    <div class="wrap process-grid">
+      <div class="process-head">
+        <p class="label">Process</p>
+        <h2>From the first call to a live site.</h2>
+        <p class="muted">You follow every step and talk directly to the people building your site, from quote to launch.</p>
+      </div>
+      <ol class="steps" id="steps">
+        <span class="steps-line" aria-hidden="true"><i id="steps-fill"></i></span>
+        <li><small>Step 1</small><b>Conversation</b><span>We learn about your business, your audience and what you want people to feel when they open your site.</span></li>
+        <li><small>Step 2</small><b>Proposal and layout</b><span>We send a fixed quote and the first visual draft for you to approve or adjust.</span></li>
+        <li><small>Step 3</small><b>Development</b><span>We build the site with its animations and test it on desktop, tablet and phone.</span></li>
+        <li><small>Step 4</small><b>Launch and support</b><span>We publish it on your domain, connect WhatsApp and Google, and stay around for adjustments.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- SOBRE + CARTÃO 3D -->
+  <section class="about" id="sobre">
+    <div class="wrap about-grid">
+      <div class="card-stage" id="card-stage">
+        <button class="card3d" id="card3d" type="button" aria-label="Flip the business card">
+          <span class="card-face card-front">
+            <span class="card-logo"><svg viewBox="0 0 170 130" aria-hidden="true"><polygon points="0,0 46,0 100,92 78,110" fill="url(#lg-green)"/><polygon points="122,0 168,0 80,130 58,130" fill="#d9d9d4"/></svg><span>iewport</span></span>
+            <span class="card-tag">Your business, seen differently.</span>
+          </span>
+          <span class="card-face card-back">
+            <span class="card-name">Nicholas Fredes, Matheus Cremasco</span>
+            <span class="card-role">Founders · Design and development</span>
+            <span class="card-site">viewport</span>
+          </span>
+        </button>
+        <p class="card-hint label">Click to flip</p>
+      </div>
+      <div class="about-copy">
+        <p class="label">About</p>
+        <h2>Every business has a door.</h2>
+        <p>Before customers ever see your place, they open your website. <em>View</em> is what they see; <em>port</em> is the door they walk through. Viewport was created to take care of that entrance.</p>
+        <p>Founded by Nicholas Fredes and Matheus Cremasco in Brazil, Viewport designs websites that present your business the way it deserves to be seen.</p>
+        <ul class="facts">
+          <li><small>Where</small>Based in Campinas, Brazil, working online with clients worldwide</li>
+          <li><small>Focus</small>Custom websites with motion and high performance</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="contact" id="contato">
+    <div class="wrap contact-grid">
+      <div class="contact-copy">
+        <p class="label">Contact</p>
+        <h2>Ready to show your business <em>differently?</em></h2>
+        <p class="muted">Fill in the form and your message opens ready to send on WhatsApp. We’ll reply with the next steps and a free, no-obligation quote.</p>
+      </div>
+      <form class="form" id="form" novalidate>
+        <div class="field"><input id="f-nome" name="nome" autocomplete="name" placeholder=" " required><label for="f-nome">Your name</label></div>
+        <div class="field"><input id="f-negocio" name="negocio" placeholder=" " required><label for="f-negocio">Business name and industry</label></div>
+        <div class="field">
+          <select id="f-tipo" name="tipo">
+            <option>Business website</option>
+            <option>E-commerce</option>
+            <option>Landing page</option>
+            <option>Custom project</option>
+            <option>Not sure yet</option>
+          </select>
+          <label for="f-tipo" class="up">What you need</label>
+        </div>
+        <div class="field"><textarea id="f-msg" name="msg" rows="3" placeholder=" "></textarea><label for="f-msg">Tell us a bit more (optional)</label></div>
+        <a class="btn btn-green send magnet" id="send" href="#" target="_blank" rel="noopener">Send on WhatsApp <span class="arr" aria-hidden="true">→</span></a>
+        <p class="form-msg" id="form-msg" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-big" aria-hidden="true">
+      <svg viewBox="0 0 170 130"><polygon points="0,0 46,0 100,92 78,110" fill="url(#lg-green)"/><polygon points="122,0 168,0 80,130 58,130" fill="#F7F7F5"/></svg><span>iewport</span>
+    </div>
+    <div class="foot-row">
+      <p class="label">Your business, seen differently.</p>
+      <nav aria-label="Footer"><a href="#projetos">Work</a><a href="#servicos">Services</a><a href="#processo">Process</a><a href="#sobre">About</a><a href="#contato">Contact</a><a href="../" lang="pt-BR" hreflang="pt-BR">Português</a></nav>
+      <p class="legal">© <span id="ano">2026</span> Viewport · Nicholas Fredes and Matheus Cremasco<br><span class="legal-note">A Brazilian web design studio. Projects shown were built for clients in Brazil and are in Portuguese.</span></p>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="../main.js"></script>
+</body>
+</html>
