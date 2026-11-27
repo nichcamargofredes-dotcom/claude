@@ -233,14 +233,18 @@ em{font-style:normal;color:var(--green-soft)}
 .svc:hover .glow{opacity:1}
 
 /* ---------- investimento ---------- */
-.price{margin-top:64px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px 56px;align-items:center;padding:44px 48px;border-radius:18px;background:#fff;border:1px solid var(--line-l)}
-.price .label{color:var(--ink-soft);display:block;margin-bottom:14px}
-.price-main p{font-size:clamp(1.5rem,2.8vw,2.1rem);font-weight:500;letter-spacing:-.03em;line-height:1.2}
-.price-min{display:inline-block;font-size:1.25em;font-weight:600;color:var(--green);letter-spacing:-.04em}
-.price-max{color:var(--ink-soft)}
-.price-note{color:var(--ink-soft);font-size:.95rem;max-width:34em}
-@media (max-width:900px){.price{grid-template-columns:minmax(0,1fr);padding:32px 28px}}
-@media (max-width:560px){.price{padding:26px 22px}}
+.price{position:relative;overflow:hidden;margin-top:72px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:32px 64px;align-items:center;padding:clamp(40px,5vw,72px) clamp(28px,5vw,72px);border-radius:24px;color:var(--off);background:radial-gradient(90% 140% at 0% 0%,#3f6a50 0%,var(--green) 45%,var(--green-deep) 100%);box-shadow:0 40px 80px -40px rgba(27,48,36,.75)}
+.price::after{content:"";position:absolute;right:-6%;top:-30%;width:46%;aspect-ratio:170/130;background:rgba(247,247,245,.06);clip-path:polygon(71.8% 0,98.8% 0,47.1% 100%,34.1% 100%);pointer-events:none}
+.price>*{position:relative;z-index:1}
+.price .label{color:rgba(247,247,245,.72);display:block;margin-bottom:18px}
+.price-main p{font-size:clamp(1.8rem,3.6vw,3rem);font-weight:500;letter-spacing:-.035em;line-height:1.1}
+.price-min{display:inline-block;font-size:1.6em;font-weight:600;color:#fff;letter-spacing:-.05em;line-height:1;text-shadow:0 10px 40px rgba(0,0,0,.25)}
+.price-max{color:rgba(247,247,245,.72)}
+.price-side{display:grid;gap:24px;justify-items:start}
+.price-note{color:rgba(247,247,245,.85);font-size:1.02rem;max-width:30em}
+.price-btn:hover{background:var(--graphite);color:var(--off)}
+@media (max-width:900px){.price{grid-template-columns:minmax(0,1fr);padding:40px 28px}.price::after{width:80%;right:-20%;top:-10%}}
+@media (max-width:560px){.price{padding:34px 22px;border-radius:20px}.price-min{font-size:1.45em}}
 
 /* ---------- processo ---------- */
 .process{background:var(--graphite);padding-block:150px}
